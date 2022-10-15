@@ -1,5 +1,8 @@
+import template from './template.hbs';
+import './style.scss';
+
 const Login = () => {
-  return '<h1>Login</h1>';
+  return template();
 };
 
 export default Login;

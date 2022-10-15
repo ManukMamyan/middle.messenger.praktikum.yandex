@@ -1,0 +1,6 @@
+{
+  "extends": ["./.eslintrc.base"],
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

@@ -26,13 +26,11 @@ const startApp = () => {
   const isUserOnExistingPage =
     !isEmpty(currentPage) && typeof first(currentPage).loadFunc === 'function';
 
-  let loadApp = NotFound;
-
-  if (isUserOnExistingPage) {
-    loadApp = first(currentPage).loadFunc;
+  if (!isUserOnExistingPage) {
+    return NotFound();
   }
 
-  return loadApp();
+  return first(currentPage).loadFunc();
 };
 
 export default startApp;

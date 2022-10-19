@@ -4,6 +4,7 @@ import Login from './Login';
 import Register from './Register';
 import Chat from './Chat';
 import Settings from './Settings';
+import Profile from './Profile';
 import EditProfile from './EditProfile';
 import NotFound from './NotFound';
 
@@ -12,6 +13,7 @@ const pages = [
   { path: '/register', loadFunc: Register },
   { path: '/chat', loadFunc: Chat },
   { path: '/settings', loadFunc: Settings },
+  { path: '/profile', loadFunc: Profile },
   { path: '/editProfile', loadFunc: EditProfile },
 ];
 

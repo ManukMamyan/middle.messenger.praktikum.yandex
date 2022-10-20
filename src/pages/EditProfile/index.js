@@ -1,5 +1,13 @@
+import template from '../Profile/template.hbs';
+import '../Profile/style.scss';
+
 const EditProfile = () => {
-  return '<h1>EditProfile</h1>';
+  const props = {
+    edit: true,
+    back: '/profile',
+  };
+
+  return template(props);
 };
 
 export default EditProfile;

@@ -114,3 +114,20 @@
     }
   }
 }
+
+.edit-profile-actions {
+  position: absolute;
+  bottom: 153px;
+
+  .save-button {
+    color: #fff;
+    background-color: #3369F3;
+    padding: 12px 70px;
+    border:none;
+    border-radius: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

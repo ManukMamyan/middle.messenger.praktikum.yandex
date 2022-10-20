@@ -6,7 +6,7 @@
     "format": "prettier --write \"src/**/*.{js,json}\"",
     "lint": "npm run lint:js",
     "lint:js": "eslint src/. --ext .js",
-    "dev": "parcel src/index.html -p 3000",
+    "dev": "parcel src/index.html -p 3000 --no-cache --open",
     "start": "npm run build && node ./server.js",
     "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"

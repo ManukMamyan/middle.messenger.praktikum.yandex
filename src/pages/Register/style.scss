@@ -1,39 +1,10 @@
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.register-form {
 
-}
-
-.form {
-  &-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 24px 30px;
-    max-width: 340px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-    border-radius: 12px;
-  }
-
-  &-header {
-    color: #1E1E1E;
-    margin-bottom: 40px;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 20px
-  }
-}
-
-.login-form {
   &__actions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 159px;
+    margin-top: 60px;
   }
 
   &__action-button {
@@ -64,7 +35,12 @@
     font-size: 13px;
     line-height: 13px;
 
-    &.password-label {
+    &.username-label, 
+    &.name-label, 
+    &.second-name-label, 
+    &.phone-label, 
+    &.password-label, 
+    &.password-confirm-label {
       margin-top: 16px;
     }
   }
@@ -72,7 +48,7 @@
   &__input {
     min-width: 280px;
     border: none;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid #3369F3;;
 
     &:focus {
       outline: none;

@@ -1,8 +1,8 @@
 import template from './template.hbs';
 import './style.scss';
 
-const Register = () => {
+const Profile = () => {
   return template();
 };
 
-export default Register;
+export default Profile;

@@ -3,7 +3,7 @@ import '../Profile/style.scss';
 
 const EditProfile = () => {
   const props = {
-    editProfile: true,
+    editPassword: true,
     back: '/profile',
   };
 

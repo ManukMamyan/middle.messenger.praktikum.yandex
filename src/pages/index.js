@@ -6,6 +6,7 @@ import Chat from './Chat';
 import Settings from './Settings';
 import Profile from './Profile';
 import EditProfile from './EditProfile';
+import EditPassword from './EditPassword';
 import NotFound from './NotFound';
 
 const pages = [
@@ -15,6 +16,7 @@ const pages = [
   { path: '/settings', loadFunc: Settings },
   { path: '/profile', loadFunc: Profile },
   { path: '/editProfile', loadFunc: EditProfile },
+  { path: '/editPassword', loadFunc: EditPassword },
 ];
 
 const startApp = () => {

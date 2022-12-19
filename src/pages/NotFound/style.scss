@@ -1,0 +1,28 @@
+.not-found {
+  color: #1e1e1e;
+  font-weight: 500;
+  margin: 0;
+
+  &.heading {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  &.subtitle {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.action {
+  margin-top: 69px;
+
+  &.back {
+    font-weight: 500;
+    font-size: 11px;
+    color: #3369F3;
+    text-decoration: none;
+    line-height: 11px;
+  }
+}

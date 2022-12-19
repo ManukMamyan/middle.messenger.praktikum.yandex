@@ -1,0 +1,84 @@
+{
+  "extends": ["airbnb-base", "prettier", "prettier/prettier"],
+  "plugins": ["prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules"],
+        "paths": ["node_modules"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".cjs"]
+      }
+    }
+  },
+  "rules": {
+    "arrow-body-style": ["error", "always"],
+    "no-dupe-keys": "error",
+    "eol-last": ["error", "always"],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "directive",
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": "directive",
+        "next": "directive"
+      },
+      {
+        "blankLine": "always",
+        "prev": "import",
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": "import",
+        "next": "import"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["const", "let", "var", "export"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["const", "let", "var", "export"],
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": ["const", "let", "var", "export"],
+        "next": ["const", "let", "var", "export"]
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["if", "class", "for", "do", "while", "switch", "try"]
+      },
+      {
+        "blankLine": "always",
+        "prev": ["if", "class", "for", "do", "while", "switch", "try"],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      }
+    ],
+    "prettier/prettier": "error",
+    "no-underscore-dangle": "off",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-use-before-define": "off",
+    "no-unused-vars": "off",
+    "import/extensions": "off",
+    "global-require": "off",
+    "no-continue": "off"
+  }
+}

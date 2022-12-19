@@ -1,0 +1,8 @@
+**/node_modules/**
+**/dist/**
+**/.git/**
+**/static/**
+!.eslintrc.js
+package.json
+package-lock.json
+**/CHANGELOG.md 

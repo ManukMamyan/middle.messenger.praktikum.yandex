@@ -1,4 +1,12 @@
-const isEmpty = (value) => {
+const isMap = (val): val is Map<any, any> => {
+  return val.toString() === '[object Map]'
+}
+
+const isSet = (val): val is Set<any> => {
+  return val.toString() === '[object Set]'
+}
+
+const isEmpty = <T = any>(value: T) => {
   if (!value) {
     return true;
   }
@@ -18,8 +26,8 @@ const isEmpty = (value) => {
   }
 
   if (
-    value.toString &&
-    (value.toString() === '[object Map]' || value.toString() === '[object Set]')
+    value.toString() &&
+    (isMap(value) || isSet(value))
   ) {
     return !value.size;
   }

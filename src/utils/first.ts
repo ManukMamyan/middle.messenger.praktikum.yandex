@@ -1,4 +1,4 @@
-const first = (list) => {
+const first = <T>(list: T[]) => {
   if (!Array.isArray(list)) {
     return undefined;
   }

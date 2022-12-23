@@ -1,6 +1,5 @@
-/* eslint-disable no-param-reassign */
-const range = (start, end, step, isRight) => {
-  const resultArray = [];
+const range = (start: number, end?: number, step?: number, isRight: boolean = false): number[] => {
+  const resultArray: number[] = [];
 
   if (end === undefined) {
     end = start;

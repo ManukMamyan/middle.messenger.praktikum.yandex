@@ -10,31 +10,31 @@ import EditPassword from './EditPassword';
 import NotFound from './NotFound';
 
 const pages = [
-  { path: '/', loadFunc: Login },
-  { path: '/register', loadFunc: Register },
-  { path: '/chat', loadFunc: Chat },
-  { path: '/settings', loadFunc: Settings },
-  { path: '/profile', loadFunc: Profile },
-  { path: '/editProfile', loadFunc: EditProfile },
-  { path: '/editPassword', loadFunc: EditPassword },
+  { path: '/', Component: Login },
+  // { path: '/register', Component: Register },
+  // { path: '/chat', Component: Chat },
+  // { path: '/settings', Component: Settings },
+  // { path: '/profile', Component: Profile },
+  // { path: '/editProfile', Component: EditProfile },
+  // { path: '/editPassword', Component: EditPassword },
 ];
 
 const startApp = () => {
   // eslint-disable-next-line no-undef
   const locationPath = window.document.location.pathname;
 
-  const currentPage = pages.filter((page) => {
+  const currentPage = pages.find((page) => {
     return page.path === locationPath;
   });
 
   const isUserOnExistingPage =
-    !isEmpty(currentPage) && typeof first(currentPage).loadFunc === 'function';
+    !!currentPage && typeof currentPage.Component === 'function';
 
   if (!isUserOnExistingPage) {
     return NotFound();
   }
 
-  return first(currentPage).loadFunc();
+  return new currentPage.Component;
 };
 
 export default startApp;

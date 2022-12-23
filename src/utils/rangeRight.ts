@@ -1,6 +1,6 @@
 import range from './range';
 
-const rangeRight = (start, end, step) => {
+const rangeRight = (start: number, end?: number, step?: number): number[] => {
   return range(start, end, step, true);
 };
 

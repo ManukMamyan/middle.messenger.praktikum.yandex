@@ -124,7 +124,6 @@ export default class Block<P extends {} = {}> {
   };
 
   getContent(): HTMLElement {
-    // Хак, чтобы вызвать CDM только после добавления в DOM
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
         if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
@@ -137,8 +136,6 @@ export default class Block<P extends {} = {}> {
   }
 
   _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props as unknown as object, {
@@ -149,8 +146,6 @@ export default class Block<P extends {} = {}> {
       set(target: Record<string, unknown>, prop: string, value: unknown) {
         target[prop] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
         return true;
       },

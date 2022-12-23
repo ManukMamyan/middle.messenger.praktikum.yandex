@@ -1,11 +1,10 @@
 import Block from '../../core/Block';
 import './style.scss';
 
-
 class Login extends Block {
   render() {
     return `
-    <div class="container">
+  <div class="container">
     <div class="form-wrapper">
       <h2 class="form-header">Вход</h2>
       <form class="login-form">

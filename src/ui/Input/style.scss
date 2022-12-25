@@ -1,0 +1,23 @@
+.input {
+
+  &__wrapper {
+    margin-top: 16px
+  }
+
+  &__label {
+    display: block;
+    color: #999999;
+    font-size: 13px;
+    line-height: 13px;
+  }
+
+  &__input {
+    min-width: 280px;
+    border: none;
+    border-bottom: 1px solid #3369F3;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

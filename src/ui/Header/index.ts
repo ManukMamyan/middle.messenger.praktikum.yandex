@@ -1,9 +1,19 @@
 import { Block } from '../../core';
 import './style.scss';
 
+type TProps = {
+  header: string;
+};
+
 class Header extends Block {
+  constructor({ header }: TProps) {
+    super({ header });
+  }
+
   render() {
-    return ``;
+    return `
+    <h1 class="header">{{header}}</h1>
+    `;
   }
 }
 

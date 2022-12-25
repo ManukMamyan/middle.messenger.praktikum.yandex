@@ -7,6 +7,8 @@ class Login extends Block {
 
     this.setProps({
       onClick: this.onClick,
+      onChangeUsername: this.onChangeUsername,
+      onChangePassword: this.onChangePassword,
     });
   }
 
@@ -14,20 +16,22 @@ class Login extends Block {
     console.log('button was clicked, this', this);
   };
 
+  onChangeUsername = () => {
+    console.log('input username was changed, this', this);
+  };
+
+  onChangePassword = () => {
+    console.log('input password was changed, this', this);
+  };
+
   render() {
     return `
   <div class="container">
     <div class="form-wrapper">
-      <h2 class="form-header">Вход</h2>
+      {{{Header header="Вход"}}}
       <form class="login-form">
-        <div>
-          <label class="login-form__label username-label" for="username">Логин</label>
-          <input class="login-form__input username-input" type="text" id="username" name="username" />
-        </div>
-        <div>
-          <label class="login-form__label password-label" for="password">Пароль</label>
-          <input class="login-form__input password-input" type="password" id="password" name="password" />
-        </div>
+        {{{Input id="username" type="text" label="Логин" name="username" onChange=onChangeUsername}}}
+        {{{Input id="password" type="password" label="Пароль" name="password" onChange=onChangePassword}}}
       </form>
       <div class="login-form__actions">
         {{{Button text="Авторизоваться" onClick=onClick}}}

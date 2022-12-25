@@ -31,7 +31,7 @@ class Login extends Block {
       </form>
       <div class="login-form__actions">
         {{{Button text="Авторизоваться" onClick=onClick}}}
-        <a class="login-form__action-link" href="/register">Нет аккаунта?</a>
+        {{{Link text="Нет аккаунта?" to="/register"}}}
       </div>
     </div>
   </div>

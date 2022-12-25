@@ -1,9 +1,19 @@
 import { Block } from '../../core';
 import './style.scss';
 
+type TProps = {
+  text: string;
+  to: string;
+};
 class Link extends Block {
+  constructor({ text, to }: TProps) {
+    super({ text, to });
+  }
+
   render() {
-    return ``;
+    return `
+    <a class="link" href="{{to}}">{{text}}</a>
+    `;
   }
 }
 

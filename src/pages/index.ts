@@ -1,5 +1,4 @@
-import first from '../utils/first';
-import isEmpty from '../utils/isEmpty';
+import { Block } from '../core';
 import Login from './Login';
 import Register from './Register';
 import Chat from './Chat';
@@ -9,14 +8,16 @@ import EditProfile from './EditProfile';
 import EditPassword from './EditPassword';
 import NotFound from './NotFound';
 
-const pages = [
+type TPages = {path: string; Component: new (...args: any[]) => Block}
+
+const pages: TPages[] = [
   { path: '/', Component: Login },
-  // { path: '/register', Component: Register },
-  // { path: '/chat', Component: Chat },
-  // { path: '/settings', Component: Settings },
-  // { path: '/profile', Component: Profile },
-  // { path: '/editProfile', Component: EditProfile },
-  // { path: '/editPassword', Component: EditPassword },
+  { path: '/register', Component: Register },
+  { path: '/chat', Component: Chat },
+  { path: '/settings', Component: Settings },
+  { path: '/profile', Component: Profile },
+  { path: '/editProfile', Component: EditProfile },
+  { path: '/editPassword', Component: EditPassword },
 ];
 
 const startApp = () => {
@@ -31,7 +32,7 @@ const startApp = () => {
     !!currentPage && typeof currentPage.Component === 'function';
 
   if (!isUserOnExistingPage) {
-    return NotFound();
+    return new NotFound;
   }
 
   return new currentPage.Component;

@@ -1,10 +1,10 @@
 const isMap = (val): val is Map<any, any> => {
-  return val.toString() === '[object Map]'
-}
+  return val.toString() === '[object Map]';
+};
 
 const isSet = (val): val is Set<any> => {
-  return val.toString() === '[object Set]'
-}
+  return val.toString() === '[object Set]';
+};
 
 const isEmpty = <T = any>(value: T) => {
   if (!value) {
@@ -25,10 +25,7 @@ const isEmpty = <T = any>(value: T) => {
     return true;
   }
 
-  if (
-    value.toString() &&
-    (isMap(value) || isSet(value))
-  ) {
+  if (value.toString() && (isMap(value) || isSet(value))) {
     return !value.size;
   }
 

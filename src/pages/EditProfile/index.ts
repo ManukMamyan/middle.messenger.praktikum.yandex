@@ -2,12 +2,11 @@ import Block from '../../core/Block';
 import '../Profile/style.scss';
 
 class EditProfile extends Block {
-
-  protected render(): string { 
+  render(): string {
     return `
   <div class="container-profile">
     <div class="wrapper__action">
-      <a class="back" href="{{{back}}}">&#x2190</a>
+      <a class="back" href="/profile">&#x2190</a>
     </div>
     <main class="content-profile">
       <div class="avatar"></div>
@@ -47,6 +46,6 @@ class EditProfile extends Block {
   </div>
     `;
   }
-};
+}
 
 export default EditProfile;

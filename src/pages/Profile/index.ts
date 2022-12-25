@@ -2,7 +2,6 @@ import Block from '../../core/Block';
 import './style.scss';
 
 class Profile extends Block {
-
   render(): string {
     return `
   <div class="container-profile">
@@ -28,15 +27,15 @@ class Profile extends Block {
            </li>
            <li class="data-profile__list-item">
              <label class="label" for="second-name">Фамилия</label>
-             <input class="input {{#if profile}}disabled{{/if}}" type="text" id="second-name" value="Иванов"/>
+             <input class="input disabled" type="text" id="second-name" value="Иванов"/>
            </li>
            <li class="data-profile__list-item">
              <label class="label" for="chat-name">Имя в чате</label>
-             <input class="input {{#if profile}}disabled{{/if}}" type="text" id="chat-name" value="Иван"/>
+             <input class="input disabled" type="text" id="chat-name" value="Иван"/>
            </li>
            <li class="data-profile__list-item">
              <label class="label" for="phone">Телефон</label>
-             <input class="input {{#if profile}}disabled{{/if}}" type="tel" id="phone" value="+7 (909) 967 30 30"/>
+             <input class="input disabled" type="tel" id="phone" value="+7 (909) 967 30 30"/>
            </li>
         </ul>
       </div>
@@ -57,6 +56,6 @@ class Profile extends Block {
   </div>
     `;
   }
-};
+}
 
 export default Profile;

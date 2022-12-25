@@ -8,7 +8,7 @@ import EditProfile from './EditProfile';
 import EditPassword from './EditPassword';
 import NotFound from './NotFound';
 
-type TPages = {path: string; Component: new (...args: any[]) => Block}
+type TPages = { path: string; Component: new (...args: any[]) => Block };
 
 const pages: TPages[] = [
   { path: '/', Component: Login },
@@ -28,14 +28,13 @@ const startApp = () => {
     return page.path === locationPath;
   });
 
-  const isUserOnExistingPage =
-    !!currentPage && typeof currentPage.Component === 'function';
+  const isUserOnExistingPage = !!currentPage && typeof currentPage.Component === 'function';
 
   if (!isUserOnExistingPage) {
-    return new NotFound;
+    return new NotFound();
   }
 
-  return new currentPage.Component;
+  return new currentPage.Component();
 };
 
 export default startApp;

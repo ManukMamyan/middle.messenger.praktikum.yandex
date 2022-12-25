@@ -2,6 +2,18 @@ import Block from '../../core/Block';
 import './style.scss';
 
 class Login extends Block {
+  constructor() {
+    super();
+
+    this.setProps({
+      onClick: this.onClick,
+    });
+  }
+
+  onClick = () => {
+    console.log('button was clicked, this', this);
+  };
+
   render() {
     return `
   <div class="container">
@@ -18,12 +30,12 @@ class Login extends Block {
         </div>
       </form>
       <div class="login-form__actions">
-        <button class="login-form__action-button">Авторизоваться</button>
+        {{{Button text="Авторизоваться" onClick=onClick}}}
         <a class="login-form__action-link" href="/register">Нет аккаунта?</a>
       </div>
     </div>
   </div>
-    `
+    `;
   }
 }
 

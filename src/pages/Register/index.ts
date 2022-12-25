@@ -45,7 +45,6 @@ class Register extends Block {
     </div>
       `;
   }
-
-};
+}
 
 export default Register;

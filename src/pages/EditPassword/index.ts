@@ -32,8 +32,8 @@ class EditPassword extends Block {
        </div>
     </main>
   </div>
-    `
+    `;
   }
-};
+}
 
 export default EditPassword;

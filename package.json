@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "chat application",
   "scripts": {
-    "format": "prettier --write \"src/**/*.{js,json}\"",
-    "lint": "npm run lint:js",
-    "lint:js": "eslint src/. --ext .js",
+    "format": "prettier --write \"src/**/*.{js,ts,json}\"",
+    "lint": "npm run lint:js && npm run lint:ts",
+    "lint:js": "eslint src/. --ext  .js,.ts,",
+    "lint:ts": "tsx",
     "dev": "parcel src/index.html -p 3000 --no-cache --no-source-maps --open",
     "start": "npm run build && node ./server.ts",
     "build": "parcel build src/index.html",

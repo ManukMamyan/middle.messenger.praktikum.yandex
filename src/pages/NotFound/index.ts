@@ -11,8 +11,8 @@ class NotFound extends Block {
       <a href="/" class="action back">Назад к чатам</a>
     </div>
   </div>  
-    `
+    `;
   }
-};
+}
 
 export default NotFound;

@@ -2,6 +2,11 @@ import Block from '../../core/Block';
 import './style.scss';
 
 class Profile extends Block {
+  constructor() {
+    super();
+  }
+  
+
   render(): string {
     return `
   <div class="container-profile">
@@ -13,30 +18,12 @@ class Profile extends Block {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-           <li class="data-profile__list-item">
-             <label class="label" for="email">Почта</label>
-             <input class="input disabled" type="email" id="email" value="pochta@yandex.ru"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="login">Логин</label>
-             <input class="input disabled" type="text" id="login" value="ivanivanov"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="name">Имя</label>
-             <input class="input disabled" type="text" id="name" value="Иван"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="second-name">Фамилия</label>
-             <input class="input disabled" type="text" id="second-name" value="Иванов"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="chat-name">Имя в чате</label>
-             <input class="input disabled" type="text" id="chat-name" value="Иван"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="phone">Телефон</label>
-             <input class="input disabled" type="tel" id="phone" value="+7 (909) 967 30 30"/>
-           </li>
+        {{{Field id="email" type="email" label="Почта" name="email" value="pochta@yandex.ru" editable=${false}}}}
+        {{{Field id="login" type="text" label="Логин" name="newPassword" value="ivanivanov" editable=${false}}}}
+        {{{Field id="name" type="text" label="Имя" name="oldPassword" value="Иван" editable=${false}}}}
+        {{{Field id="second-name" type="text" label="Фамилия" name="newPassword" value="Иванов" editable=${false}}}}
+        {{{Field id="chat-name" type="text" label="Имя в чате" name="oldPassword" value="Иван" editable=${false}}}}
+        {{{Field id="phone" type="tel" label="Телефон" name="newPassword" value="+7 (909) 967 30 30" editable=${false}}}}
         </ul>
       </div>
        <div class="profile-actions">

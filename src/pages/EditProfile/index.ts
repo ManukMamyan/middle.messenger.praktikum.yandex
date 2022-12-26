@@ -2,6 +2,48 @@ import Block from '../../core/Block';
 import '../Profile/style.scss';
 
 class EditProfile extends Block {
+  constructor() {
+    super();
+
+    this.setProps({
+      onClickSaveProfile: this.onClickSaveProfile,
+      onChangeProfileEmail: this.onChangeProfileEmail,
+      onChangeProfileLogin: this.onChangeProfileLogin,
+      onChangeProfileName: this.onChangeProfileName,
+      onChangeProfileSecondName: this.onChangeProfileSecondName,
+      onChangeProfileChatName: this.onChangeProfileChatName,
+      onChangeProfilePhone: this.onChangeProfilePhone,
+    });
+  }
+
+  onClickSaveProfile = () => {
+    console.log('button save changed profile was clicked, this', this);
+  };
+
+  onChangeProfileEmail = () => {
+    console.log('profile email is being changed, this', this);
+  };
+
+  onChangeProfileLogin = () => {
+    console.log('profile login is being changed, this', this);
+  };
+
+  onChangeProfileName = () => {
+    console.log('profile name is being changed, this', this);
+  };
+
+  onChangeProfileSecondName = () => {
+    console.log('profile second name is being changed, this', this);
+  };
+
+  onChangeProfileChatName = () => {
+    console.log('profile chat name is being changed, this', this);
+  };
+
+  onChangeProfilePhone = () => {
+    console.log('profile phone number is being changed, this', this);
+  };
+
   render(): string {
     return `
   <div class="container-profile">
@@ -13,34 +55,16 @@ class EditProfile extends Block {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-           <li class="data-profile__list-item">
-             <label class="label" for="email">Почта</label>
-             <input class="input" type="email" id="email" value="pochta@yandex.ru"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="login">Логин</label>
-             <input class="input" type="text" id="login" value="ivanivanov"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="name">Имя</label>
-             <input class="input" type="text" id="name" value="Иван"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="second-name">Фамилия</label>
-             <input class="input" type="text" id="second-name" value="Иванов"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="chat-name">Имя в чате</label>
-             <input class="input" type="text" id="chat-name" value="Иван"/>
-           </li>
-           <li class="data-profile__list-item">
-             <label class="label" for="phone">Телефон</label>
-             <input class="input" type="tel" id="phone" value="+7 (909) 967 30 30"/>
-           </li>
+        {{{Field id="email" type="email" label="Почта" name="email" value="pochta@yandex.ru" onChange=onChangeProfileEmail}}}
+        {{{Field id="login" type="text" label="Логин" name="newPassword" value="ivanivanov" onChange=onChangeProfileLogin}}}
+        {{{Field id="name" type="text" label="Имя" name="oldPassword" value="Иван" onChange=onChangeProfileName}}}
+        {{{Field id="second-name" type="text" label="Фамилия" name="newPassword" value="Иванов" onChange=onChangeProfileSecondName}}}
+        {{{Field id="chat-name" type="text" label="Имя в чате" name="oldPassword" value="Иван" onChange=onChangeProfileChatName}}}
+        {{{Field id="phone" type="tel" label="Телефон" name="newPassword" value="+7 (909) 967 30 30" onChange=onChangeProfilePhone}}}
         </ul>
       </div>
        <div class="edit-profile-actions">
-        <button class="save-button">Сохранить</button>
+       {{{Button text="Сохранить" size="large" onClick=onClickSaveProfile}}}
        </div>
     </main>
   </div>

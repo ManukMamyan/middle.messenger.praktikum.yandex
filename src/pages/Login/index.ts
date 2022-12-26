@@ -34,7 +34,7 @@ class Login extends Block {
         {{{Input id="password" type="password" label="Пароль" name="password" onChange=onChangePassword}}}
       </form>
       <div class="login-form__actions">
-        {{{Button text="Авторизоваться" onClick=onClick}}}
+        {{{Button text="Авторизоваться" size="large" onClick=onClick}}}
         {{{Link text="Нет аккаунта?" to="/register"}}}
       </div>
     </div>

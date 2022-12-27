@@ -1,0 +1,118 @@
+.chat-container {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.aside { 
+  &__chat {
+    min-width: 310px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: 1px solid #eaeaea;
+  }
+
+  &__header {
+    text-align: right;
+    padding-top: 21px;
+    padding-bottom: 23px;
+    color: #999999;
+  }
+
+  &__header-link {
+    text-decoration: none;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
+  &__chat-filter {
+    width: 100%;
+    margin-bottom: 14px;
+
+    &__input {
+      width: 100%;
+      min-height: 32px;
+      border-radius: 5px;
+      border: none;
+      background-color: #efefef;
+      color: #999999;
+      padding: 10px;
+    }
+  }
+
+  &__chat-list {
+    list-style-type: none;
+
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #eaeaea;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      cursor: pointer;
+
+      .user-info {
+        display: flex;
+      }
+
+      .user-avatar {
+        width:47px;
+        height:47px;
+        border-radius: 50%;
+        background-color: #efefef;
+      }
+
+      .info {
+        padding-left: 10px;
+
+        .title {
+          font-size:13px;
+          line-height: 13px;
+          margin-bottom: 4px;
+          font-weight: 600;
+        }
+
+        .subtitle {
+          color: #999999;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+        }
+      }
+    }
+  }
+}
+
+.last-message__time {
+  color: #999999;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 13px;
+  margin-bottom: 14px;
+}
+
+.last-message__unread {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: #3369F3;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.chat_messages-list {
+  flex-grow: 1;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+ }
+
+ :focus::-webkit-input-placeholder {
+  opacity: 0;
+}

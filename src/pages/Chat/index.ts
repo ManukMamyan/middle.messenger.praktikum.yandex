@@ -24,139 +24,29 @@ class Chat extends Block {
             <div class="last-message__unread">2</div>
           </div>
         </li>
-        <li class="aside__chat-list__item">
-          <div class="user-info">
-            <div class="user-avatar"></div>
-            <div class="info">
-              <div class="title">Киноклуб</div>
-              <div class="subtitle">стикер</div>
-            </div>
-          </div>
-          <div class="chat-message__data">
-            <div class="last-message__time">12:00</div>
-            <div class="last-message__unread">2</div>
-          </div>
-        </li>
-        <li class="aside__chat-list__item">
-          <div class="user-info">
-            <div class="user-avatar"></div>
-            <div class="info">
-              <div class="title">Илья</div>
-              <div class="subtitle">друзья, у меня для вас особенный...</div>
-            </div>
-          </div>
-          <div class="chat-message__data">
-            <div class="last-message__time">15:12</div>
-            <div class="last-message__unread">4</div>
-          </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-        <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
-        <li class="aside__chat-list__item">
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="info">
-            <div class="title">Илья</div>
-            <div class="subtitle">друзья, у меня для вас особенный...</div>
-          </div>
-        </div>
-        <div class="chat-message__data">
-          <div class="last-message__time">15:12</div>
-          <div class="last-message__unread">4</div>
-        </div>
-        </li>
       </ul>
     </aside>
-    <main class="chat_messages-list"></main>
+    <main class="chat__messages-list">
+      <header class="chat__messages-list__header">
+        <div class="user-info">
+          <div class="user-avatar"></div>
+          <div class="header__user-info__title">Вадим</div> 
+        </div>
+        <div class="chat__messages-list__header-menu">
+          <div class="header-menu__dot"></div>
+          <div class="header-menu__dot"></div>
+          <div class="header-menu__dot"></div>
+        </div>
+      </header>
+      <div class="chat__messages-list__content"></div>
+      <footer class="chat__messages-list__footer">
+        <form class="message-form">
+          <i class="fa fa-paperclip file-icon"></i>
+          <input class="input_message" type="text" placeholder="Сообщение" name="message">
+          <button type="submit" class="send-message__button">&#x2192;</button>
+        </form>
+      </footer>
+    </main>
   </div>
     `
   }

@@ -103,16 +103,118 @@
   text-align: center;
 }
 
-.chat_messages-list {
+.chat__messages-list {
   flex-grow: 1;
   padding-right: 10px;
   padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    min-height: 54px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-avatar {
+      width:34px;
+      height:34px;
+      border-radius: 50%;
+      background-color: #efefef;
+    }
+
+    .header__user-info__title {
+      margin-left: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      line-height:13px;
+    }
+
+    &-menu {
+      display: flex;
+      padding-left: 10px;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+
+      .header-menu__dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: #1e1e1e;
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  &__content {
+    color: green;
+    flex-grow: 1;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  &__footer {
+    color: blue;
+    min-height: 54px;
+
+    .file-icon,
+    .input_message,
+    .send-message__button {
+      display: flex;
+    }
+
+    .file-icon {
+      min-width: 42px;
+      color: #999999;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .input_message {
+      flex-grow: 1;
+      height: 32px;
+      background-color: #efefef;
+      border-radius: 30px;
+      color: #999999;
+      border: none;
+    }
+
+    .send-message__button {
+      min-width: 28px;
+      min-height: 28px;
+      margin-left: 10px;
+      border-radius: 50%;
+      background-color: #3369F3;
+      border: none;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .message-form {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
-::-webkit-input-placeholder {
+.aside__chat-filter__input::-webkit-input-placeholder {
   text-align: center;
  }
 
  :focus::-webkit-input-placeholder {
   opacity: 0;
+}
+
+.input_message {
+  padding: 10px 20px;
 }

@@ -24,4 +24,12 @@
       pointer-events: none;
     }
   }
+
+  & .input_error {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 8px;
+    color: #ff2f2f;
+    margin-top: 7px;
+  }
 }

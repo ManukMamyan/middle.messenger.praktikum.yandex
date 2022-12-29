@@ -6,18 +6,21 @@ type TProps = {
   name: string;
   label: string;
   id: string;
+  error?: string;
+  value?: string;
   onChange: () => void;
 };
 class Input extends Block {
-  constructor({ id, type, name, label, onChange }: TProps) {
-    super({ id, type, name, label, events: { input: onChange } });
+  constructor({ id, type, name, label, error, value, onChange }: TProps) {
+    super({ id, type, name, label, error, value, events: { input: onChange } });
   }
 
   render() {
     return `
   <div class="input__wrapper">
     <label class="input__label" for="{{id}}">{{label}}</label>
-    <input class="input__input" type="{{type}}" id="{{id}}" name="{{name}}" />
+    <input class="input__input" type="{{type}}" id="{{id}}" name="{{name}}" value="{{value}}" />
+    <div class="input__error">{{#if error}}{{error}}{{/if}}</div>
   </div>
     `;
   }

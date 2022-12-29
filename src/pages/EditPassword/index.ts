@@ -1,4 +1,5 @@
 import Block from '../../core/Block';
+import validate, { ValidateRuleType } from '../../helpers/validate'
 import '../Profile/style.scss';
 
 class EditPassword extends Block {
@@ -10,11 +11,30 @@ class EditPassword extends Block {
       onChangeOldPassword: this.onChangeOldPassword,
       onChangeNewPassword: this.onChangeNewPassword,
       onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
+      errorOldPassword: '',
+      errorNewPassword: '',
+      errorRepeatPassword: '',
     });
   }
 
   onClickSave = () => {
-    console.log('button save changed password was clicked, this', this);
+   const inputElOldPassword = this._element?.querySelector('input[name=oldPassword]') as HTMLInputElement;
+   const inputElNewPassword = this._element?.querySelector('input[name=newPassword]') as HTMLInputElement;
+   const inputElRepeatNewPassword = this._element?.querySelector('input[name=repeatNewPassword]') as HTMLInputElement;
+
+   const errorOldPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElOldPassword.value})
+   const errorNewPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElNewPassword.value})
+   const errorRepeatPassword = validate({type: ValidateRuleType.REPEAT_PASSWORD, value: inputElOldPassword.value, repeatedValue: inputElRepeatNewPassword.value})
+
+   this.setProps({
+    onClickSave: this.onClickSave,
+    onChangeOldPassword: this.onChangeOldPassword,
+    onChangeNewPassword: this.onChangeNewPassword,
+    onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
+    errorOldPassword:  errorOldPassword,
+    errorNewPassword: errorNewPassword,
+    errorRepeatPassword: errorRepeatPassword,
+   })
   };
 
   onChangeOldPassword = () => {
@@ -40,9 +60,9 @@ class EditPassword extends Block {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-        {{{Field id="oldPassword" type="password" label="Старый пароль" name="oldPassword" value="123456789" onChange=onChangeOldPassword}}}
-        {{{Field id="newPassword" type="password" label="Новый пароль" name="newPassword" value="00123456789" onChange=onChangeNewPassword}}}
-        {{{Field id="repeatNewPassword" type="password" label="Повторите новый пароль" name="repeatNewPassword" value="00123456789" onChange=onChangeRepeatNewPassword}}}
+        {{{Field error=errorOldPassword id="oldPassword" type="password" label="Старый пароль" name="oldPassword" value="123456789" onChange=onChangeOldPassword}}}
+        {{{Field error=errorOldPassword id="newPassword" type="password" label="Новый пароль" name="newPassword" value="00123456789" onChange=onChangeNewPassword}}}
+        {{{Field error=errorRepeatPassword id="repeatNewPassword" type="password" label="Повторите новый пароль" name="repeatNewPassword" value="00123456789" onChange=onChangeRepeatNewPassword}}}
         </ul>
       </div>
        <div class="edit-profile-actions">

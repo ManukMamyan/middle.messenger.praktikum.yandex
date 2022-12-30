@@ -16,7 +16,7 @@
     text-align: right;
     padding-top: 21px;
     padding-bottom: 23px;
-    color: #999999;
+    color: #999;
   }
 
   &__header-link {
@@ -35,7 +35,7 @@
       border-radius: 5px;
       border: none;
       background-color: #efefef;
-      color: #999999;
+      color: #999;
       padding: 10px;
     }
   }
@@ -73,7 +73,7 @@
         }
 
         .subtitle {
-          color: #999999;
+          color: #999;
           font-weight: 500;
           font-size: 12px;
           line-height: 15px;
@@ -84,7 +84,7 @@
 }
 
 .last-message__time {
-  color: #999999;
+  color: #999;
   font-size: 9px;
   font-weight: 500;
   line-height: 13px;
@@ -95,7 +95,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  color: #ffffff;
+  color: #fff;
   background-color: #3369f3;
   font-weight: 500;
   font-size: 11px;
@@ -172,7 +172,7 @@
 
     .file-icon {
       min-width: 42px;
-      color: #999999;
+      color: #999;
       font-size: 24px;
       cursor: pointer;
     }
@@ -180,9 +180,10 @@
     .input_message {
       flex-grow: 1;
       height: 32px;
+      padding: 10px 20px;
       background-color: #efefef;
       border-radius: 30px;
-      color: #999999;
+      color: #999;
       border: none;
     }
 
@@ -195,7 +196,7 @@
       border: none;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
+      color: #fff;
       cursor: pointer;
     }
 
@@ -213,8 +214,4 @@
 
 :focus::-webkit-input-placeholder {
   opacity: 0;
-}
-
-.input_message {
-  padding: 10px 20px;
 }

@@ -62,17 +62,15 @@
   margin-top: 60px;
 }
 
-.profile-actions__list {
-  &-item:last-child {
-    border-bottom: 0;
-  }
-}
-
 .profile-actions__list-item {
   list-style-type: none;
   border-bottom: 1px solid #eaeaea;
   min-width: 510px;
   padding: 10px 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   & .action {
     text-decoration: none;

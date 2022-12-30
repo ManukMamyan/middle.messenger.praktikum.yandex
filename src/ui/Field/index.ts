@@ -13,7 +13,7 @@ type TProps = {
 };
 
 class Field extends Block<Omit<TProps, 'onChange'> & { events: { input: () => void } }> {
-  static componentName = 'Field'
+  static componentName = 'Field';
 
   constructor({ id, type, name, label, value, error, onChange, editable = true }: TProps) {
     super({ id, type, name, label, value, editable, error, events: { input: onChange } });

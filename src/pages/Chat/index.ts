@@ -8,8 +8,8 @@ type TProps = {
 };
 
 class Chat extends Block<TProps> {
-  static componentName = 'Chat'
-  
+  static componentName = 'Chat';
+
   constructor() {
     super();
 

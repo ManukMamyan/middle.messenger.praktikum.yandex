@@ -7,7 +7,7 @@ type TProps = {
 };
 
 class Fab extends Block<Omit<TProps, 'onClick'> & { events: { click: () => void } }> {
-  static componentName = 'Fab'
+  static componentName = 'Fab';
 
   constructor({ icon, onClick }: TProps) {
     super({ icon, events: { click: onClick } });

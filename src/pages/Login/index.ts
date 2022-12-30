@@ -11,7 +11,7 @@ type TProps = {
 };
 
 class Login extends Block<TProps> {
-  static componentName = 'Login'
+  static componentName = 'Login';
 
   constructor() {
     super();

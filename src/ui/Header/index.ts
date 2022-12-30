@@ -6,7 +6,7 @@ type TProps = {
 };
 
 class Header extends Block<TProps> {
-  static componentName = 'Header'
+  static componentName = 'Header';
 
   constructor({ header }: TProps) {
     super({ header });

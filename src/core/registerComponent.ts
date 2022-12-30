@@ -3,7 +3,7 @@ import Handlebars, { HelperOptions } from 'handlebars';
 
 interface BlockConstructable<Props extends {}> {
   componentName: string;
-  new (...args: any[]): Block<Props>
+  new (...args: any[]): Block<Props>;
 }
 
 export default function registerComponent<Props extends {}>(Component: BlockConstructable<Props>) {

@@ -1,18 +1,16 @@
-
-
-enum METHODS  {
+enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE',
-};
+}
 
 type TOptions = {
   timeout?: number;
-  headers?: Record<string, string>
-  method?: METHODS
-  data?: Record<string, string>
-}
+  headers?: Record<string, string>;
+  method?: METHODS;
+  data?: Record<string, string>;
+};
 
 function queryStringify(data: Record<string, string>): string {
   if (typeof data !== 'object') {

@@ -6,7 +6,7 @@
 .wrapper__action {
   min-width: 64px;
   height: 100vh;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +16,11 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #FFFFFF;
-    background-color: #3369F3;
+    color: #ffffff;
+    background-color: #3369f3;
     width: 28px;
     height: 28px;
-    border-radius: 50%
+    border-radius: 50%;
   }
 }
 
@@ -29,7 +29,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
 }
 
 .avatar {
@@ -37,7 +37,7 @@
   height: 130px;
   margin-top: 60px;
   margin-bottom: 21px;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   border-radius: 50%;
 
   &:hover {
@@ -59,7 +59,7 @@
 }
 
 .profile-actions {
-  margin-top: 60px
+  margin-top: 60px;
 }
 
 .profile-actions__list {
@@ -70,7 +70,7 @@
 
 .profile-actions__list-item {
   list-style-type: none;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
   min-width: 510px;
   padding: 10px 0;
 
@@ -79,10 +79,10 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
-    color: #3369F3;
+    color: #3369f3;
 
     &.exit {
-     color: #FF0000;
+      color: #ff0000;
     }
   }
 }

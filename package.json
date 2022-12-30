@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "chat application",
   "scripts": {
-    "format": "prettier --write \"src/**/*.{js,ts,json}\"",
-    "format:styles": "npx stylelint \"**/*.scss\"",
+    "format": "prettier --write \"src/**/*.{js,ts,json,scss}\"",
     "lint": "npm run lint:js && npm run lint:ts",
     "lint:js": "eslint src/. --ext  .js,.ts,",
     "lint:ts": "tsx",
+    "lint:styles": "npx stylelint \"**/*.scss\"",
     "dev": "parcel src/index.html -p 3000 --no-cache --no-source-maps --open",
     "start": "npm run build && ts-node ./server.ts",
     "build": "parcel build src/index.html",

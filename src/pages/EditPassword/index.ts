@@ -13,7 +13,7 @@ type TProps = {
 };
 
 class EditPassword extends Block<TProps> {
-  static componentName = 'EditPassword'
+  static componentName = 'EditPassword';
 
   constructor() {
     super();

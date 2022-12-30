@@ -2,7 +2,7 @@ import { Block } from '../../core';
 import '../NotFound/style.scss';
 
 class ServerError extends Block<{}> {
-  static componentName = 'ServerError'
+  static componentName = 'ServerError';
 
   render() {
     return `

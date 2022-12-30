@@ -2,7 +2,7 @@ import Block from '../../core/Block';
 import './style.scss';
 
 class Profile extends Block<{}> {
-  static componentName = 'Profile'
+  static componentName = 'Profile';
 
   constructor() {
     super();

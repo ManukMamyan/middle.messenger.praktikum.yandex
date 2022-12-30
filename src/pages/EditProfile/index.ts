@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import validate, { ValidateRuleType } from '../../helpers/validate'
+import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
 class EditProfile extends Block {
@@ -26,14 +26,25 @@ class EditProfile extends Block {
     const inputElEmail = this._element?.querySelector('input[name=email]') as HTMLInputElement;
     const inputElLogin = this._element?.querySelector('input[name=username]') as HTMLInputElement;
     const inputElName = this._element?.querySelector('input[name=name]') as HTMLInputElement;
-    const inputElSecondName = this._element?.querySelector('input[name=second-name]') as HTMLInputElement;
+    const inputElSecondName = this._element?.querySelector(
+      'input[name=second-name]'
+    ) as HTMLInputElement;
     const inputElPhone = this._element?.querySelector('input[name=phone]') as HTMLInputElement;
 
-    const errorEmail = validate({type: ValidateRuleType.EMAIL, value: inputElEmail.value})
-    const errorLogin = validate({type: ValidateRuleType.LOGIN, value: inputElLogin.value})
-    const errorName = validate({type: ValidateRuleType.FIRST_NAME, value: inputElName.value})
-    const errorSecondName = validate({type: ValidateRuleType.SECOND_NAME, value: inputElSecondName.value})
-    const errorPhone = validate({type: ValidateRuleType.PHONE_NUMBER, value: inputElPhone.value})
+    const email = inputElEmail.value;
+    const login = inputElLogin.value;
+    const name = inputElName.value;
+    const secondName = inputElSecondName.value;
+    const phone = inputElPhone.value;
+
+    const errorEmail = validate({ type: ValidateRuleType.EMAIL, value: email });
+    const errorLogin = validate({ type: ValidateRuleType.LOGIN, value: login });
+    const errorName = validate({ type: ValidateRuleType.FIRST_NAME, value: name });
+    const errorSecondName = validate({
+      type: ValidateRuleType.SECOND_NAME,
+      value: secondName,
+    });
+    const errorPhone = validate({ type: ValidateRuleType.PHONE_NUMBER, value: phone });
 
     this.setProps({
       onClickSaveProfile: this.onClickSaveProfile,
@@ -49,6 +60,16 @@ class EditProfile extends Block {
       errorSecondName,
       errorPhone,
     });
+
+    if (!errorEmail && !errorLogin && !errorName && !errorSecondName && !errorPhone) {
+      console.log('[PROFILE_DATA]', {
+        email,
+        login,
+        name,
+        secondName,
+        phone,
+      });
+    }
   };
 
   onChangeProfileEmail = () => {

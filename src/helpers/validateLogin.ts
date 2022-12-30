@@ -1,10 +1,10 @@
-const patternValidateLogin = new RegExp('[\\w.]*')
+const patternValidateLogin = new RegExp('[\\w.]*');
 const MIN_LENGTH = 3;
 const MAX_LENGTH = 20;
 
 const validateLogin = (login?: string) => {
   if (!login) {
-    return 'Поле не может быть пустым'
+    return 'Поле не может быть пустым';
   }
 
   if (login.length < MIN_LENGTH || login.length > MAX_LENGTH) {
@@ -12,10 +12,10 @@ const validateLogin = (login?: string) => {
   }
 
   if (!patternValidateLogin.test(login)) {
-    return 'Введен недопустимый символ. Только англ. буквы, символ _ и точка'
+    return 'Введен недопустимый символ. Только англ. буквы, символ _ и точка';
   }
 
-  return ''
-}
+  return '';
+};
 
-export default validateLogin
+export default validateLogin;

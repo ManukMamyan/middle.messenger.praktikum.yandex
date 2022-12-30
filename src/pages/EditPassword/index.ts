@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import validate, { ValidateRuleType } from '../../helpers/validate'
+import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
 class EditPassword extends Block {
@@ -18,23 +18,47 @@ class EditPassword extends Block {
   }
 
   onClickSave = () => {
-   const inputElOldPassword = this._element?.querySelector('input[name=oldPassword]') as HTMLInputElement;
-   const inputElNewPassword = this._element?.querySelector('input[name=newPassword]') as HTMLInputElement;
-   const inputElRepeatNewPassword = this._element?.querySelector('input[name=repeatNewPassword]') as HTMLInputElement;
+    const inputElOldPassword = this._element?.querySelector(
+      'input[name=oldPassword]'
+    ) as HTMLInputElement;
+    const inputElNewPassword = this._element?.querySelector(
+      'input[name=newPassword]'
+    ) as HTMLInputElement;
+    const inputElRepeatNewPassword = this._element?.querySelector(
+      'input[name=repeatNewPassword]'
+    ) as HTMLInputElement;
 
-   const errorOldPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElOldPassword.value})
-   const errorNewPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElNewPassword.value})
-   const errorRepeatPassword = validate({type: ValidateRuleType.REPEAT_PASSWORD, value: inputElOldPassword.value, repeatedValue: inputElRepeatNewPassword.value})
+    const oldPassword = inputElOldPassword.value;
+    const newPassword = inputElNewPassword.value;
+    const repeatNewPassword = inputElRepeatNewPassword.value;
 
-   this.setProps({
-    onClickSave: this.onClickSave,
-    onChangeOldPassword: this.onChangeOldPassword,
-    onChangeNewPassword: this.onChangeNewPassword,
-    onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
-    errorOldPassword:  errorOldPassword,
-    errorNewPassword: errorNewPassword,
-    errorRepeatPassword: errorRepeatPassword,
-   })
+    const errorOldPassword = validate({
+      type: ValidateRuleType.PASSWORD,
+      value: oldPassword,
+    });
+    const errorNewPassword = validate({
+      type: ValidateRuleType.PASSWORD,
+      value: newPassword,
+    });
+    const errorRepeatPassword = validate({
+      type: ValidateRuleType.REPEAT_PASSWORD,
+      value: newPassword,
+      repeatedValue: repeatNewPassword,
+    });
+
+    this.setProps({
+      onClickSave: this.onClickSave,
+      onChangeOldPassword: this.onChangeOldPassword,
+      onChangeNewPassword: this.onChangeNewPassword,
+      onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
+      errorOldPassword: errorOldPassword,
+      errorNewPassword: errorNewPassword,
+      errorRepeatPassword: errorRepeatPassword,
+    });
+
+    if (!errorOldPassword && !errorNewPassword && !repeatNewPassword) {
+      console.log('[LOGIN_DATA]', { errorOldPassword, errorNewPassword, repeatNewPassword });
+    }
   };
 
   onChangeOldPassword = () => {

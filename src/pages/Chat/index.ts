@@ -48,8 +48,8 @@ class Chat extends Block {
       </footer>
     </main>
   </div>
-    `
+    `;
   }
 }
 
-export default Chat
+export default Chat;

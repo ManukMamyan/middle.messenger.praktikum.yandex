@@ -5,7 +5,7 @@ type TProps = {
   text: string;
   to: string;
 };
-class Link extends Block {
+class Link extends Block<TProps> {
   constructor({ text, to }: TProps) {
     super({ text, to });
   }

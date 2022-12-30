@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import validate, { ValidateRuleType } from '../../helpers/validate'
+import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
 class Register extends Block {
@@ -29,20 +29,45 @@ class Register extends Block {
     const inputElEmail = this._element?.querySelector('input[name=email]') as HTMLInputElement;
     const inputElLogin = this._element?.querySelector('input[name=username]') as HTMLInputElement;
     const inputElName = this._element?.querySelector('input[name=name]') as HTMLInputElement;
-    const inputElSecondName = this._element?.querySelector('input[name=second-name]') as HTMLInputElement;
+    const inputElSecondName = this._element?.querySelector(
+      'input[name=second-name]'
+    ) as HTMLInputElement;
     const inputElPhone = this._element?.querySelector('input[name=phone]') as HTMLInputElement;
-    const inputElPassword = this._element?.querySelector('input[name=password]') as HTMLInputElement;
-    const inputElPasswordConfirm = this._element?.querySelector('input[name=password-confirm]') as HTMLInputElement;
+    const inputElPassword = this._element?.querySelector(
+      'input[name=password]'
+    ) as HTMLInputElement;
+    const inputElPasswordConfirm = this._element?.querySelector(
+      'input[name=password-confirm]'
+    ) as HTMLInputElement;
 
-    const errorEmail = validate({type: ValidateRuleType.EMAIL, value: inputElEmail.value})
-    const errorLogin = validate({type: ValidateRuleType.LOGIN, value: inputElLogin.value})
-    const errorName = validate({type: ValidateRuleType.FIRST_NAME, value: inputElName.value})
-    const errorSecondName = validate({type: ValidateRuleType.SECOND_NAME, value: inputElSecondName.value})
-    const errorPhone = validate({type: ValidateRuleType.PHONE_NUMBER, value: inputElPhone.value})
-    const errorPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElPassword.value})
-    const errorPasswordConfirm = validate({type: ValidateRuleType.REPEAT_PASSWORD, value: inputElPassword.value, repeatedValue: inputElPasswordConfirm.value})
+    const email = inputElEmail.value;
+    const login = inputElLogin.value;
+    const name = inputElName.value;
+    const secondName = inputElSecondName.value;
+    const phone = inputElPhone.value;
+    const password = inputElPassword.value;
+    const passwordConfirm = inputElPasswordConfirm.value;
+
+    const errorEmail = validate({ type: ValidateRuleType.EMAIL, value: email });
+    const errorLogin = validate({ type: ValidateRuleType.LOGIN, value: login });
+    const errorName = validate({ type: ValidateRuleType.FIRST_NAME, value: name });
+    const errorSecondName = validate({ type: ValidateRuleType.SECOND_NAME, value: secondName });
+    const errorPhone = validate({ type: ValidateRuleType.PHONE_NUMBER, value: phone });
+    const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: password });
+    const errorPasswordConfirm = validate({
+      type: ValidateRuleType.REPEAT_PASSWORD,
+      value: password,
+      repeatedValue: passwordConfirm,
+    });
 
     this.setProps({
+      errorEmail,
+      errorLogin,
+      errorName,
+      errorSecondName,
+      errorPhone,
+      errorPassword,
+      errorPasswordConfirm,
       onClickRegister: this.onClickRegister,
       onInputEmail: this.onInputEmail,
       onInputLogin: this.onInputLogin,
@@ -51,14 +76,26 @@ class Register extends Block {
       onInputPhone: this.onInputPhone,
       onInputPassword: this.onInputPassword,
       onInputConfirmPassword: this.onInputConfirmPassword,
-      errorEmail,
-      errorLogin,
-      errorName,
-      errorSecondName,
-      errorPhone,
-      errorPassword,
-      errorPasswordConfirm,
     });
+
+    if (
+      !errorEmail &&
+      !errorLogin &&
+      !errorName &&
+      !errorSecondName &&
+      !errorPhone &&
+      !errorPasswordConfirm
+    ) {
+      console.log('[REGISTER_DATA]', {
+        email,
+        login,
+        name,
+        secondName,
+        phone,
+        password,
+        passwordConfirm,
+      });
+    }
   };
 
   onInputEmail = () => {
@@ -67,8 +104,8 @@ class Register extends Block {
 
   onInputLogin = () => {
     console.log('input username was changed, this', this);
-  };  
-  
+  };
+
   onInputName = () => {
     console.log('input name was changed, this', this);
   };

@@ -10,7 +10,7 @@ type TProps = {
   value?: string;
   onChange: () => void;
 };
-class Input extends Block {
+class Input extends Block<Omit<TProps, 'onChange'> & { events: { input: () => void } }> {
   constructor({ id, type, name, label, error, value, onChange }: TProps) {
     super({ id, type, name, label, error, value, events: { input: onChange } });
   }

@@ -5,7 +5,7 @@ type TProps = {
   header: string;
 };
 
-class Header extends Block {
+class Header extends Block<TProps> {
   constructor({ header }: TProps) {
     super({ header });
   }

@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import validate, { ValidateRuleType } from '../../helpers/validate'
+import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
 class Login extends Block {
@@ -16,11 +16,17 @@ class Login extends Block {
   }
 
   onClick = () => {
-    const inputElUsername = this._element?.querySelector('input[name=username]') as HTMLInputElement;
-    const inputElPassword = this._element?.querySelector('input[name=password]') as HTMLInputElement;
+    const inputElUsername = this._element?.querySelector(
+      'input[name=username]'
+    ) as HTMLInputElement;
+    const inputElPassword = this._element?.querySelector(
+      'input[name=password]'
+    ) as HTMLInputElement;
+    const username = inputElUsername.value;
+    const password = inputElUsername.value;
 
-    const errorUsername= validate({type: ValidateRuleType.PASSWORD, value: inputElUsername.value})
-    const errorPassword = validate({type: ValidateRuleType.PASSWORD, value: inputElPassword.value})
+    const errorUsername = validate({ type: ValidateRuleType.PASSWORD, value: username });
+    const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: password });
 
     this.setProps({
       onClick: this.onClick,
@@ -28,7 +34,11 @@ class Login extends Block {
       onChangePassword: this.onChangePassword,
       errorUsername,
       errorPassword,
-     })
+    });
+
+    if (!errorUsername && !errorPassword) {
+      console.log('[LOGIN_DATA]', { username, password });
+    }
   };
 
   onChangeUsername = () => {

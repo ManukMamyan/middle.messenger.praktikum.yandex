@@ -39,7 +39,7 @@ export default class Block<P extends {} = {}> {
 
     this.props = this._makePropsProxy(props || ({} as P));
     this.state = this._makePropsProxy(this.state);
-    
+
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
 

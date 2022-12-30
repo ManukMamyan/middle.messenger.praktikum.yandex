@@ -5,7 +5,6 @@ class Profile extends Block {
   constructor() {
     super();
   }
-  
 
   render(): string {
     return `

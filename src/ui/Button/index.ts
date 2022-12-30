@@ -7,9 +7,9 @@ type TProps = {
   onClick: () => void;
 };
 
-class Button extends Block<Omit<TProps, 'onClick'> & {events: {click: () => void}}> {
+class Button extends Block<Omit<TProps, 'onClick'> & { events: { click: () => void } }> {
   constructor({ text, size, onClick }: TProps) {
-    super({ text,size, events: { click: onClick } });
+    super({ text, size, events: { click: onClick } });
   }
 
   render() {

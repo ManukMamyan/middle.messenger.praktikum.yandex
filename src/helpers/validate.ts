@@ -19,31 +19,31 @@ export enum ValidateRuleType {
 type ValidationData = {
   value: string;
   repeatedValue?: string;
-  type: ValidateRuleType
-}
+  type: ValidateRuleType;
+};
 
 const validate = (validationData: ValidationData): string => {
   let errorMessage: string = '';
 
-  const {type, value, repeatedValue} = validationData;
+  const { type, value, repeatedValue } = validationData;
 
   if (type === ValidateRuleType.LOGIN) {
     errorMessage = validateLogin(value);
   } else if (type === ValidateRuleType.PASSWORD) {
     errorMessage = validatePassword(value);
   } else if (type === ValidateRuleType.REPEAT_PASSWORD) {
-    errorMessage = validateRepeatPassword(value, repeatedValue)
+    errorMessage = validateRepeatPassword(value, repeatedValue);
   } else if (type === ValidateRuleType.EMAIL) {
-    errorMessage = validateEmail(value)
+    errorMessage = validateEmail(value);
   } else if (type === ValidateRuleType.PHONE_NUMBER) {
-    errorMessage = validatePhoneNumber(value)
+    errorMessage = validatePhoneNumber(value);
   } else if (type === ValidateRuleType.FIRST_NAME) {
-    errorMessage = validateName(value)
+    errorMessage = validateName(value);
   } else if (type === ValidateRuleType.SECOND_NAME) {
-    errorMessage = validateSecondName(value)
+    errorMessage = validateSecondName(value);
   }
 
   return errorMessage;
-}
+};
 
 export default validate;

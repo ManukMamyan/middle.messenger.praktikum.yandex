@@ -10,7 +10,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "dist", "public"]
 }

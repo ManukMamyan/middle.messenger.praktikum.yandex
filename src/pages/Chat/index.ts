@@ -1,7 +1,40 @@
 import Block from '../../core/Block';
+import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
-class Chat extends Block {
+type TProps = {
+  onClick: (event: SubmitEvent) => void;
+  errorMessage: string;
+};
+
+class Chat extends Block<TProps> {
+  constructor() {
+    super();
+
+    this.setProps({
+      onClick: this.onClick,
+      errorMessage: '',
+    });
+  }
+
+  onClick = (event: SubmitEvent) => {
+    event.preventDefault();
+
+    const inputElMessage = this._element?.querySelector('input[name=message]') as HTMLInputElement;
+    const message = inputElMessage.value;
+
+    const errorMessage = validate({ type: ValidateRuleType.MESSAGE, value: message });
+
+    this.setProps({
+      errorMessage,
+      onClick: this.onClick,
+    });
+
+    if (!errorMessage) {
+      console.log('[MESSAGE]', { message });
+    }
+  };
+
   render() {
     return `
   <div class="chat-container">
@@ -43,7 +76,7 @@ class Chat extends Block {
         <form class="message-form">
           <i class="fa fa-paperclip file-icon"></i>
           <input class="input_message" type="text" placeholder="Сообщение" name="message">
-          <button type="submit" class="send-message__button">&#x2192;</button>
+          {{{Fab icon="&#x2192;" onClick=onClick}}}
         </form>
       </footer>
     </main>

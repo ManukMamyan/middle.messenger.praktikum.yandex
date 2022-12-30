@@ -2,7 +2,25 @@ import Block from '../../core/Block';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
-class Register extends Block {
+type TProps = {
+  onClickRegister: (event: MouseEvent) => void;
+  onInputEmail: (event: InputEvent) => void;
+  onInputLogin: (event: InputEvent) => void;
+  onInputName: (event: InputEvent) => void;
+  onInputSecondName: (event: InputEvent) => void;
+  onInputPhone: (event: InputEvent) => void;
+  onInputPassword: (event: InputEvent) => void;
+  onInputConfirmPassword: (event: InputEvent) => void;
+  errorEmail: string;
+  errorLogin: string;
+  errorName: string;
+  errorSecondName: string;
+  errorPhone: string;
+  errorPassword: string;
+  errorPasswordConfirm: string;
+};
+
+class Register extends Block<TProps> {
   constructor() {
     super();
 

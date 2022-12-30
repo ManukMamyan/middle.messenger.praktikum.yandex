@@ -5,6 +5,7 @@ import validatePassword from './validatePassword';
 import validateRepeatPassword from './validateRepeatPassword';
 import validateName from './validateName';
 import validateSecondName from './validateSecondName';
+import validateMessage from './validateMessage';
 
 export enum ValidateRuleType {
   LOGIN = 'LOGIN',
@@ -14,6 +15,7 @@ export enum ValidateRuleType {
   PHONE_NUMBER = 'PHONE_NUMBER',
   FIRST_NAME = 'FIRST_NAME',
   SECOND_NAME = 'SECOND_NAME',
+  MESSAGE = 'MESSAGE',
 }
 
 type ValidationData = {
@@ -41,6 +43,8 @@ const validate = (validationData: ValidationData): string => {
     errorMessage = validateName(value);
   } else if (type === ValidateRuleType.SECOND_NAME) {
     errorMessage = validateSecondName(value);
+  } else if (type === ValidateRuleType.MESSAGE) {
+    errorMessage = validateMessage(value);
   }
 
   return errorMessage;

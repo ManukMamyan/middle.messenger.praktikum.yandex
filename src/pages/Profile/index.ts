@@ -1,7 +1,7 @@
 import Block from '../../core/Block';
 import './style.scss';
 
-class Profile extends Block {
+class Profile extends Block<{}> {
   constructor() {
     super();
   }

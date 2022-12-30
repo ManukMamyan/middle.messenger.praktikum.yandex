@@ -2,7 +2,15 @@ import Block from '../../core/Block';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
-class Login extends Block {
+type TProps = {
+  onClick: (event: SubmitEvent) => void;
+  onChangeUsername: (event: InputEvent) => void;
+  onChangePassword: (event: InputEvent) => void;
+  errorUsername: string;
+  errorPassword: string;
+};
+
+class Login extends Block<TProps> {
   constructor() {
     super();
 
@@ -29,11 +37,11 @@ class Login extends Block {
     const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: password });
 
     this.setProps({
+      errorUsername,
+      errorPassword,
       onClick: this.onClick,
       onChangeUsername: this.onChangeUsername,
       onChangePassword: this.onChangePassword,
-      errorUsername,
-      errorPassword,
     });
 
     if (!errorUsername && !errorPassword) {

@@ -2,7 +2,22 @@ import Block from '../../core/Block';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
-class EditProfile extends Block {
+type TProps = {
+  onClickSaveProfile: (event: MouseEvent) => void;
+  onChangeProfileEmail: (event: InputEvent) => void;
+  onChangeProfileLogin: (event: InputEvent) => void;
+  onChangeProfileName: (event: InputEvent) => void;
+  onChangeProfileSecondName: (event: InputEvent) => void;
+  onChangeProfileChatName: (event: InputEvent) => void;
+  onChangeProfilePhone: (event: InputEvent) => void;
+  errorEmail: string;
+  errorLogin: string;
+  errorName: string;
+  errorSecondName: string;
+  errorPhone: string;
+};
+
+class EditProfile extends Block<TProps> {
   constructor() {
     super();
 

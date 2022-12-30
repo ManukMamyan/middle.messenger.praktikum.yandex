@@ -2,7 +2,17 @@ import Block from '../../core/Block';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
-class EditPassword extends Block {
+type TProps = {
+  onClickSave: (event: MouseEvent) => void;
+  onChangeOldPassword: (event: InputEvent) => void;
+  onChangeNewPassword: (event: InputEvent) => void;
+  onChangeRepeatNewPassword: (event: InputEvent) => void;
+  errorOldPassword: string;
+  errorNewPassword: string;
+  errorRepeatPassword: string;
+};
+
+class EditPassword extends Block<TProps> {
   constructor() {
     super();
 
@@ -57,7 +67,7 @@ class EditPassword extends Block {
     });
 
     if (!errorOldPassword && !errorNewPassword && !repeatNewPassword) {
-      console.log('[LOGIN_DATA]', { errorOldPassword, errorNewPassword, repeatNewPassword });
+      console.log('[PASSWORD_DATA]', { errorOldPassword, errorNewPassword, repeatNewPassword });
     }
   };
 

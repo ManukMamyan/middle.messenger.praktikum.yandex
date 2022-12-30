@@ -1,7 +1,7 @@
 import { Block } from '../../core';
 import './style.scss';
 
-class NotFound extends Block {
+class NotFound extends Block<{}> {
   render() {
     return `
   <div class="container">

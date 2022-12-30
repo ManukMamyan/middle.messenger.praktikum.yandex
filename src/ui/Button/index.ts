@@ -1,7 +1,7 @@
 import { Block } from '../../core';
 import './style.scss';
 
-type TProps = {
+export type TProps = {
   text: string;
   size: 'small' | 'medium' | 'large';
   onClick: () => void;

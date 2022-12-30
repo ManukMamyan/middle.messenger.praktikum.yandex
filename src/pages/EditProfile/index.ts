@@ -18,6 +18,8 @@ type TProps = {
 };
 
 class EditProfile extends Block<TProps> {
+  static componentName = 'EditProfile'
+
   constructor() {
     super();
 

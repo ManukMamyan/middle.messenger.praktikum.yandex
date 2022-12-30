@@ -1,7 +1,9 @@
 import { Block } from '../../core';
 import '../NotFound/style.scss';
 
-class NotFound extends Block<{}> {
+class ServerError extends Block<{}> {
+  static componentName = 'ServerError'
+
   render() {
     return `
     <div class="container">
@@ -15,4 +17,4 @@ class NotFound extends Block<{}> {
   }
 }
 
-export default NotFound;
+export default ServerError;

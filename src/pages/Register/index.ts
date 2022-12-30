@@ -21,6 +21,8 @@ type TProps = {
 };
 
 class Register extends Block<TProps> {
+  static componentName = 'Register'
+
   constructor() {
     super();
 

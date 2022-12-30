@@ -6,6 +6,8 @@ type TProps = {
   to: string;
 };
 class Link extends Block<TProps> {
+  static componentName = 'Link'
+
   constructor({ text, to }: TProps) {
     super({ text, to });
   }

@@ -2,6 +2,8 @@ import { Block } from '../../core';
 import './style.scss';
 
 class NotFound extends Block<{}> {
+  static componentName = 'NotFound'
+
   render() {
     return `
   <div class="container">

@@ -33,7 +33,7 @@ class Login extends Block<TProps> {
       'input[name=password]'
     ) as HTMLInputElement;
     const username = inputElUsername.value;
-    const password = inputElUsername.value;
+    const password = inputElPassword.value;
 
     const errorUsername = validate({ type: ValidateRuleType.PASSWORD, value: username });
     const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: password });

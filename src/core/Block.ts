@@ -17,6 +17,7 @@ export default class Block<P extends {}> {
   } as const;
 
   public id = nanoid(6);
+  // @ts-ignore
   private readonly _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
@@ -57,6 +58,7 @@ export default class Block<P extends {}> {
     this._element = this._createDocumentElement('div');
   }
 
+  // @ts-ignore
   protected getStateFromProps(props: any): void {
     this.state = {};
   }
@@ -70,6 +72,7 @@ export default class Block<P extends {}> {
     this.componentDidMount(props);
   }
 
+  // @ts-ignore
   componentDidMount(props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
@@ -80,6 +83,7 @@ export default class Block<P extends {}> {
     this._render();
   }
 
+  // @ts-ignore
   componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }

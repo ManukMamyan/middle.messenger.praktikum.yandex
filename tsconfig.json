@@ -1,5 +1,7 @@
 {
-  "compilerOptions": {                            
+  "compilerOptions": {
+    "target": "ES2020",
+    "moduleResolution": "node",                            
     "typeRoots": ["node_modules/@types", "typings/typings.d.ts", "typings/hbs/hbs.d.ts"],
     "sourceMap": true,
     "esModuleInterop": true,

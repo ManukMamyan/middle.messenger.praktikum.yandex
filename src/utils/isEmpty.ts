@@ -1,8 +1,8 @@
-const isMap = (val): val is Map<any, any> => {
+const isMap = (val: any): val is Map<any, any> => {
   return val.toString() === '[object Map]';
 };
 
-const isSet = (val): val is Set<any> => {
+const isSet = (val: any): val is Set<any> => {
   return val.toString() === '[object Set]';
 };
 

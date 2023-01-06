@@ -1,5 +1,7 @@
+@use '../../sass/style';
+
 .not-found {
-  color: #1e1e1e;
+  color: style.$text-color-dark;
   font-weight: 500;
   margin: 0;
 
@@ -20,7 +22,7 @@
     .back {
       font-weight: 500;
       font-size: 11px;
-      color: #3369f3;
+      color: style.$text-color-blue;
       text-decoration: none;
       line-height: 11px;
     }

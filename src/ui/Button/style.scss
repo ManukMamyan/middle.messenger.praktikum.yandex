@@ -1,6 +1,8 @@
+@use '../../sass/style';
+
 .button {
-  color: #fff;
-  background-color: #3369f3;
+  color: style.$text-color-white;
+  background-color: style.$background-color-blue;
   border: none;
   border-radius: 8px;
 

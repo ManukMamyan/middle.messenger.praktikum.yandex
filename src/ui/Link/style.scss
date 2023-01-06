@@ -1,7 +1,9 @@
+@use '../../sass/style';
+
 .link {
   display: block;
   margin-top: 14px;
-  color: #3369f3;
+  color: style.$text-color-blue;
   font-weight: 500;
   font-size: 11px;
   line-height: 11px;

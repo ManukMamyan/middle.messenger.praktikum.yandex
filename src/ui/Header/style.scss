@@ -1,5 +1,7 @@
+@use '../../sass/style';
+
 .header {
-  color: #1e1e1e;
+  color: style.$text-color-dark;
   margin-bottom: 24px;
   font-weight: 500;
   font-size: 20px;

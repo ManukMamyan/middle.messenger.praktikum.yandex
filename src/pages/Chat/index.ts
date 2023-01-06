@@ -41,7 +41,7 @@ class Chat extends Block<TProps> {
     return `
   <div class="chat-container">
     <aside class="aside__chat">
-      <header class="aside__header">Профиль<a class="aside__header-link">&#62;</a></header>
+      <header class="aside__header">Профиль<a class="aside__header-link" href="/profile">&#62;</a></header>
       <div class="aside__chat-filter">
         <input class="aside__chat-filter__input" type="text" placeholder="&#128269 Поиск">
       </div>

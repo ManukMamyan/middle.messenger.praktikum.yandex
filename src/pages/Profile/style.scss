@@ -1,3 +1,5 @@
+@use '../../sass/style';
+
 .container-profile {
   height: 100vh;
   display: flex;
@@ -6,7 +8,7 @@
 .wrapper__action {
   min-width: 64px;
   height: 100vh;
-  background-color: #fbfbfb;
+  background-color: style.$background-color-white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +18,8 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #fff;
-    background-color: #3369f3;
+    color: style.$text-color-white;
+    background-color: style.$background-color-blue;
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -37,7 +39,7 @@
   height: 130px;
   margin-top: 60px;
   margin-bottom: 21px;
-  background-color: #efefef;
+  background-color: style.$background-color-gray;
   border-radius: 50%;
 
   &:hover {
@@ -64,7 +66,7 @@
 
 .profile-actions__list-item {
   list-style-type: none;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid style.$border-color;
   min-width: 510px;
   padding: 10px 0;
 
@@ -77,10 +79,10 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
-    color: #3369f3;
+    color: style.$text-color-blue;
 
     &.exit {
-      color: #f00;
+      color: style.$text-color-danger;
     }
   }
 }

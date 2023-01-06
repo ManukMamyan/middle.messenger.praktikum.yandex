@@ -1,3 +1,5 @@
+@use '../../sass/style';
+
 .chat-container {
   display: flex;
   justify-content: space-between;
@@ -9,14 +11,14 @@
     min-width: 310px;
     padding-right: 10px;
     padding-left: 10px;
-    border-right: 1px solid #eaeaea;
+    border-right: 1px solid style.$border-color;
   }
 
   &__header {
     text-align: right;
     padding-top: 21px;
     padding-bottom: 23px;
-    color: #999;
+    color: style.$text-color-gray;
   }
 
   &__header-link {
@@ -34,8 +36,8 @@
       min-height: 32px;
       border-radius: 5px;
       border: none;
-      background-color: #efefef;
-      color: #999;
+      background-color: style.$background-color-gray;
+      color: style.$text-color-gray;
       padding: 10px;
     }
   }
@@ -46,7 +48,7 @@
     &__item {
       display: flex;
       justify-content: space-between;
-      border-top: 1px solid #eaeaea;
+      border-top: 1px solid style.$border-color;
       padding-top: 12px;
       padding-bottom: 12px;
       cursor: pointer;
@@ -59,7 +61,7 @@
         width: 47px;
         height: 47px;
         border-radius: 50%;
-        background-color: #efefef;
+        background-color: style.$background-color-gray;
       }
 
       .info {
@@ -73,7 +75,7 @@
         }
 
         .subtitle {
-          color: #999;
+          color: style.$text-color-gray;
           font-weight: 500;
           font-size: 12px;
           line-height: 15px;
@@ -84,7 +86,7 @@
 }
 
 .last-message__time {
-  color: #999;
+  color: style.$text-color-gray;
   font-size: 9px;
   font-weight: 500;
   line-height: 13px;
@@ -95,8 +97,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  color: #fff;
-  background-color: #3369f3;
+  color: style.$text-color-white;
+  background-color: style.$background-color-blue;
   font-weight: 500;
   font-size: 11px;
   line-height: 20px;
@@ -126,7 +128,7 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background-color: #efefef;
+      background-color: style.$background-color-gray;
     }
 
     .header__user-info__title {
@@ -147,21 +149,19 @@
         width: 3px;
         height: 3px;
         border-radius: 50%;
-        background-color: #1e1e1e;
+        background-color: style.$background-color-dark;
         margin-bottom: 3px;
       }
     }
   }
 
   &__content {
-    color: green;
     flex-grow: 1;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
+    border-top: 1px solid style.$border-color;
+    border-bottom: 1px solid style.$border-color;
   }
 
   &__footer {
-    color: blue;
     min-height: 54px;
 
     .file-icon,
@@ -172,7 +172,7 @@
 
     .file-icon {
       min-width: 42px;
-      color: #999;
+      color: style.$text-color-gray;
       font-size: 24px;
       cursor: pointer;
     }
@@ -181,9 +181,9 @@
       flex-grow: 1;
       height: 32px;
       padding: 10px 20px;
-      background-color: #efefef;
+      background-color: style.$background-color-gray;
       border-radius: 30px;
-      color: #999;
+      color: style.$text-color-gray;
       border: none;
     }
 
@@ -192,11 +192,11 @@
       min-height: 28px;
       margin-left: 10px;
       border-radius: 50%;
-      background-color: #3369f3;
+      background-color: style.$background-color-blue;
       border: none;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: style.$text-color-white;
       cursor: pointer;
     }
 

@@ -19,12 +19,54 @@ class Profile extends Block<{}> {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-        {{{Field id="email" type="email" label="Почта" name="email" value="pochta@yandex.ru" editable=${false}}}}
-        {{{Field id="login" type="text" label="Логин" name="newPassword" value="ivanivanov" editable=${false}}}}
-        {{{Field id="name" type="text" label="Имя" name="oldPassword" value="Иван" editable=${false}}}}
-        {{{Field id="second-name" type="text" label="Фамилия" name="newPassword" value="Иванов" editable=${false}}}}
-        {{{Field id="chat-name" type="text" label="Имя в чате" name="oldPassword" value="Иван" editable=${false}}}}
-        {{{Field id="phone" type="tel" label="Телефон" name="newPassword" value="+7 (909) 967 30 30" editable=${false}}}}
+        {{{Field 
+          id="email" 
+          type="email" 
+          label="Почта" 
+          name="email" 
+          value="pochta@yandex.ru" 
+          editable=${false}
+        }}}
+        {{{Field 
+          id="login" 
+          type="text" 
+          label="Логин" 
+          name="newPassword" 
+          value="ivanivanov" 
+          editable=${false}
+        }}}
+        {{{Field 
+          id="name" 
+          type="text" 
+          label="Имя" 
+          name="oldPassword" 
+          value="Иван" 
+          editable=${false}
+        }}}
+        {{{Field 
+          id="second-name" 
+          type="text" 
+          label="Фамилия" 
+          name="newPassword" 
+          value="Иванов" 
+          editable=${false}
+        }}}
+        {{{Field 
+          id="chat-name" 
+          type="text" 
+          label="Имя в чате" 
+          name="oldPassword" 
+          value="Иван" 
+          editable=${false}
+        }}}
+        {{{Field 
+          id="phone" 
+          type="tel" 
+          label="Телефон" 
+          name="newPassword" 
+          value="+7 (909) 967 30 30" 
+          editable=${false}
+        }}}
         </ul>
       </div>
        <div class="profile-actions">

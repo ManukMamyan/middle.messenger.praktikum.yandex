@@ -37,13 +37,13 @@ class Login extends Block<TProps> {
     this.refs.errorRefUsername.setProps({
       error,
     });
-  }
+  };
 
   setErrorPassword = (error: string) => {
     this.refs.errorRefPassword.setProps({
       error,
     });
-  }
+  };
 
   getFormValues = (): { username: string; password: string } => {
     const inputElUsername = this._element?.querySelector(
@@ -111,7 +111,7 @@ class Login extends Block<TProps> {
   };
 
   onChangePassword = () => {
-    this.setErrorPassword('')
+    this.setErrorPassword('');
   };
 
   onFocusPassword = () => {

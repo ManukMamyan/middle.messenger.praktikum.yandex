@@ -153,13 +153,62 @@ class Register extends Block<TProps> {
       <div class="form-wrapper">
       {{{Header header="Регистрация"}}}
         <form class="register-form">
-          {{{Input error=errorEmail id="email" type="email" label="Почта" name="email" onChange=onInputEmail}}}
-          {{{Input error=errorLogin id="username" type="text" label="Логин" name="username" onChange=onInputLogin}}}
-          {{{Input error=errorName id="name" type="text" label="Имя" name="name" onChange=onInputName}}}
-          {{{Input error=errorName id="second-name" type="text" label="Фамилия" name="second-name" onChange=onInputSecondName}}}
-          {{{Input error=errorPhone id="phone" type="tel" label="Телефон" name="phone" onChange=onInputPhone}}}
-          {{{Input error=errorPassword id="password" type="password" label="Пароль" name="password" onChange=onInputPassword}}}
-          {{{Input error=errorPasswordConfirm id="password-confirm" type="password" label="Пароль (еще раз)" name="password-confirm" onChange=onInputConfirmPassword}}}
+          {{{Input 
+            error=errorEmail 
+            id="email" 
+            type="email" 
+            label="Почта" 
+            name="email" 
+            onChange=onInputEmail
+          }}}
+          {{{Input 
+            error=errorLogin 
+            id="username" 
+            type="text" 
+            label="Логин" 
+            name="username" 
+            onChange=onInputLogin
+          }}}
+          {{{Input 
+            error=errorName 
+            id="name" 
+            type="text" 
+            label="Имя" 
+            name="name" 
+            onChange=onInputName
+          }}}
+          {{{Input 
+            error=errorName 
+            id="second-name" 
+            type="text" 
+            label="Фамилия" 
+            name="second-name" 
+            onChange=onInputSecondName
+          }}}
+          {{{Input 
+            error=errorPhone 
+            id="phone" 
+            type="tel" 
+            label="Телефон" 
+            name="phone" 
+            onChange=onInputPhone
+          }}}
+          {{{Input 
+            error=errorPassword 
+            id="password" 
+            type="password" 
+            label="Пароль" 
+            name="password" 
+            onChange=onInputPassword
+          }}}
+          {{{Input 
+            error=errorPasswordConfirm 
+            id="password-confirm" 
+            type="password" 
+            label="Пароль (еще раз)" 
+            name="password-confirm" 
+            onChange=onInputConfirmPassword
+          }}}
         </form>
         <div class="register-form__actions">
         {{{Button text="Зарегистрироваться" size="medium" onClick=onClickRegister}}}

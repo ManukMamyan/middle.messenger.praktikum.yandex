@@ -96,9 +96,33 @@ class EditPassword extends Block<TProps> {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-        {{{Field error=errorOldPassword id="oldPassword" type="password" label="Старый пароль" name="oldPassword" value="123456789" onChange=onChangeOldPassword}}}
-        {{{Field error=errorOldPassword id="newPassword" type="password" label="Новый пароль" name="newPassword" value="00123456789" onChange=onChangeNewPassword}}}
-        {{{Field error=errorRepeatPassword id="repeatNewPassword" type="password" label="Повторите новый пароль" name="repeatNewPassword" value="00123456789" onChange=onChangeRepeatNewPassword}}}
+        {{{Field 
+          error=errorOldPassword 
+          id="oldPassword" 
+          type="password" 
+          label="Старый пароль" 
+          name="oldPassword" 
+          value="123456789" 
+          onChange=onChangeOldPassword
+        }}}
+        {{{Field 
+          error=errorOldPassword 
+          id="newPassword" 
+          type="password" 
+          label="Новый пароль" 
+          name="newPassword" 
+          value="00123456789" 
+          onChange=onChangeNewPassword
+        }}}
+        {{{Field 
+          error=errorRepeatPassword 
+          id="repeatNewPassword" 
+          type="password" 
+          label="Повторите новый пароль" 
+          name="repeatNewPassword" 
+          value="00123456789" 
+          onChange=onChangeRepeatNewPassword
+        }}}
         </ul>
       </div>
        <div class="edit-profile-actions">

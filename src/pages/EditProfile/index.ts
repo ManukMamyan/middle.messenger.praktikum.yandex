@@ -124,12 +124,58 @@ class EditProfile extends Block<TProps> {
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
-        {{{Field error=errorEmail id="email" type="email" label="Почта" name="email" value="pochta@yandex.ru" onChange=onChangeProfileEmail}}}
-        {{{Field error=errorLogin id="login" type="text" label="Логин" name="newPassword" value="ivanivanov" onChange=onChangeProfileLogin}}}
-        {{{Field error=errorName id="name" type="text" label="Имя" name="oldPassword" value="Иван" onChange=onChangeProfileName}}}
-        {{{Field error=errorName id="second-name" type="text" label="Фамилия" name="newPassword" value="Иванов" onChange=onChangeProfileSecondName}}}
-        {{{Field id="chat-name" type="text" label="Имя в чате" name="oldPassword" value="Иван" onChange=onChangeProfileChatName}}}
-        {{{Field error=errorPhone id="phone" type="tel" label="Телефон" name="newPassword" value="+7 (909) 967 30 30" onChange=onChangeProfilePhone}}}
+        {{{Field 
+          error=errorEmail 
+          id="email" 
+          type="email" 
+          label="Почта" 
+          name="email" 
+          value="pochta@yandex.ru" 
+          onChange=onChangeProfileEmail
+        }}}
+        {{{Field 
+          error=errorLogin 
+          id="login" 
+          type="text" 
+          label="Логин" 
+          name="newPassword" 
+          value="ivanivanov" 
+          onChange=onChangeProfileLogin
+        }}}
+        {{{Field 
+          error=errorName 
+          id="name" 
+          type="text" 
+          label="Имя" 
+          name="oldPassword" 
+          value="Иван" 
+          onChange=onChangeProfileName
+        }}}
+        {{{Field 
+          error=errorName 
+          id="second-name" 
+          type="text" 
+          label="Фамилия" 
+          name="newPassword" 
+          value="Иванов" 
+          onChange=onChangeProfileSecondName
+        }}}
+        {{{Field 
+          id="chat-name" 
+          type="text" 
+          label="Имя в чате" 
+          name="oldPassword" 
+          value="Иван" 
+          onChange=onChangeProfileChatName
+        }}}
+        {{{Field 
+          error=errorPhone 
+          id="phone" type="tel" 
+          label="Телефон" 
+          name="newPassword" 
+          value="+7 (909) 967 30 30" 
+          onChange=onChangeProfilePhone
+        }}}
         </ul>
       </div>
        <div class="edit-profile-actions">

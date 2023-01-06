@@ -61,6 +61,7 @@ class Login extends Block<TProps> {
 
   render() {
     return `
+<main>
   <div class="container">
     <div class="form-wrapper">
       {{{Header header="Вход"}}}
@@ -74,6 +75,7 @@ class Login extends Block<TProps> {
       </div>
     </div>
   </div>
+</main>
     `;
   }
 }

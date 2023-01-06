@@ -148,6 +148,7 @@ class Register extends Block<TProps> {
 
   render() {
     return `
+  <main>
     <div class="container">
       <div class="form-wrapper">
       {{{Header header="Регистрация"}}}
@@ -166,6 +167,7 @@ class Register extends Block<TProps> {
         </div>
       </div>
     </div>
+  </main>
       `;
   }
 }

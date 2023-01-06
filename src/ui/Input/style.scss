@@ -1,32 +1,11 @@
 @use '../../sass/style';
 
 .input {
-  &__wrapper {
-    margin-top: 16px;
-  }
+  min-width: 280px;
+  border: none;
+  border-bottom: 1px solid style.$border-color-blue;
 
-  &__label {
-    display: block;
-    color: style.$text-color-gray;
-    font-size: 13px;
-    line-height: 13px;
-  }
-
-  &__input {
-    min-width: 280px;
-    border: none;
-    border-bottom: 1px solid style.$border-color-blue;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &__error {
-    font-weight: 400;
-    font-size: 8px;
-    line-height: 8px;
-    color: style.$text-color-red;
-    margin-top: 7px;
+  &:focus {
+    outline: none;
   }
 }

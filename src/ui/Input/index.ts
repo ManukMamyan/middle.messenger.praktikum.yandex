@@ -2,28 +2,28 @@ import { Block } from '../../core';
 import './style.scss';
 
 type TProps = {
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'email' | 'phone' | 'number';
   name: string;
-  label: string;
   id: string;
-  error?: string;
   value?: string;
   onChange: () => void;
+  onFocus: () => void;
+  onBlur: () => void;
 };
-class Input extends Block<Omit<TProps, 'onChange'> & { events: { input: () => void } }> {
+class Input extends Block<
+  Omit<TProps, 'onChange' | 'onFocus' | 'onBlur' | ''> & {
+    events: { input: () => void; focus: () => void; blur: () => void };
+  }
+> {
   static componentName = 'Input';
 
-  constructor({ id, type, name, label, error, value, onChange }: TProps) {
-    super({ id, type, name, label, error, value, events: { input: onChange } });
+  constructor({ id, type, name, value, onChange, onFocus, onBlur }: TProps) {
+    super({ id, type, name, value, events: { input: onChange, focus: onFocus, blur: onBlur } });
   }
 
   render() {
     return `
-  <div class="input__wrapper">
-    <label class="input__label" for="{{id}}">{{label}}</label>
-    <input class="input__input" type="{{type}}" id="{{id}}" name="{{name}}" value="{{value}}" />
-    <div class="input__error">{{#if error}}{{error}}{{/if}}</div>
-  </div>
+      <input class="input" type="{{type}}" id="{{id}}" name="{{name}}" value="{{value}}" />
     `;
   }
 }

@@ -1,0 +1,9 @@
+@use '../../sass/style';
+
+.input__error {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 8px;
+  color: style.$text-color-red;
+  margin-top: 7px;
+}

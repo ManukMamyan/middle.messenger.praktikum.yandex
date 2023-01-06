@@ -8,7 +8,7 @@ const validateLogin = (login?: string) => {
   }
 
   if (login.length < MIN_LENGTH || login.length > MAX_LENGTH) {
-    return `Имя пользователя должен быть от ${MAX_LENGTH} до ${MAX_LENGTH} символов`;
+    return `Имя пользователя должен быть от ${MIN_LENGTH} до ${MAX_LENGTH} символов`;
   }
 
   if (!patternValidateLogin.test(login)) {

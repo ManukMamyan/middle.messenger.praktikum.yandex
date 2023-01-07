@@ -5,11 +5,20 @@ import '../Profile/style.scss';
 type TProps = {
   onClickSave: (event: MouseEvent) => void;
   onChangeOldPassword: (event: InputEvent) => void;
+  onBlurOldPassword: (event: InputEvent) => void;
   onChangeNewPassword: (event: InputEvent) => void;
+  onBlurNewPassword: (event: InputEvent) => void;
   onChangeRepeatNewPassword: (event: InputEvent) => void;
+  onBlurRepeatNewPassword: (event: InputEvent) => void;
   errorOldPassword: string;
   errorNewPassword: string;
   errorRepeatPassword: string;
+};
+
+type TFormValues = {
+  oldPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
 };
 
 class EditPassword extends Block<TProps> {
@@ -21,15 +30,36 @@ class EditPassword extends Block<TProps> {
     this.setProps({
       onClickSave: this.onClickSave,
       onChangeOldPassword: this.onChangeOldPassword,
+      onBlurOldPassword: this.onBlurOldPassword,
       onChangeNewPassword: this.onChangeNewPassword,
+      onBlurNewPassword: this.onBlurNewPassword,
       onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
+      onBlurRepeatNewPassword: this.onBlurRepeatNewPassword,
       errorOldPassword: '',
       errorNewPassword: '',
       errorRepeatPassword: '',
     });
   }
 
-  onClickSave = () => {
+  setErrorOldPassword = (error: string) => {
+    this.refs.errorRefOldPassword.setProps({
+      error,
+    });
+  };
+
+  setErrorNewPassword = (error: string) => {
+    this.refs.errorRefNewPassword.setProps({
+      error,
+    });
+  };
+
+  setErrorRepeatNewPassword = (error: string) => {
+    this.refs.errorRefRepeatPassword.setProps({
+      error,
+    });
+  };
+
+  getFormValues = (): TFormValues => {
     const inputElOldPassword = this._element?.querySelector(
       'input[name=oldPassword]'
     ) as HTMLInputElement;
@@ -44,45 +74,91 @@ class EditPassword extends Block<TProps> {
     const newPassword = inputElNewPassword.value;
     const repeatNewPassword = inputElRepeatNewPassword.value;
 
-    const errorOldPassword = validate({
-      type: ValidateRuleType.PASSWORD,
-      value: oldPassword,
-    });
-    const errorNewPassword = validate({
-      type: ValidateRuleType.PASSWORD,
-      value: newPassword,
-    });
-    const errorRepeatPassword = validate({
+    return { oldPassword, newPassword, repeatNewPassword };
+  };
+
+  validateOldPassword = (): boolean => {
+    const { oldPassword } = this.getFormValues();
+    const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: oldPassword });
+    let isValid = true;
+
+    if (errorPassword) {
+      this.setErrorOldPassword(errorPassword);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateNewPassword = (): boolean => {
+    const { newPassword } = this.getFormValues();
+    const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: newPassword });
+    let isValid = true;
+
+    if (errorPassword) {
+      this.setErrorNewPassword(errorPassword);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateRepeatNewPassword = (): boolean => {
+    const { newPassword, repeatNewPassword } = this.getFormValues();
+    const errorPasswordConfirm = validate({
       type: ValidateRuleType.REPEAT_PASSWORD,
       value: newPassword,
       repeatedValue: repeatNewPassword,
     });
+    let isValid = true;
 
-    this.setProps({
-      onClickSave: this.onClickSave,
-      onChangeOldPassword: this.onChangeOldPassword,
-      onChangeNewPassword: this.onChangeNewPassword,
-      onChangeRepeatNewPassword: this.onChangeRepeatNewPassword,
-      errorOldPassword: errorOldPassword,
-      errorNewPassword: errorNewPassword,
-      errorRepeatPassword: errorRepeatPassword,
-    });
+    if (errorPasswordConfirm) {
+      this.setErrorRepeatNewPassword(errorPasswordConfirm);
 
-    if (!errorOldPassword && !errorNewPassword && !repeatNewPassword) {
-      console.log('[PASSWORD_DATA]', { errorOldPassword, errorNewPassword, repeatNewPassword });
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateForm = (): boolean => {
+    return (
+      this.validateOldPassword() && this.validateNewPassword() && this.validateRepeatNewPassword()
+    );
+  };
+
+  onClickSave = () => {
+    const isValidForm = this.validateForm();
+
+    if (isValidForm) {
+      console.log('[PASSWORD_DATA]', this.getFormValues());
     }
   };
 
   onChangeOldPassword = () => {
-    console.log('old password is being changed, this', this);
+    this.setErrorOldPassword('');
+  };
+
+  onBlurOldPassword = () => {
+    this.validateOldPassword();
   };
 
   onChangeNewPassword = () => {
-    console.log('new password is being changed, this', this);
+    this.setErrorNewPassword('');
+  };
+
+  onBlurNewPassword = () => {
+    this.validateNewPassword();
   };
 
   onChangeRepeatNewPassword = () => {
-    console.log('new password repeat is being changed, this', this);
+    this.setErrorRepeatNewPassword('');
+  };
+
+  onBlurRepeatNewPassword = () => {
+    this.validateRepeatNewPassword();
   };
 
   render() {
@@ -104,16 +180,20 @@ class EditPassword extends Block<TProps> {
           name="oldPassword" 
           value="123456789" 
           onChange=onChangeOldPassword
+          onBlur=onBlurOldPassword
         }}}
+        {{{InputError error=errorOldPassword ref="errorRefOldPassword"}}}
         {{{Field 
-          error=errorOldPassword 
+          error=errorNewPassword 
           id="newPassword" 
           type="password" 
           label="Новый пароль" 
           name="newPassword" 
           value="00123456789" 
           onChange=onChangeNewPassword
+          onBlur=onBlurNewPassword
         }}}
+        {{{InputError error=errorNewPassword ref="errorRefNewPassword"}}}
         {{{Field 
           error=errorRepeatPassword 
           id="repeatNewPassword" 
@@ -122,7 +202,9 @@ class EditPassword extends Block<TProps> {
           name="repeatNewPassword" 
           value="00123456789" 
           onChange=onChangeRepeatNewPassword
+          onBlur=onBlurRepeatNewPassword
         }}}
+        {{{InputError error=errorRepeatPassword ref="errorRefRepeatPassword"}}}
         </ul>
       </div>
        <div class="edit-profile-actions">

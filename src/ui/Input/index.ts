@@ -11,7 +11,7 @@ type TProps = {
   onBlur: () => void;
 };
 class Input extends Block<
-  Omit<TProps, 'onChange' | 'onFocus' | 'onBlur' | ''> & {
+  Omit<TProps, 'onChange' | 'onFocus' | 'onBlur'> & {
     events: { input: () => void; focus: () => void; blur: () => void };
   }
 > {

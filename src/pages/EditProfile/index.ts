@@ -5,16 +5,29 @@ import '../Profile/style.scss';
 type TProps = {
   onClickSaveProfile: (event: MouseEvent) => void;
   onChangeProfileEmail: (event: InputEvent) => void;
+  onBlurProfileEmail: (event: InputEvent) => void;
   onChangeProfileLogin: (event: InputEvent) => void;
+  onBlurProfileLogin: (event: InputEvent) => void;
   onChangeProfileName: (event: InputEvent) => void;
+  onBlurProfileName: (event: InputEvent) => void;
   onChangeProfileSecondName: (event: InputEvent) => void;
+  onBlurProfileSecondName: (event: InputEvent) => void;
   onChangeProfileChatName: (event: InputEvent) => void;
   onChangeProfilePhone: (event: InputEvent) => void;
+  onBlurProfilePhone: (event: InputEvent) => void;
   errorEmail: string;
   errorLogin: string;
   errorName: string;
   errorSecondName: string;
   errorPhone: string;
+};
+
+type TFormValues = {
+  email: string;
+  login: string;
+  name: string;
+  secondName: string;
+  phone: string;
 };
 
 class EditProfile extends Block<TProps> {
@@ -26,11 +39,16 @@ class EditProfile extends Block<TProps> {
     this.setProps({
       onClickSaveProfile: this.onClickSaveProfile,
       onChangeProfileEmail: this.onChangeProfileEmail,
+      onBlurProfileEmail: this.onBlurProfileEmail,
       onChangeProfileLogin: this.onChangeProfileLogin,
+      onBlurProfileLogin: this.onBlurProfileLogin,
       onChangeProfileName: this.onChangeProfileName,
+      onBlurProfileName: this.onBlurProfileName,
       onChangeProfileSecondName: this.onChangeProfileSecondName,
+      onBlurProfileSecondName: this.onBlurProfileSecondName,
       onChangeProfileChatName: this.onChangeProfileChatName,
       onChangeProfilePhone: this.onChangeProfilePhone,
+      onBlurProfilePhone: this.onBlurProfilePhone,
       errorEmail: '',
       errorLogin: '',
       errorName: '',
@@ -39,7 +57,37 @@ class EditProfile extends Block<TProps> {
     });
   }
 
-  onClickSaveProfile = () => {
+  setErrorEmail = (error: string) => {
+    this.refs.errorRefEmail.setProps({
+      error,
+    });
+  };
+
+  setErrorUsername = (error: string) => {
+    this.refs.errorRefUsername.setProps({
+      error,
+    });
+  };
+
+  setErrorName = (error: string) => {
+    this.refs.errorRefName.setProps({
+      error,
+    });
+  };
+
+  setErrorSecondName = (error: string) => {
+    this.refs.errorRefSecondName.setProps({
+      error,
+    });
+  };
+
+  setErrorPhone = (error: string) => {
+    this.refs.errorRefPhone.setProps({
+      error,
+    });
+  };
+
+  getFormValues = (): TFormValues => {
     const inputElEmail = this._element?.querySelector('input[name=email]') as HTMLInputElement;
     const inputElLogin = this._element?.querySelector('input[name=username]') as HTMLInputElement;
     const inputElName = this._element?.querySelector('input[name=name]') as HTMLInputElement;
@@ -54,63 +102,143 @@ class EditProfile extends Block<TProps> {
     const secondName = inputElSecondName.value;
     const phone = inputElPhone.value;
 
+    return { email, login, name, secondName, phone };
+  };
+
+  validateEmail = (): boolean => {
+    const { email } = this.getFormValues();
     const errorEmail = validate({ type: ValidateRuleType.EMAIL, value: email });
-    const errorLogin = validate({ type: ValidateRuleType.LOGIN, value: login });
+    let isValid = true;
+
+    if (errorEmail) {
+      this.setErrorEmail(errorEmail);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateUsername = (): boolean => {
+    const { login } = this.getFormValues();
+    const errorUsername = validate({ type: ValidateRuleType.LOGIN, value: login });
+    let isValid = true;
+
+    if (errorUsername) {
+      this.setErrorUsername(errorUsername);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateName = (): boolean => {
+    const { name } = this.getFormValues();
     const errorName = validate({ type: ValidateRuleType.FIRST_NAME, value: name });
-    const errorSecondName = validate({
-      type: ValidateRuleType.SECOND_NAME,
-      value: secondName,
-    });
+    let isValid = true;
+
+    if (errorName) {
+      this.setErrorName(errorName);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateSecondName = (): boolean => {
+    const { secondName } = this.getFormValues();
+    const errorSecondName = validate({ type: ValidateRuleType.SECOND_NAME, value: secondName });
+    let isValid = true;
+
+    if (errorSecondName) {
+      this.setErrorSecondName(errorSecondName);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validatePhone = (): boolean => {
+    const { phone } = this.getFormValues();
     const errorPhone = validate({ type: ValidateRuleType.PHONE_NUMBER, value: phone });
+    let isValid = true;
 
-    this.setProps({
-      onClickSaveProfile: this.onClickSaveProfile,
-      onChangeProfileEmail: this.onChangeProfileEmail,
-      onChangeProfileLogin: this.onChangeProfileLogin,
-      onChangeProfileName: this.onChangeProfileName,
-      onChangeProfileSecondName: this.onChangeProfileSecondName,
-      onChangeProfileChatName: this.onChangeProfileChatName,
-      onChangeProfilePhone: this.onChangeProfilePhone,
-      errorEmail,
-      errorLogin,
-      errorName,
-      errorSecondName,
-      errorPhone,
-    });
+    if (errorPhone) {
+      this.setErrorPhone(errorPhone);
 
-    if (!errorEmail && !errorLogin && !errorName && !errorSecondName && !errorPhone) {
-      console.log('[PROFILE_DATA]', {
-        email,
-        login,
-        name,
-        secondName,
-        phone,
-      });
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateForm = (): boolean => {
+    return (
+      this.validateEmail() &&
+      this.validateUsername() &&
+      this.validateName() &&
+      this.validateSecondName() &&
+      this.validatePhone()
+    );
+  };
+
+  onClickSaveProfile = () => {
+    const isValidForm = this.validateForm();
+
+    if (isValidForm) {
+      console.log('[PROFILE_DATA]', this.getFormValues());
     }
   };
 
   onChangeProfileEmail = () => {
-    console.log('profile email is being changed, this', this);
+    this.setErrorEmail('');
+  };
+
+  onBlurProfileEmail = () => {
+    this.validateEmail();
   };
 
   onChangeProfileLogin = () => {
-    console.log('profile login is being changed, this', this);
+    this.setErrorUsername('');
+  };
+
+  onBlurProfileLogin = () => {
+    this.validateUsername();
   };
 
   onChangeProfileName = () => {
-    console.log('profile name is being changed, this', this);
+    this.setErrorName('');
+  };
+
+  onBlurProfileName = () => {
+    this.validateName();
   };
 
   onChangeProfileSecondName = () => {
-    console.log('profile second name is being changed, this', this);
+    this.setErrorSecondName('');
+  };
+
+  onBlurProfileSecondName = () => {
+    this.validateSecondName();
   };
 
   onChangeProfileChatName = () => {
     console.log('profile chat name is being changed, this', this);
   };
 
+  onBlurProfileChatName = () => {
+    console.log('profile chat name is being blured, this', this);
+  };
+
   onChangeProfilePhone = () => {
-    console.log('profile phone number is being changed, this', this);
+    this.setErrorPhone('');
+  };
+
+  onBlurProfilePhone = () => {
+    this.validatePhone();
   };
 
   render(): string {
@@ -125,57 +253,63 @@ class EditProfile extends Block<TProps> {
       <div class="data-profile">
         <ul class="data-profile__list">
         {{{Field 
-          error=errorEmail 
           id="email" 
           type="email" 
           label="Почта" 
           name="email" 
           value="pochta@yandex.ru" 
           onChange=onChangeProfileEmail
+          onBlur=onBlurProfileEmail
         }}}
+        {{{InputError error=errorEmail ref="errorRefEmail"}}}
         {{{Field 
-          error=errorLogin 
           id="login" 
           type="text" 
           label="Логин" 
-          name="newPassword" 
+          name="username" 
           value="ivanivanov" 
           onChange=onChangeProfileLogin
+          onBlur=onBlurProfileLogin
         }}}
+        {{{InputError error=errorLogin ref="errorRefUsername"}}}
         {{{Field 
-          error=errorName 
           id="name" 
           type="text" 
           label="Имя" 
-          name="oldPassword" 
+          name="name" 
           value="Иван" 
           onChange=onChangeProfileName
+          onBlur=onBlurProfileName
         }}}
+        {{{InputError error=errorName ref="errorRefName"}}}
         {{{Field 
-          error=errorName 
           id="second-name" 
           type="text" 
           label="Фамилия" 
-          name="newPassword" 
+          name="second-name" 
           value="Иванов" 
           onChange=onChangeProfileSecondName
+          onBlur=onBlurSecondName
         }}}
+        {{{InputError error=errorSecondName ref="errorRefSecondName"}}}
         {{{Field 
           id="chat-name" 
           type="text" 
           label="Имя в чате" 
-          name="oldPassword" 
+          name="chat-name" 
           value="Иван" 
           onChange=onChangeProfileChatName
+          onBlur=onBlurProfileChatName
         }}}
         {{{Field 
-          error=errorPhone 
           id="phone" type="tel" 
           label="Телефон" 
-          name="newPassword" 
+          name="phone" 
           value="+7 (909) 967 30 30" 
           onChange=onChangeProfilePhone
+          onBlur=onBlurProfilePhone
         }}}
+        {{{InputError error=errorPhone ref="errorRefPhone"}}}
         </ul>
       </div>
        <div class="edit-profile-actions">

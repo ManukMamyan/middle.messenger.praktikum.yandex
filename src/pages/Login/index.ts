@@ -123,8 +123,6 @@ class Login extends Block<TProps> {
   };
 
   render() {
-    console.log('[REFS]', this.refs);
-
     return `
 <main>
   <div class="container">

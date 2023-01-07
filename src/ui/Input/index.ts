@@ -17,7 +17,7 @@ class Input extends Block<
 > {
   static componentName = 'Input';
 
-  constructor({ id, type, name, value, onChange, onFocus, onBlur }: TProps) {
+  constructor({ id, type, name, value, onChange, onBlur, onFocus = () => {} }: TProps) {
     super({ id, type, name, value, events: { input: onChange, focus: onFocus, blur: onBlur } });
   }
 

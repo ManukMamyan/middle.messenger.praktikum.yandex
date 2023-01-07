@@ -1,0 +1,36 @@
+@use '../../sass/style';
+
+.field__list-item {
+  padding: 10px 0;
+  list-style-type: none;
+  border-bottom: 1px solid style.$border-color;
+  min-width: 510px;
+  display: flex;
+  justify-content: space-between;
+
+  & .input {
+    border: none;
+    text-align: right;
+    margin-left: auto;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.disabled {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 13px;
+      color: style.$text-color-gray;
+      pointer-events: none;
+    }
+  }
+
+  & .input_error {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 8px;
+    color: style.$text-color-red;
+    margin-top: 7px;
+  }
+}

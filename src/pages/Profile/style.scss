@@ -1,3 +1,5 @@
+@use '../../sass/style';
+
 .container-profile {
   height: 100vh;
   display: flex;
@@ -6,7 +8,7 @@
 .wrapper__action {
   min-width: 64px;
   height: 100vh;
-  background-color: #FBFBFB;
+  background-color: style.$background-color-white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +18,11 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #FFFFFF;
-    background-color: #3369F3;
+    color: style.$text-color-white;
+    background-color: style.$background-color-blue;
     width: 28px;
     height: 28px;
-    border-radius: 50%
+    border-radius: 50%;
   }
 }
 
@@ -29,7 +31,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
 }
 
 .avatar {
@@ -37,7 +39,7 @@
   height: 130px;
   margin-top: 60px;
   margin-bottom: 21px;
-  background-color: #EFEFEF;
+  background-color: style.$background-color-gray;
   border-radius: 50%;
 
   &:hover {
@@ -58,59 +60,29 @@
   }
 }
 
-.data-profile__list-item {
-  padding: 10px 0;
-  list-style-type: none;
-  border-bottom: 1px solid #EAEAEA;
-  min-width: 510px;
-
-  display: flex;
-  justify-content: space-between;
-
-  & .input {
-    border: none;
-    text-align: right;
-    margin-left: auto;
-
-    &:focus {
-      outline: none;
-    }
-
-    &.disabled {
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 13px;
-      color: #999999;
-      pointer-events: none;
-    }
-  }
-}
-
 .profile-actions {
-  margin-top: 60px
-}
-
-.profile-actions__list {
-  &-item:last-child {
-    border-bottom: 0;
-  }
+  margin-top: 60px;
 }
 
 .profile-actions__list-item {
   list-style-type: none;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid style.$border-color;
   min-width: 510px;
   padding: 10px 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   & .action {
     text-decoration: none;
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
-    color: #3369F3;
+    color: style.$text-color-blue;
 
     &.exit {
-     color: #FF0000;
+      color: style.$text-color-danger;
     }
   }
 }
@@ -118,16 +90,4 @@
 .edit-profile-actions {
   position: absolute;
   bottom: 153px;
-
-  .save-button {
-    color: #fff;
-    background-color: #3369F3;
-    padding: 12px 107px;
-    border:none;
-    border-radius: 8px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }

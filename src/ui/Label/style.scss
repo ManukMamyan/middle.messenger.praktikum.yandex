@@ -1,0 +1,9 @@
+@use '../../sass/style';
+
+.input__label {
+  margin-top: 16px;
+  display: block;
+  color: style.$text-color-gray;
+  font-size: 13px;
+  line-height: 13px;
+}

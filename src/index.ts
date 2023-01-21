@@ -1,5 +1,7 @@
-import { renderDOM, registerComponent } from './core';
-import App from './pages';
+import { registerComponent, Store, Router } from './core';
+import defaultState from './store';
+import initRouter from './router';
+
 import './global.scss';
 
 import Button from './ui/Button';
@@ -22,6 +24,28 @@ registerComponent(Header);
 registerComponent(Field);
 registerComponent(Fab);
 
+declare global {
+  interface Window {
+    store: Store<AppState>;
+    router: Router;
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-  renderDOM(App());
+  const store = new Store<AppState>(defaultState);
+  const router = new Router();
+
+  window.router = router;
+  window.store = store;
+
+  store.on('changed', (prevState, nextState) => {
+    if (process.env.DEBUG) {
+      console.log('%cstore updated', 'background: #222; color: #bada55', nextState);
+      console.log('%cprev state', 'background: #222; color: #bada55', prevState);
+    }
+  });
+
+  initRouter(router, store);
+
+  store.dispatch({appIsInitiated: true, screen: 'login'});
 });

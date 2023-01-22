@@ -1,6 +1,7 @@
 import { registerComponent, Store, Router } from './core';
 import defaultState from './store';
 import initRouter from './router';
+import initApp from './services/initApp'
 
 import './global.scss';
 
@@ -47,5 +48,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initRouter(router, store);
 
-  store.dispatch({appIsInitiated: true, screen: 'login'});
+  store.dispatch(initApp);
 });

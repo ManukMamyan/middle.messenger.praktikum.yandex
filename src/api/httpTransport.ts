@@ -7,9 +7,11 @@ enum METHODS {
 
 type TOptions = {
   timeout?: number;
+  credentials?: string;
+  mode?: string;
   headers?: Record<string, string>;
   method?: METHODS;
-  data?: Record<string, string>;
+  data?: Record<string, string> | null;
 };
 
 function queryStringify(data: Record<string, string>): string {
@@ -41,10 +43,10 @@ class HTTPTransport {
     return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   };
 
-  request = (url: string, options: TOptions = {}, timeout = 5000) => {
+  request = <T>(url: string, options: TOptions = {}, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise<T>(function (resolve, reject) {
       if (!method) {
         reject('No method');
         return;
@@ -59,8 +61,9 @@ class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
-      xhr.onload = function () {
-        resolve(xhr);
+      xhr.onload = function (e) {
+        const response = JSON.parse(xhr.responseText) as T
+        resolve(response);
       };
 
       xhr.onabort = reject;
@@ -78,3 +81,7 @@ class HTTPTransport {
     });
   };
 }
+
+const transport = new HTTPTransport();
+
+export default transport;

@@ -1,5 +1,7 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { login } from '../../services/auth';
 import validate, { ValidateRuleType } from '../../helpers/validate';
+import { withStore } from '../../HOCs/withStore';
 import './style.scss';
 
 type TProps = {
@@ -13,6 +15,7 @@ type TProps = {
   toRegister: (event: MouseEvent) => void;
   errorUsername: string;
   errorPassword: string;
+  store: Store<AppState>;
 };
 
 class Login extends Block<TProps> {
@@ -32,6 +35,7 @@ class Login extends Block<TProps> {
       toRegister: this.toRegister,
       errorUsername: '',
       errorPassword: '',
+      store: window.store,
     });
   }
 
@@ -96,7 +100,9 @@ class Login extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[LOGIN_DATA]', this.getFormValues());
+      const { username, password } = this.getFormValues();
+      const loginData = { login: username, password };
+      this.props.store.dispatch(login, loginData);
     }
   };
 
@@ -171,4 +177,4 @@ class Login extends Block<TProps> {
   }
 }
 
-export default Login;
+export default withStore(Login);

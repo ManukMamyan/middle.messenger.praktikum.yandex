@@ -73,18 +73,6 @@
   &:last-child {
     border-bottom: 0;
   }
-
-  & .action {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    color: style.$text-color-blue;
-
-    &.exit {
-      color: style.$text-color-danger;
-    }
-  }
 }
 
 .edit-profile-actions {

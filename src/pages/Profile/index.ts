@@ -1,12 +1,46 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { logout } from '../../services/auth';
+import { withStore } from '../../HOCs/withStore';
 import './style.scss';
 
-class Profile extends Block<{}> {
+type TProps = {
+  toEditProfile: (event: MouseEvent) => void;
+  toEditPassword: (event: MouseEvent) => void;
+  logout: (event: MouseEvent) => void;
+  store: Store<AppState>;
+};
+
+class Profile extends Block<TProps> {
   static componentName = 'Profile';
 
   constructor() {
     super();
+
+    this.setProps({
+      toEditProfile: this.toEditProfile,
+      toEditPassword: this.toEditPassword,
+      logout: this.logout,
+      store: window.store,
+    });
   }
+
+  toEditProfile = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.go('/editProfile');
+  };
+
+  toEditPassword = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.go('/editPassword');
+  };
+
+  logout = (e: MouseEvent) => {
+    e.preventDefault();
+
+    this.props.store.dispatch(logout);
+  };
 
   render(): string {
     return `
@@ -72,14 +106,14 @@ class Profile extends Block<{}> {
        <div class="profile-actions">
          <ul class="profile-actions__list">
            <li class="profile-actions__list-item">
-             <a href="/editProfile" class="action">Изменить данные</a>
+             {{{Link text="Изменить данные" to="/editProfile" action=${true} onClick=toEditProfile}}}
            </li>
           <li class="profile-actions__list-item">
-             <a href="/editPassword" class="action">Изменить пароль</a>
-           </li>
-           <li class="profile-actions__list-item">
-             <a href="/" class="action exit">Выйти</a>
-           </li>
+            {{{Link text="Изменить пароль" to="/editPassword" action=${true} onClick=toEditPassword}}}
+          </li>
+          <li class="profile-actions__list-item">
+            {{{Link text="Выйти" to="/editPassword" action=${true} exit=${true} onClick=logout}}}           
+          </li>
          </ul>
        </div>
     </main>
@@ -88,4 +122,4 @@ class Profile extends Block<{}> {
   }
 }
 
-export default Profile;
+export default withStore(Profile);

@@ -10,6 +10,7 @@ type TProps = {
   onChangePassword: (event: InputEvent) => void;
   onFocusPassword: (event: InputEvent) => void;
   onBlurPassword: (event: InputEvent) => void;
+  toRegister: (event: MouseEvent) => void;
   errorUsername: string;
   errorPassword: string;
 };
@@ -28,6 +29,7 @@ class Login extends Block<TProps> {
       onChangePassword: this.onChangePassword,
       onFocusPassword: this.onFocusPassword,
       onBlurPassword: this.onBlurPassword,
+      toRegister: this.toRegister,
       errorUsername: '',
       errorPassword: '',
     });
@@ -122,6 +124,12 @@ class Login extends Block<TProps> {
     this.validatePassword();
   };
 
+  toRegister = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.go('/register')
+  }
+
   render() {
     return `
 <main>
@@ -154,7 +162,7 @@ class Login extends Block<TProps> {
       </form>
       <div class="login-form__actions">
         {{{Button text="Авторизоваться" size="large" onClick=onClick}}}
-        {{{Link text="Нет аккаунта?" to="/register"}}}
+        {{{Link text="Нет аккаунта?" to="/register" onClick=toRegister}}}
       </div>
     </div>
   </div>

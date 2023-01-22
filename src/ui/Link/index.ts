@@ -4,17 +4,23 @@ import './style.scss';
 type TProps = {
   text: string;
   to: string;
+  onClick: (event: MouseEvent) => void;
 };
-class Link extends Block<TProps> {
+
+type TPropsLinkBlock = Omit<TProps, 'onClick'> & { events: { click: (event: MouseEvent) => void } };
+
+class Link extends Block<TPropsLinkBlock> {
   static componentName = 'Link';
 
-  constructor({ text, to }: TProps) {
-    super({ text, to });
+  constructor({ text, to, onClick }: TProps) {
+    super({ text, to, events: { click: onClick } });
   }
 
   render() {
     return `
-    <a class="link" href="{{to}}">{{text}}</a>
+    <div>
+      <a class="link" href="{{to}}" onclick="event.preventDefault()">{{text}}</a>
+    <div>
     `;
   }
 }

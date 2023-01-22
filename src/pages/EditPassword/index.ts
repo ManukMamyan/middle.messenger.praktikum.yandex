@@ -184,7 +184,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Старый пароль" 
           name="oldPassword" 
-          value="123456789" 
+          value="" 
           onChange=onChangeOldPassword
           onBlur=onBlurOldPassword
         }}}
@@ -195,7 +195,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Новый пароль" 
           name="newPassword" 
-          value="00123456789" 
+          value="" 
           onChange=onChangeNewPassword
           onBlur=onBlurNewPassword
         }}}
@@ -206,7 +206,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Повторите новый пароль" 
           name="repeatNewPassword" 
-          value="00123456789" 
+          value="" 
           onChange=onChangeRepeatNewPassword
           onBlur=onBlurRepeatNewPassword
         }}}

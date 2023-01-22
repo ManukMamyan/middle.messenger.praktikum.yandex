@@ -5,12 +5,14 @@ type TProps = {
   onClick: (event: MouseEvent) => void;
 };
 
-type TPropsIconButtonBlock = Omit<TProps, 'onClick'> & { events: { click: (event: MouseEvent) => void } };
+type TPropsIconButtonBlock = Omit<TProps, 'onClick'> & {
+  events: { click: (event: MouseEvent) => void };
+};
 
 class IconButton extends Block<TPropsIconButtonBlock> {
   static componentName = 'IconButton';
 
-  constructor({  onClick }: TProps) {
+  constructor({ onClick }: TProps) {
     super({ events: { click: onClick } });
   }
 

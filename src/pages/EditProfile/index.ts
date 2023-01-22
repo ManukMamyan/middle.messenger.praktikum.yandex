@@ -1,4 +1,6 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { editProfile } from '../../services/profile';
+import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
@@ -20,6 +22,13 @@ type TProps = {
   errorName: string;
   errorSecondName: string;
   errorPhone: string;
+  store: Store<AppState>;
+  email?: () => string | undefined;
+  login?: () => string | undefined;
+  firstName?: () => string | undefined;
+  secondName?: () => string | undefined;
+  displayName?: () => string | undefined;
+  phone?: () => string | undefined;
 };
 
 type TFormValues = {
@@ -54,6 +63,13 @@ class EditProfile extends Block<TProps> {
       errorName: '',
       errorSecondName: '',
       errorPhone: '',
+      store: window.store,
+      email: () => this.props.store.getState().user?.email,
+      login: () => this.props.store.getState().user?.login,
+      firstName: () => this.props.store.getState().user?.firstName,
+      secondName: () => this.props.store.getState().user?.secondName,
+      displayName: () => this.props.store.getState().user?.displayName,
+      phone: () => this.props.store.getState().user?.phone,
     });
   }
 
@@ -189,7 +205,16 @@ class EditProfile extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[PROFILE_DATA]', this.getFormValues());
+      const formValues = this.getFormValues();
+      const editedData = {
+        login: formValues.login,
+        first_name: formValues.name,
+        second_name: formValues.secondName,
+        display_name: formValues.login,
+        phone: formValues.phone,
+        email: formValues.email,
+      };
+      this.props.store.dispatch(editProfile, editedData);
     }
   };
 
@@ -257,7 +282,7 @@ class EditProfile extends Block<TProps> {
           type="email" 
           label="Почта" 
           name="email" 
-          value="pochta@yandex.ru" 
+          value=email
           onChange=onChangeProfileEmail
           onBlur=onBlurProfileEmail
         }}}
@@ -267,7 +292,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Логин" 
           name="username" 
-          value="ivanivanov" 
+          value=login
           onChange=onChangeProfileLogin
           onBlur=onBlurProfileLogin
         }}}
@@ -277,7 +302,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Имя" 
           name="name" 
-          value="Иван" 
+          value=firstName 
           onChange=onChangeProfileName
           onBlur=onBlurProfileName
         }}}
@@ -287,7 +312,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Фамилия" 
           name="second-name" 
-          value="Иванов" 
+          value=secondName
           onChange=onChangeProfileSecondName
           onBlur=onBlurSecondName
         }}}
@@ -297,7 +322,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Имя в чате" 
           name="chat-name" 
-          value="Иван" 
+          value=login
           onChange=onChangeProfileChatName
           onBlur=onBlurProfileChatName
         }}}
@@ -305,7 +330,7 @@ class EditProfile extends Block<TProps> {
           id="phone" type="tel" 
           label="Телефон" 
           name="phone" 
-          value="+7 (909) 967 30 30" 
+          value=phone 
           onChange=onChangeProfilePhone
           onBlur=onBlurProfilePhone
         }}}
@@ -321,4 +346,4 @@ class EditProfile extends Block<TProps> {
   }
 }
 
-export default EditProfile;
+export default withStore(EditProfile);

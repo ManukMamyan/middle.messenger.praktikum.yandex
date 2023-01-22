@@ -9,6 +9,8 @@ declare global {
     isLoading: boolean;
     loginFormError: string | null;
     signupFormError: string | null;
+    editProfileFormError: string | null;
+    editPasswordFormError: string | null;
     user: User | null;
   };
 

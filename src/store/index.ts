@@ -4,6 +4,8 @@ const defaultState: AppState = {
   screen: null,
   loginFormError: null,
   signupFormError: null,
+  editProfileFormError: null,
+  editPasswordFormError: null,
   user: null,
 };
 

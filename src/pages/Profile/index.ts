@@ -9,12 +9,12 @@ type TProps = {
   logout: (event: MouseEvent) => void;
   back: (event: MouseEvent) => void;
   store: Store<AppState>;
-  email?: () => string  | undefined;
-  login?: () => string  | undefined;
-  firstName?: () => string  | undefined;
-  secondName?: () => string  | undefined;
-  displayName?: () => string  | undefined;
-  phone?: () => string  | undefined;
+  email?: () => string | undefined;
+  login?: () => string | undefined;
+  firstName?: () => string | undefined;
+  secondName?: () => string | undefined;
+  displayName?: () => string | undefined;
+  phone?: () => string | undefined;
 };
 
 class Profile extends Block<TProps> {
@@ -108,7 +108,7 @@ class Profile extends Block<TProps> {
           type="text" 
           label="Имя в чате" 
           name="displayName" 
-          value= login
+          value=login
           editable=${false}
         }}}
         {{{Field 

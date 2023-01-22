@@ -12,10 +12,10 @@ async function initApp(dispatch: Dispatch<AppState>) {
       return;
     }
 
-    dispatch({ user: transformUser(response as UserDTO) });
+    dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO), screen: 'profile' });
   } catch (err) {
     console.error(err);
-  } finally {
+
     dispatch({ appIsInitiated: true });
   }
 }

@@ -7,7 +7,14 @@ type TProps = {
   toEditProfile: (event: MouseEvent) => void;
   toEditPassword: (event: MouseEvent) => void;
   logout: (event: MouseEvent) => void;
+  back: (event: MouseEvent) => void;
   store: Store<AppState>;
+  email?: () => string  | undefined;
+  login?: () => string  | undefined;
+  firstName?: () => string  | undefined;
+  secondName?: () => string  | undefined;
+  displayName?: () => string  | undefined;
+  phone?: () => string  | undefined;
 };
 
 class Profile extends Block<TProps> {
@@ -20,7 +27,14 @@ class Profile extends Block<TProps> {
       toEditProfile: this.toEditProfile,
       toEditPassword: this.toEditPassword,
       logout: this.logout,
+      back: this.back,
       store: window.store,
+      email: () => this.props.store.getState().user?.email,
+      login: () => this.props.store.getState().user?.login,
+      firstName: () => this.props.store.getState().user?.firstName,
+      secondName: () => this.props.store.getState().user?.secondName,
+      displayName: () => this.props.store.getState().user?.displayName,
+      phone: () => this.props.store.getState().user?.phone,
     });
   }
 
@@ -42,12 +56,16 @@ class Profile extends Block<TProps> {
     this.props.store.dispatch(logout);
   };
 
+  back = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.back();
+  };
+
   render(): string {
     return `
   <div class="container-profile">
-    <div class="wrapper__action">
-      <a class="back" href="/">&#x2190</a>
-    </div>
+    {{{IconButton onClick=back}}}
     <main class="content-profile">
       <div class="avatar"></div>
       <h3 class="profile__header-name">Иван</h3>
@@ -58,47 +76,47 @@ class Profile extends Block<TProps> {
           type="email" 
           label="Почта" 
           name="email" 
-          value="pochta@yandex.ru" 
+          value=email
           editable=${false}
         }}}
         {{{Field 
           id="login" 
           type="text" 
           label="Логин" 
-          name="newPassword" 
-          value="ivanivanov" 
+          name="login" 
+          value=login
           editable=${false}
         }}}
         {{{Field 
           id="name" 
           type="text" 
           label="Имя" 
-          name="oldPassword" 
-          value="Иван" 
+          name="name" 
+          value=firstName
           editable=${false}
         }}}
         {{{Field 
           id="second-name" 
           type="text" 
           label="Фамилия" 
-          name="newPassword" 
-          value="Иванов" 
+          name="secondName" 
+          value="secondName" 
           editable=${false}
         }}}
         {{{Field 
           id="chat-name" 
           type="text" 
           label="Имя в чате" 
-          name="oldPassword" 
-          value="Иван" 
+          name="displayName" 
+          value= login
           editable=${false}
         }}}
         {{{Field 
           id="phone" 
           type="tel" 
           label="Телефон" 
-          name="newPassword" 
-          value="+7 (909) 967 30 30" 
+          name="phone" 
+          value=phone
           editable=${false}
         }}}
         </ul>

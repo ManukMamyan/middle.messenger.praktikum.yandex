@@ -14,6 +14,7 @@ import InputError from './ui/InputError';
 import Header from './ui/Header';
 import Field from './ui/Field';
 import Fab from './ui/Fab';
+import IconButton from './ui/IconButton';
 
 registerComponent(Button);
 registerComponent(Link);
@@ -24,6 +25,7 @@ registerComponent(InputError);
 registerComponent(Header);
 registerComponent(Field);
 registerComponent(Fab);
+registerComponent(IconButton);
 
 declare global {
   interface Window {
@@ -41,8 +43,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   store.on('changed', (prevState, nextState) => {
     if (process.env.DEBUG) {
-      console.log('%cstore updated', 'background: #222; color: #bada55', nextState);
       console.log('%cprev state', 'background: #222; color: #bada55', prevState);
+      console.log('%cstore updated', 'background: #222; color: #bada55', nextState);
     }
   });
 

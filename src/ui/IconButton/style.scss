@@ -1,0 +1,22 @@
+@use '../../sass/style';
+
+.wrapper__action {
+  min-width: 64px;
+  height: 100vh;
+  background-color: style.$background-color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: style.$text-color-white;
+    background-color: style.$background-color-blue;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+}

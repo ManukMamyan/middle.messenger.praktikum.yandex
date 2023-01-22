@@ -1,5 +1,6 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
 import validate, { ValidateRuleType } from '../../helpers/validate';
+import { withStore } from '../../HOCs/withStore';
 import './style.scss';
 
 type TProps = {
@@ -25,6 +26,7 @@ type TProps = {
   errorPhone: string;
   errorPassword: string;
   errorPasswordConfirm: string;
+  store: Store<AppState>;
 };
 
 type TFormValues = {
@@ -66,6 +68,7 @@ class Register extends Block<TProps> {
       errorPhone: '',
       errorPassword: '',
       errorPasswordConfirm: '',
+      store: window.store,
     });
   }
 
@@ -397,4 +400,4 @@ class Register extends Block<TProps> {
   }
 }
 
-export default Register;
+export default withStore(Register);

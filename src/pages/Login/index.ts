@@ -127,8 +127,8 @@ class Login extends Block<TProps> {
   toRegister = (e: MouseEvent) => {
     e.preventDefault();
 
-    window.router.go('/register')
-  }
+    window.router.go('/register');
+  };
 
   render() {
     return `

@@ -1,7 +1,7 @@
 import { registerComponent, Store, Router } from './core';
 import defaultState from './store';
 import initRouter from './router';
-import initApp from './services/initApp'
+import initApp from './services/initApp';
 
 import './global.scss';
 

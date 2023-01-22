@@ -3,6 +3,7 @@ const defaultState: AppState = {
   isLoading: false,
   screen: null,
   loginFormError: null,
+  signupFormError: null,
   user: null,
 };
 

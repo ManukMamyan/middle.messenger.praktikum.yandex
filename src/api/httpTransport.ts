@@ -62,7 +62,7 @@ class HTTPTransport {
       });
 
       xhr.onload = function (e) {
-        const response = JSON.parse(xhr.responseText) as T
+        const response = JSON.parse(xhr.responseText) as T;
         resolve(response);
       };
 

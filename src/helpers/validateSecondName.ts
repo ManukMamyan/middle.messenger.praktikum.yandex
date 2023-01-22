@@ -1,4 +1,4 @@
-const patternValidateSecondName = new RegExp('^[A-Z]+ [a-zA-Z]+$');
+const patternValidateSecondName = new RegExp('^[A-Z]+[a-zA-Z]+$');
 
 const validateSecondName = (secondName?: string) => {
   if (!secondName) {

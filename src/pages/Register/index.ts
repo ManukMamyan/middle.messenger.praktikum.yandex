@@ -1,4 +1,6 @@
 import { Block, Store } from '../../core';
+import { register } from '../../services/register';
+import { transformFromUser } from '../../api/utils';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import { withStore } from '../../HOCs/withStore';
 import './style.scss';
@@ -258,7 +260,17 @@ class Register extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[REGISTER_DATA]', this.getFormValues());
+      const formValues = this.getFormValues();
+      const signupData = transformFromUser({
+        login: formValues.login,
+        password: formValues.password,
+        firstName: formValues.name,
+        secondName: formValues.secondName,
+        displayName: formValues.login,
+        phone: formValues.phone,
+        email: formValues.email,
+      });
+      this.props.store.dispatch(register, signupData);
     }
   };
 

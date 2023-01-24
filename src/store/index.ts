@@ -7,6 +7,7 @@ const defaultState: AppState = {
   editProfileFormError: null,
   editPasswordFormError: null,
   user: null,
+  chats: null,
 };
 
 export default defaultState;

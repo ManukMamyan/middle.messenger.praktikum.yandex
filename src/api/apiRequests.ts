@@ -17,6 +17,7 @@ export function request<T extends any>({ method, path, data }: any): Promise<T> 
 }
 
 request.post = <T>(path: string, data?: any) => request<T>({ method: 'POST', path, data });
+request.delete = <T>(path: string, data?: any) => request<T>({ method: 'DELETE', path, data });
 request.put = <T>(path: string, data?: any) => request<T>({ method: 'PUT', path, data });
 request.get = <T>(path: string) => request<T>({ method: 'GET', path });
 

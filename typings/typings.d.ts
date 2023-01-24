@@ -12,6 +12,7 @@ declare global {
     editProfileFormError: string | null;
     editPasswordFormError: string | null;
     user: User | null;
+    chats: Chat[] | null;
   };
 
   export type User = {
@@ -23,6 +24,25 @@ declare global {
     avatar: string;
     phone: string;
     email: string;
+  };
+
+  export type Chat = {
+    id: number;
+    title: string;
+    avatar: string;
+    unread_count: string;
+    last_message: {
+      user: {
+        first_name:string;
+        second_name: string;
+        avatar: string;
+        email: string;
+        login: string;
+        phone: string;
+      }
+    };
+    time: string;
+    content: string;
   };
 }
 

@@ -71,3 +71,15 @@ export const deleteUser = async (
 
   await dispatch(chatList);
 };
+
+export const token = async (
+  dispatch: Dispatch<AppState>,
+  state: AppState,
+  action: number
+) => {
+  dispatch({ isLoading: true });
+
+  const response = await chatAPI.token(action);
+
+  return response;
+};

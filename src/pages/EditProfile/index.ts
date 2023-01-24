@@ -78,10 +78,10 @@ class EditProfile extends Block<TProps> {
 
   componentDidMount(props: TProps): void {
     const avatarWrapper = document.getElementById('avatarWrapper');
-    
+
     avatarWrapper?.addEventListener('click', () => {
       this.toggleAvatarForm();
-    })
+    });
   }
 
   setErrorEmail = (error: string) => {
@@ -286,13 +286,13 @@ class EditProfile extends Block<TProps> {
       form.addEventListener('submit', (event: SubmitEvent) => {
         event.preventDefault();
         const data = new FormData(form);
-  
+
         this.props.store.dispatch(editAvatar, data);
         this.toggleAvatarForm();
-      })
+      });
     }
   };
-  
+
   renderAvatarForm = () => {
     return `
     <form id="avatarForm" class="avatar_form__wrapper">

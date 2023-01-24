@@ -50,5 +50,5 @@ export const editProfileAPI = {
     request.put<EditPasswordDataResponseData>('user/password', data),
 
   editAvatar: (data: FormData) =>
-  requestAvatar.put<EditAvatarDataResponseData>('user/profile/avatar', data),
+    requestAvatar.put<EditAvatarDataResponseData>('user/profile/avatar', data),
 };

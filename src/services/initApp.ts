@@ -5,19 +5,14 @@ import transformUser from '../api/utils/transformUser';
 import apiHasError from '../api/utils/apiHasError';
 
 async function initApp(dispatch: Dispatch<AppState>) {
-  try {
-    const response = await authAPI.me();
+  const response = await authAPI.me();
 
-    if (apiHasError(response)) {
-      return;
-    }
-
-    dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO), screen: 'profile' });
-  } catch (err) {
-    console.error(err);
-
+  if (apiHasError(response)) {
     dispatch({ appIsInitiated: true });
+    return;
   }
+
+  dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO), screen: 'profile' });
 }
 
 export default initApp;

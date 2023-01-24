@@ -15,6 +15,7 @@ type TProps = {
   secondName?: () => string | undefined;
   displayName?: () => string | undefined;
   phone?: () => string | undefined;
+  avatar?: () => string | undefined;
 };
 
 class Profile extends Block<TProps> {
@@ -35,6 +36,7 @@ class Profile extends Block<TProps> {
       secondName: () => this.props.store.getState().user?.secondName,
       displayName: () => this.props.store.getState().user?.displayName,
       phone: () => this.props.store.getState().user?.phone,
+      avatar: () => this.props.store.getState().user?.avatar,
     });
   }
 
@@ -67,7 +69,11 @@ class Profile extends Block<TProps> {
   <div class="container-profile">
     {{{IconButton onClick=back}}}
     <main class="content-profile">
-      <div class="avatar"></div>
+      ${
+        this.props.avatar
+          ? `<img class="avatar_image" src="https://ya-praktikum.tech/api/v2/uploads{{avatar}}" alt="avatar">`
+          : '<div class="avatar"></div>'
+      }
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">

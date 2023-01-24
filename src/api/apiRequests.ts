@@ -25,7 +25,7 @@ export function requestAvatar<T extends any>({ method, path, data }: any): Promi
     method,
     credentials: 'include',
     mode: 'cors',
-    body: data
+    body: data,
   }).then((resp) => {
     return resp.json().catch(() => {
       return Promise.resolve(resp);

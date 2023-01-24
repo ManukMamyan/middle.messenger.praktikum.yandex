@@ -1,8 +1,9 @@
 import { Block, Store } from '../../core';
-import { editProfile } from '../../services/profile';
+import { editProfile, editAvatar } from '../../services/profile';
 import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
+import './style.scss';
 
 type TProps = {
   onClickSaveProfile: (event: MouseEvent) => void;
@@ -29,6 +30,7 @@ type TProps = {
   secondName?: () => string | undefined;
   displayName?: () => string | undefined;
   phone?: () => string | undefined;
+  isShowAvatarForm: boolean;
 };
 
 type TFormValues = {
@@ -70,7 +72,16 @@ class EditProfile extends Block<TProps> {
       secondName: () => this.props.store.getState().user?.secondName,
       displayName: () => this.props.store.getState().user?.displayName,
       phone: () => this.props.store.getState().user?.phone,
+      isShowAvatarForm: false,
     });
+  }
+
+  componentDidMount(props: TProps): void {
+    const avatarWrapper = document.getElementById('avatarWrapper');
+    
+    avatarWrapper?.addEventListener('click', () => {
+      this.toggleAvatarForm();
+    })
   }
 
   setErrorEmail = (error: string) => {
@@ -266,6 +277,31 @@ class EditProfile extends Block<TProps> {
     this.validatePhone();
   };
 
+  toggleAvatarForm = () => {
+    this.setProps({ ...this.props, isShowAvatarForm: !this.props.isShowAvatarForm });
+
+    if (this.props.isShowAvatarForm) {
+      const form = document.getElementById('avatarForm') as HTMLFormElement;
+
+      form.addEventListener('submit', (event: SubmitEvent) => {
+        event.preventDefault();
+        const data = new FormData(form);
+  
+        this.props.store.dispatch(editAvatar, data);
+        this.toggleAvatarForm();
+      })
+    }
+  };
+  
+  renderAvatarForm = () => {
+    return `
+    <form id="avatarForm" class="avatar_form__wrapper">
+      {{{Input id="avatar" type="file" name="avatar" label="Аватар"}}}
+      {{{Button size="medium" type="submit" text="Отправить"}}}
+    <form> 
+    `;
+  };
+
   render(): string {
     return `
   <div class="container-profile">
@@ -273,7 +309,9 @@ class EditProfile extends Block<TProps> {
       <a class="back" href="/profile">&#x2190</a>
     </div>
     <main class="content-profile">
-      <div class="avatar"></div>
+      <div id="avatarWrapper" class="avatar">
+       ${this.props.isShowAvatarForm ? this.renderAvatarForm() : ''}
+      </div>
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">

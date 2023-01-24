@@ -19,3 +19,18 @@ export function request<T extends any>({ method, path, data }: any): Promise<T> 
 request.post = <T>(path: string, data?: any) => request<T>({ method: 'POST', path, data });
 request.put = <T>(path: string, data?: any) => request<T>({ method: 'PUT', path, data });
 request.get = <T>(path: string) => request<T>({ method: 'GET', path });
+
+export function requestAvatar<T extends any>({ method, path, data }: any): Promise<T> {
+  return fetch(`${API_ENDPOINT}/${path}`, {
+    method,
+    credentials: 'include',
+    mode: 'cors',
+    body: data
+  }).then((resp) => {
+    return resp.json().catch(() => {
+      return Promise.resolve(resp);
+    });
+  });
+}
+
+requestAvatar.put = <T>(path: string, data?: any) => request<T>({ method: 'PUT', path, data });

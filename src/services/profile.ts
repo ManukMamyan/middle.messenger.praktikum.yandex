@@ -52,3 +52,22 @@ export const editPassword = async (
 
   window.router.go('/profile');
 };
+
+export const editAvatar = async (
+  dispatch: Dispatch<AppState>,
+  state: AppState,
+  action: FormData
+) => {
+  dispatch({ isLoading: true });
+
+  const response = await editProfileAPI.editAvatar(action);
+
+  if (apiHasError(response)) {
+    dispatch({ isLoading: false, editPasswordFormError: response.reason });
+    return;
+  }
+
+  dispatch({ user: transformUser(response as UserDTO) });
+
+  window.router.go('/profile');
+};

@@ -7,8 +7,8 @@ type CreateChatRequestData = {
 type AddUserToChatRequestData = { users: number[]; chatId: number };
 type DeleteUserToChatRequestData = AddUserToChatRequestData;
 
-type ChatListResponseData = Chat[] | APIError;
-type CreateChatResponseData = Chat[] | APIError;
+type ChatListResponseData = UserChat[] | APIError;
+type CreateChatResponseData = UserChat[] | APIError;
 
 export const chatAPI = {
   chatList: () => request.get<ChatListResponseData>('/chats'),

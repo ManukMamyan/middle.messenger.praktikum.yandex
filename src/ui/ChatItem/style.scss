@@ -1,0 +1,70 @@
+@use '../../sass/style';
+
+.chat-list {
+  list-style-type: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid style.$border-color;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: pointer;
+
+    .user-info {
+      display: flex;
+    }
+
+    .user-avatar {
+      width: 47px;
+      height: 47px;
+      border-radius: 50%;
+      background-color: style.$background-color-gray;
+    }
+
+    .info {
+      padding-left: 10px;
+
+      .title {
+        font-size: 13px;
+        line-height: 13px;
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        color: style.$text-color-gray;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+  }
+}
+
+.last-message__time {
+  color: style.$text-color-gray;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 13px;
+  margin-bottom: 14px;
+}
+
+.last-message__unread {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: style.$text-color-white;
+  background-color: style.$background-color-blue;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.avatar_image {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: style.$background-color-gray;
+}

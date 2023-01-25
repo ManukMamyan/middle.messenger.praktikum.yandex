@@ -11,8 +11,9 @@ declare global {
     signupFormError: string | null;
     editProfileFormError: string | null;
     editPasswordFormError: string | null;
+    selectedChat: string | null;
     user: User | null;
-    chats: Chat[] | null;
+    chats: UserChat[] | null;
   };
 
   export type User = {
@@ -26,7 +27,7 @@ declare global {
     email: string;
   };
 
-  export type Chat = {
+  export type UserChat = {
     id: number;
     title: string;
     avatar: string;

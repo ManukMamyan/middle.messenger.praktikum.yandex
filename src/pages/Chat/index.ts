@@ -1,10 +1,18 @@
-import {Block} from '../../core';
+import { Block, Store } from '../../core';
+import { chatList, createChat } from '../../services/chat';
+import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 
 type TProps = {
   onClick: (event: SubmitEvent) => void;
+  createChat: (event: SubmitEvent) => void;
+  selectedChat: () => string | null;
+  toggleAddChatForm: () => void;
+  chats: () => UserChat[] | null;
   errorMessage: string;
+  isShowAddChatForm: boolean;
+  store: Store<AppState>;
 };
 
 class Chat extends Block<TProps> {
@@ -15,8 +23,18 @@ class Chat extends Block<TProps> {
 
     this.setProps({
       onClick: this.onClick,
+      toggleAddChatForm: this.toggleAddChatForm,
+      createChat: this.createChat,
       errorMessage: '',
+      isShowAddChatForm: false,
+      store: window.store,
+      selectedChat: () => this.props.store.getState().selectedChat,
+      chats: () => this.props.store?.getState().chats,
     });
+  }
+
+  componentDidMount(props: TProps): void {
+    this.props.store.dispatch(chatList);
   }
 
   onClick = (event: SubmitEvent) => {
@@ -28,13 +46,39 @@ class Chat extends Block<TProps> {
     const errorMessage = validate({ type: ValidateRuleType.MESSAGE, value: message });
 
     this.setProps({
+      ...this.props,
       errorMessage,
-      onClick: this.onClick,
     });
 
     if (!errorMessage) {
       console.log('[MESSAGE]', { message });
     }
+  };
+
+  createChat = (event: SubmitEvent) => {
+    event.preventDefault();
+
+    const chatTitleInput = document.getElementById('titleNewChat') as HTMLInputElement;
+    const title = chatTitleInput.value;
+
+    if (title) {
+      this.props.store.dispatch(createChat, { title });
+    }
+
+    this.toggleAddChatForm;
+  };
+
+  toggleAddChatForm = () => {
+    this.setProps({ ...this.props, isShowAddChatForm: !this.props.isShowAddChatForm });
+  };
+
+  renderAddChatForm = () => {
+    return `
+    <form id="addChatForm" class="add_chat_form__wrapper">
+      {{{Input id="titleNewChat" type="text" name="text" label="Имя чата" placeholder="Введите имя чата"}}}
+      {{{Button size="medium" type="submit" text="Создать" onClick=createChat}}}
+    <form> 
+    `;
   };
 
   render() {
@@ -46,32 +90,19 @@ class Chat extends Block<TProps> {
         <input class="aside__chat-filter__input" type="text" placeholder="&#128269 Поиск">
       </div>
       <ul class="aside__chat-list">
-        <li class="aside__chat-list__item">
-          <div class="user-info">
-            <div class="user-avatar"></div>
-            <div class="info">
-              <div class="title">Андрей</div>
-              <div class="subtitle">Изображение</div>
-            </div>
-          </div>
-          <div class="chat-message__data">
-            <div class="last-message__time">10:49</div>
-            <div class="last-message__unread">2</div>
-          </div>
-        </li>
+        {{#each chats}}
+        {{{ChatItem id=id avatar=avatar title=title content=content time=time unreadCount=unread_count}}}
+        {{/each}}
       </ul>
     </aside>
     <main class="chat__messages-list">
-      <header class="chat__messages-list__header">
+     {{#if selectedChat}}
+        <header class="chat__messages-list__header">
         <div class="user-info">
           <div class="user-avatar"></div>
-          <div class="header__user-info__title">Вадим</div> 
+          <div class="header__user-info__title">{{ title }}</div> 
         </div>
-        <div class="chat__messages-list__header-menu">
-          <div class="header-menu__dot"></div>
-          <div class="header-menu__dot"></div>
-          <div class="header-menu__dot"></div>
-        </div>
+        {{{MenuToggler onClick=toggleAddChatForm}}}
       </header>
       <div class="chat__messages-list__content"></div>
       <footer class="chat__messages-list__footer">
@@ -81,10 +112,17 @@ class Chat extends Block<TProps> {
           {{{Fab icon="&#x2192;" onClick=onClick}}}
         </form>
       </footer>
+      {{else}}
+        <header class="chat__messages-list__header">
+          {{{MenuToggler onClick=toggleAddChatForm}}}
+          ${this.props.isShowAddChatForm ? this.renderAddChatForm() : ''}
+        </header>
+        <div class="chat__messages-list__empty"> выберите чат </div>  
+     {{/if}}
     </main>
   </div>
     `;
   }
 }
 
-export default Chat;
+export default withStore(Chat);

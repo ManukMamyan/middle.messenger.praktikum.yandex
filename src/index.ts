@@ -15,6 +15,8 @@ import Header from './ui/Header';
 import Field from './ui/Field';
 import Fab from './ui/Fab';
 import IconButton from './ui/IconButton';
+import MenuToggler from './ui/MenuToggler';
+import ChatItem from './ui/ChatItem';
 
 registerComponent(Button);
 registerComponent(Link);
@@ -26,6 +28,8 @@ registerComponent(Header);
 registerComponent(Field);
 registerComponent(Fab);
 registerComponent(IconButton);
+registerComponent(MenuToggler);
+registerComponent(ChatItem);
 
 declare global {
   interface Window {

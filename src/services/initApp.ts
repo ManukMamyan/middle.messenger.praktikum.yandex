@@ -12,7 +12,12 @@ async function initApp(dispatch: Dispatch<AppState>) {
     return;
   }
 
-  dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO), screen: 'profile' });
+  if (window.location.pathname === '/') {
+    dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO), screen: 'profile' });
+    return;
+  }
+
+  return dispatch({ appIsInitiated: true, user: transformUser(response as UserDTO) });
 }
 
 export default initApp;

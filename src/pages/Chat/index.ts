@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import {Block} from '../../core';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
 

@@ -19,5 +19,5 @@ export const chatAPI = {
 
   deleteUser: (data: DeleteUserToChatRequestData) => request.delete('/auth/logout', data),
 
-  token: (chatId: number) => request.post<void>(`/chats/token/${chatId}`)
+  token: (chatId: number) => request.post<void>(`/chats/token/${chatId}`),
 };

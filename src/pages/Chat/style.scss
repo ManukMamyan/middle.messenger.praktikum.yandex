@@ -133,7 +133,7 @@
       cursor: pointer;
     }
 
-    .message-form {
+    .message-form-footer {
       height: 100%;
       display: flex;
       align-items: center;
@@ -148,12 +148,23 @@
 .add_chat_form {
   &__wrapper {
     position: absolute;
-    right: 300px;
     top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100px;
+  }
+}
+
+.chat-participants {
+  &__actions {
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
   }
 }
 

@@ -1,5 +1,5 @@
 import { Block, Store } from '../../core';
-import { chatList, createChat } from '../../services/chat';
+import { chatList, createChat, addUser, deleteUser } from '../../services/chat';
 import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
@@ -7,11 +7,15 @@ import './style.scss';
 type TProps = {
   onClick: (event: SubmitEvent) => void;
   createChat: (event: SubmitEvent) => void;
+  addParticipantToChat: (event: SubmitEvent) => void;
+  deleteParticipantFromChat: (event: SubmitEvent) => void;
   selectedChat: () => string | null;
   toggleAddChatForm: () => void;
+  toggleChatActions: () => void;
   chats: () => UserChat[] | null;
   errorMessage: string;
   isShowAddChatForm: boolean;
+  isShowChatActions: boolean;
   store: Store<AppState>;
 };
 
@@ -24,9 +28,13 @@ class Chat extends Block<TProps> {
     this.setProps({
       onClick: this.onClick,
       toggleAddChatForm: this.toggleAddChatForm,
+      toggleChatActions: this.toggleChatActions,
       createChat: this.createChat,
+      addParticipantToChat: this.addParticipantToChat,
+      deleteParticipantFromChat: this.deleteParticipantFromChat,
       errorMessage: '',
       isShowAddChatForm: false,
+      isShowChatActions: false,
       store: window.store,
       selectedChat: () => this.props.store.getState().selectedChat,
       chats: () => this.props.store?.getState().chats,
@@ -65,19 +73,63 @@ class Chat extends Block<TProps> {
       this.props.store.dispatch(createChat, { title });
     }
 
-    this.toggleAddChatForm;
+    this.toggleAddChatForm();
+  };
+
+  addParticipantToChat = (event: SubmitEvent) => {
+    event.preventDefault();
+
+    const chatTitleInput = document.getElementById('addParticipantToChat') as HTMLInputElement;
+    const participantId = chatTitleInput.value;
+    const chatId = this.props.store.getState().selectedChat
+
+    if (participantId && typeof +participantId === 'number' && chatId) {
+      this.props.store.dispatch(addUser, { users: [+participantId], chatId: +chatId });
+    }
+
+    this.toggleChatActions();
+  };
+
+  deleteParticipantFromChat = (event: SubmitEvent) => {
+    event.preventDefault();
+
+    const chatTitleInput = document.getElementById('deleteParticipantFromChat') as HTMLInputElement;
+    const participantId = chatTitleInput.value;
+    const chatId = this.props.store.getState().selectedChat
+
+    if (participantId && typeof +participantId === 'number' && chatId) {
+      this.props.store.dispatch(deleteUser, { users: [+participantId], chatId: +chatId });
+    }
+
+    this.toggleChatActions();
   };
 
   toggleAddChatForm = () => {
     this.setProps({ ...this.props, isShowAddChatForm: !this.props.isShowAddChatForm });
   };
 
+  toggleChatActions = () => {
+    this.setProps({ ...this.props, isShowChatActions: !this.props.isShowChatActions });
+  };
+
   renderAddChatForm = () => {
     return `
     <form id="addChatForm" class="add_chat_form__wrapper">
-      {{{Input id="titleNewChat" type="text" name="text" label="Имя чата" placeholder="Введите имя чата"}}}
-      {{{Button size="medium" type="submit" text="Создать" onClick=createChat}}}
+    {{{Input id="titleNewChat" type="text" name="text" label="Имя чата" placeholder="Введите имя чата"}}}
+    {{{Button size="medium" type="submit" text="Создать" onClick=createChat}}}
     <form> 
+    `;
+  };
+  
+  renderChatActions = () => {
+    return `
+      <form id="chatActionsForm" class="chat-participants__actions">
+        {{{Input id="addParticipantToChat" type="text" name="text" label="Имя чата" placeholder="Введите id участника"}}}
+        {{{Button size="medium" type="submit" text="Добавить участника" onClick=addParticipantToChat}}}
+        </tr>
+        {{{Input id="deleteParticipantFromChat" type="text" name="text" label="Имя чата" placeholder="Введите id участника"}}}
+        {{{Button size="medium" type="submit" text="Удалить участника" onClick=deleteParticipantFromChat}}}
+      <form>
     `;
   };
 
@@ -102,15 +154,16 @@ class Chat extends Block<TProps> {
           <div class="user-avatar"></div>
           <div class="header__user-info__title">{{ title }}</div> 
         </div>
-        {{{MenuToggler onClick=toggleAddChatForm}}}
+        {{{MenuToggler onClick=toggleChatActions}}}
+        ${this.props.isShowChatActions ? this.renderChatActions() : ''}
       </header>
       <div class="chat__messages-list__content"></div>
       <footer class="chat__messages-list__footer">
-        <form class="message-form">
+        <div class="message-form-footer">
           <i class="fa fa-paperclip file-icon"></i>
           <input class="input_message" type="text" placeholder="Сообщение" name="message">
           {{{Fab icon="&#x2192;" onClick=onClick}}}
-        </form>
+        </div>
       </footer>
       {{else}}
         <header class="chat__messages-list__header">

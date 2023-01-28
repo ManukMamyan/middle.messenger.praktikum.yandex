@@ -31,6 +31,7 @@ type TProps = {
   displayName?: () => string | undefined;
   phone?: () => string | undefined;
   isShowAvatarForm: boolean;
+  back: (event: MouseEvent) => void;
 };
 
 type TFormValues = {
@@ -73,6 +74,7 @@ class EditProfile extends Block<TProps> {
       displayName: () => this.props.store.getState().user?.displayName,
       phone: () => this.props.store.getState().user?.phone,
       isShowAvatarForm: false,
+      back: this.back,
     });
   }
 
@@ -302,12 +304,16 @@ class EditProfile extends Block<TProps> {
     `;
   };
 
+  back = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.back();
+  };
+
   render(): string {
     return `
   <div class="container-profile">
-    <div class="wrapper__action">
-      <a class="back" href="/profile">&#x2190</a>
-    </div>
+    {{{IconButton onClick=back}}}
     <main class="content-profile">
       <div id="avatarWrapper" class="avatar">
        ${this.props.isShowAvatarForm ? this.renderAvatarForm() : ''}

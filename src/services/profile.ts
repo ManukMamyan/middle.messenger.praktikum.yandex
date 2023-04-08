@@ -25,6 +25,7 @@ export const editProfile = async (
   dispatch({ isLoading: true });
 
   const response = await editProfileAPI.editProfile(action);
+  console.log('🚀 ~ file: profile.ts:28 ~ response:', response)
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, editProfileFormError: response.reason });
@@ -60,14 +61,12 @@ export const editAvatar = async (
 ) => {
   dispatch({ isLoading: true });
 
-  const response = await editProfileAPI.editAvatar(action);
+  const response = await editProfileAPI.editAvatar(action)  as string;
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, editPasswordFormError: response.reason });
     return;
   }
 
-  dispatch({ user: transformUser(response as UserDTO) });
-
-  window.router.go('/profile');
+  dispatch({ user: transformUser(JSON.parse(response) as UserDTO) });
 };

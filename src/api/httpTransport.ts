@@ -61,6 +61,9 @@ class HTTPTransport {
         xhr.setRequestHeader(key, headers[key]);
       });
 
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
+
       xhr.onload = function (e) {
         const { responseText } = xhr;
 

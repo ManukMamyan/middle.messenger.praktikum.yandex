@@ -1,4 +1,4 @@
-import { request, requestAvatar } from './apiRequests';
+import { request } from './apiRequests';
 import { APIError } from './types';
 
 type EditProfileRequestData = {
@@ -50,5 +50,5 @@ export const editProfileAPI = {
     request.put<EditPasswordDataResponseData>('user/password', data),
 
   editAvatar: (data: FormData) =>
-    requestAvatar.put<EditAvatarDataResponseData>('user/profile/avatar', data),
+    request.put<EditAvatarDataResponseData>('user/profile/avatar', data),
 };

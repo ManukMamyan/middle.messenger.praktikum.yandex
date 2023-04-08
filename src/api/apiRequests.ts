@@ -1,37 +1,24 @@
-// import transport from './httpTransport';
+import HTTPTransport from './httpTransportSimple';
 
-const API_ENDPOINT = 'https://ya-praktikum.tech/api/v2';
+type TMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-export function request<T extends any>({ method, path, data }: any): Promise<T> {
-  return fetch(`${API_ENDPOINT}/${path}`, {
-    method,
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: data ? JSON.stringify(data) : null,
-  }).then((resp) => {
-    return resp.json().catch(() => {
-      return Promise.resolve(resp);
-    });
+export function request<T extends any>({
+  method,
+  path,
+  data,
+}: {
+  method: TMethod;
+  path: string;
+  data?: any;
+}): Promise<T | unknown> {
+  const transport = new HTTPTransport('');
+
+  return transport[method](path, data).catch((errorResponse) => {
+    return errorResponse;
   });
 }
 
-request.post = <T>(path: string, data?: any) => request<T>({ method: 'POST', path, data });
-request.delete = <T>(path: string, data?: any) => request<T>({ method: 'DELETE', path, data });
-request.put = <T>(path: string, data?: any) => request<T>({ method: 'PUT', path, data });
-request.get = <T>(path: string) => request<T>({ method: 'GET', path });
-
-export function requestAvatar<T extends any>({ method, path, data }: any): Promise<T> {
-  return fetch(`${API_ENDPOINT}/${path}`, {
-    method,
-    credentials: 'include',
-    mode: 'cors',
-    body: data,
-  }).then((resp) => {
-    return resp.json().catch(() => {
-      return Promise.resolve(resp);
-    });
-  });
-}
-
-requestAvatar.put = <T>(path: string, data?: any) => request<T>({ method: 'PUT', path, data });
+request.post = <T>(path: string, data?: any) => request<T>({ method: 'post', path, data });
+request.delete = <T>(path: string, data?: any) => request<T>({ method: 'delete', path, data });
+request.put = <T>(path: string, data?: any) => request<T>({ method: 'put', path, data });
+request.get = <T>(path: string) => request<T>({ method: 'get', path });

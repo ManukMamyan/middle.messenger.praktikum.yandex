@@ -81,7 +81,7 @@ class Chat extends Block<TProps> {
 
     const chatTitleInput = document.getElementById('addParticipantToChat') as HTMLInputElement;
     const participantId = chatTitleInput.value;
-    const chatId = this.props.store.getState().selectedChat
+    const chatId = this.props.store.getState().selectedChat;
 
     if (participantId && typeof +participantId === 'number' && chatId) {
       this.props.store.dispatch(addUser, { users: [+participantId], chatId: +chatId });
@@ -95,7 +95,7 @@ class Chat extends Block<TProps> {
 
     const chatTitleInput = document.getElementById('deleteParticipantFromChat') as HTMLInputElement;
     const participantId = chatTitleInput.value;
-    const chatId = this.props.store.getState().selectedChat
+    const chatId = this.props.store.getState().selectedChat;
 
     if (participantId && typeof +participantId === 'number' && chatId) {
       this.props.store.dispatch(deleteUser, { users: [+participantId], chatId: +chatId });
@@ -120,7 +120,7 @@ class Chat extends Block<TProps> {
     <form> 
     `;
   };
-  
+
   renderChatActions = () => {
     return `
       <form id="chatActionsForm" class="chat-participants__actions">

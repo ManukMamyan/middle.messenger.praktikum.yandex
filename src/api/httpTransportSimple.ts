@@ -30,11 +30,11 @@ export default class HTTPTransport {
     });
   }
 
-  public put<Response = void>(path: string, data: unknown): Promise<Response> {
+  public put<Response = void>(path: string, data: unknown, isJson = true): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Put,
       data,
-    });
+    }, isJson,);
   }
 
   public patch<Response = void>(path: string, data: unknown): Promise<Response> {
@@ -52,7 +52,8 @@ export default class HTTPTransport {
 
   private request<Response>(
     url: string,
-    options: Options = { method: Method.Get }
+    options: Options = { method: Method.Get },
+    isJson: boolean = true
   ): Promise<Response> {
     const { method, data } = options;
 
@@ -74,15 +75,19 @@ export default class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' });
       xhr.ontimeout = () => reject({ reason: 'timeout' });
 
-      xhr.setRequestHeader('Content-Type', 'application/json');
 
+      if (isJson) {
+       xhr.setRequestHeader('Content-Type', 'application/json');
+       xhr.responseType = 'json';
+      }
+      
       xhr.withCredentials = true;
-      xhr.responseType = 'json';
+
 
       if (method === Method.Get || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        xhr.send(isJson ? JSON.stringify(data) : data);
       }
     });
   }

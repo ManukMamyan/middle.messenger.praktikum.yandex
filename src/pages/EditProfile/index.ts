@@ -29,6 +29,7 @@ type TProps = {
   firstName?: () => string | undefined;
   secondName?: () => string | undefined;
   displayName?: () => string | undefined;
+  avatar?: () => string | undefined;
   phone?: () => string | undefined;
   isShowAvatarForm: boolean;
   back: (event: MouseEvent) => void;
@@ -72,6 +73,7 @@ class EditProfile extends Block<TProps> {
       firstName: () => this.props.store.getState().user?.firstName,
       secondName: () => this.props.store.getState().user?.secondName,
       displayName: () => this.props.store.getState().user?.displayName,
+      avatar: () => this.props.store.getState().user?.avatar,
       phone: () => this.props.store.getState().user?.phone,
       isShowAvatarForm: false,
       back: this.back,
@@ -316,6 +318,7 @@ class EditProfile extends Block<TProps> {
     {{{IconButton onClick=back}}}
     <main class="content-profile">
       <div id="avatarWrapper" class="avatar">
+       <img class="avatar_image--edit-profile" src="https://ya-praktikum.tech/api/v2/resources{{avatar}}" alt="avatar">
        ${this.props.isShowAvatarForm ? this.renderAvatarForm() : ''}
       </div>
       <h3 class="profile__header-name">Иван</h3>

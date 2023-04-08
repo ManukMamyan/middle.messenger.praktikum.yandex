@@ -71,10 +71,10 @@ class Profile extends Block<TProps> {
     <main class="content-profile">
       ${
         this.props.avatar
-          ? `<img class="avatar_image" src="https://ya-praktikum.tech/api/v2/uploads{{avatar}}" alt="avatar">`
+          ? `<img class="avatar_image" src="https://ya-praktikum.tech/api/v2/resources{{avatar}}" alt="avatar">`
           : '<div class="avatar"></div>'
       }
-      <h3 class="profile__header-name">Иван</h3>
+      <h3 class="profile__header-name">{{firstName}}</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
         {{{Field 

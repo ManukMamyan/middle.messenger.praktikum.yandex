@@ -1,8 +1,17 @@
 import { Block, Store } from '../../core';
-import { chatList, createChat, addUser, deleteUser } from '../../services/chat';
+import { chatList, createChat, addUser, deleteUser, token } from '../../services/chat';
+import Socket from '../../services/socket';
 import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import './style.scss';
+
+type TMessage = {
+  id: number;
+  user_id: number;
+  content: string;
+  type: string;
+  time: string;
+};
 
 type TProps = {
   onClick: (event: SubmitEvent) => void;
@@ -12,15 +21,20 @@ type TProps = {
   selectedChat: () => string | null;
   toggleAddChatForm: () => void;
   toggleChatActions: () => void;
+  renderMessages: () => string;
   chats: () => UserChat[] | null;
   errorMessage: string;
   isShowAddChatForm: boolean;
   isShowChatActions: boolean;
   store: Store<AppState>;
+  token?: string;
+  socket?: Socket;
+  messages: TMessage[];
 };
 
 class Chat extends Block<TProps> {
   static componentName = 'Chat';
+  static chatInitiated = false;
 
   constructor() {
     super();
@@ -32,17 +46,57 @@ class Chat extends Block<TProps> {
       createChat: this.createChat,
       addParticipantToChat: this.addParticipantToChat,
       deleteParticipantFromChat: this.deleteParticipantFromChat,
+      renderMessages: this.renderMessages,
       errorMessage: '',
       isShowAddChatForm: false,
       isShowChatActions: false,
       store: window.store,
+      messages: [],
       selectedChat: () => this.props.store.getState().selectedChat,
       chats: () => this.props.store?.getState().chats,
     });
   }
 
-  componentDidMount(props: TProps): void {
-    props.store.dispatch(chatList);
+  componentDidMount(): void {
+    this.props.store.dispatch(chatList);
+  }
+
+  componentDidUpdate(_oldProps: TProps, _newProps: TProps): boolean {
+    const chatId = this.props.store?.getState().selectedChat;
+    const userId = this.props.store?.getState().user?.id;
+
+    if (!Chat.chatInitiated && chatId && userId) {
+      Chat.chatInitiated = true;
+
+      token(chatId)
+        .then(({ token }: { token: string }) => {
+          const socket = new Socket({ userId, chatId, token });
+          socket.onMessage((data: TMessage) => {
+            this.setProps({
+              ...this.props,
+              messages: [...this.props.messages, data],
+            });
+          });
+
+          this.setProps({
+            ...this.props,
+            socket,
+          });
+        })
+        .catch(console.log);
+    }
+
+    if (_oldProps.selectedChat !== _newProps.selectedChat) {
+      Chat.chatInitiated = false;
+    }
+
+    return true;
+  }
+
+  componentWillUnmount(): void {
+    if (this.props.socket) {
+      this.props.socket.close();
+    }
   }
 
   onClick = (event: SubmitEvent) => {
@@ -59,7 +113,7 @@ class Chat extends Block<TProps> {
     });
 
     if (!errorMessage) {
-      console.log('[MESSAGE]', { message });
+      this.props.socket?.sendMessage(message);
     }
   };
 
@@ -114,11 +168,19 @@ class Chat extends Block<TProps> {
 
   renderAddChatForm = () => {
     return `
-    <form id="addChatForm" class="add_chat_form__wrapper">
-    {{{Input id="titleNewChat" type="text" name="text" label="Имя чата" placeholder="Введите имя чата"}}}
-    {{{Button size="medium" type="submit" text="Создать" onClick=createChat}}}
-    <form> 
+      <form id="addChatForm" class="add_chat_form__wrapper">
+      {{{Input id="titleNewChat" type="text" name="text" label="Имя чата" placeholder="Введите имя чата"}}}
+      {{{Button size="medium" type="submit" text="Создать" onClick=createChat}}}
+      <form> 
     `;
+  };
+
+  renderMessages = () => {
+    return this.props.messages
+      ?.map((message) => {
+        return `<div>${message.content}</div>`;
+      })
+      .join('');
   };
 
   renderChatActions = () => {
@@ -157,7 +219,9 @@ class Chat extends Block<TProps> {
         {{{MenuToggler onClick=toggleChatActions}}}
         ${this.props.isShowChatActions ? this.renderChatActions() : ''}
       </header>
-      <div class="chat__messages-list__content"></div>
+      <div class="chat__messages-list__content">${
+        this.props.renderMessages ? this.props.renderMessages() : ''
+      }</div>
       <footer class="chat__messages-list__footer">
         <div class="message-form-footer">
           <i class="fa fa-paperclip file-icon"></i>

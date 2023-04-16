@@ -42,7 +42,7 @@ class Chat extends Block<TProps> {
   }
 
   componentDidMount(props: TProps): void {
-    this.props.store.dispatch(chatList);
+    props.store.dispatch(chatList);
   }
 
   onClick = (event: SubmitEvent) => {

@@ -64,14 +64,14 @@ class HTTPTransport {
       xhr.withCredentials = true;
       xhr.responseType = 'json';
 
-      xhr.onload = function (e) {
+      xhr.onload = function () {
         const { responseText } = xhr;
 
         let response;
 
         try {
           response = JSON.parse(responseText) as T;
-        } catch (e) {
+        } catch {
           response = responseText as T;
         }
 

@@ -1,4 +1,5 @@
 import { chatAPI } from '../api/chat';
+import type { ChatListResponseData } from '../api/chat';
 import type { Dispatch } from '../core';
 import { apiHasError } from '../api/utils';
 
@@ -8,10 +9,10 @@ type CreateChatPayload = {
 type AddUserToChatPayload = { users: number[]; chatId: number };
 type DeleteUserToChatPayload = AddUserToChatPayload;
 
-export const chatList = async (dispatch: Dispatch<AppState>, state: AppState) => {
+export const chatList = async (dispatch: Dispatch<AppState>, _state: AppState) => {
   dispatch({ isLoading: true });
 
-  const response = await chatAPI.chatList();
+  const response = await chatAPI.chatList() as ChatListResponseData;
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false });
@@ -23,7 +24,7 @@ export const chatList = async (dispatch: Dispatch<AppState>, state: AppState) =>
 
 export const createChat = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: CreateChatPayload
 ) => {
   dispatch({ isLoading: true });
@@ -40,7 +41,7 @@ export const createChat = async (
 
 export const addUser = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: AddUserToChatPayload
 ) => {
   dispatch({ isLoading: true });
@@ -57,7 +58,7 @@ export const addUser = async (
 
 export const deleteUser = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: DeleteUserToChatPayload
 ) => {
   dispatch({ isLoading: true });
@@ -72,7 +73,7 @@ export const deleteUser = async (
   await dispatch(chatList);
 };
 
-export const token = async (dispatch: Dispatch<AppState>, state: AppState, action: number) => {
+export const token = async (dispatch: Dispatch<AppState>, _state: AppState, action: number) => {
   dispatch({ isLoading: true });
 
   const response = await chatAPI.token(action);

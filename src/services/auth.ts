@@ -10,7 +10,7 @@ type LoginPayload = {
 
 export const login = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: LoginPayload
 ) => {
   dispatch({ isLoading: true });

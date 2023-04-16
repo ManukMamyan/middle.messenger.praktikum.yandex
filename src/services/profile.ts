@@ -19,13 +19,12 @@ type EditPasswordPayload = {
 
 export const editProfile = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: EditProfilePayload
 ) => {
   dispatch({ isLoading: true });
 
   const response = await editProfileAPI.editProfile(action);
-  console.log('🚀 ~ file: profile.ts:28 ~ response:', response)
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, editProfileFormError: response.reason });
@@ -39,7 +38,7 @@ export const editProfile = async (
 
 export const editPassword = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: EditPasswordPayload
 ) => {
   dispatch({ isLoading: true });
@@ -56,12 +55,12 @@ export const editPassword = async (
 
 export const editAvatar = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: FormData
 ) => {
   dispatch({ isLoading: true });
 
-  const response = await editProfileAPI.editAvatar(action)  as string;
+  const response = (await editProfileAPI.editAvatar(action)) as string;
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, editPasswordFormError: response.reason });

@@ -80,7 +80,7 @@ class EditProfile extends Block<TProps> {
     });
   }
 
-  componentDidMount(props: TProps): void {
+  componentDidMount(): void {
     const avatarWrapper = document.getElementById('avatarWrapper');
 
     avatarWrapper?.addEventListener('click', () => {

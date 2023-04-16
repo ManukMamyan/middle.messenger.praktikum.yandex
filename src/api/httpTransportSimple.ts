@@ -31,10 +31,14 @@ export default class HTTPTransport {
   }
 
   public put<Response = void>(path: string, data: unknown, isJson = true): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Put,
-      data,
-    }, isJson,);
+    return this.request<Response>(
+      this.endpoint + path,
+      {
+        method: Method.Put,
+        data,
+      },
+      isJson
+    );
   }
 
   public patch<Response = void>(path: string, data: unknown): Promise<Response> {
@@ -61,7 +65,7 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
-      xhr.onreadystatechange = (e) => {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
@@ -75,14 +79,12 @@ export default class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' });
       xhr.ontimeout = () => reject({ reason: 'timeout' });
 
-
       if (isJson) {
-       xhr.setRequestHeader('Content-Type', 'application/json');
-       xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.responseType = 'json';
       }
-      
-      xhr.withCredentials = true;
 
+      xhr.withCredentials = true;
 
       if (method === Method.Get || !data) {
         xhr.send();

@@ -13,7 +13,7 @@ type SignupPayload = {
 
 export const register = async (
   dispatch: Dispatch<AppState>,
-  state: AppState,
+  _state: AppState,
   action: SignupPayload
 ) => {
   dispatch({ isLoading: true });

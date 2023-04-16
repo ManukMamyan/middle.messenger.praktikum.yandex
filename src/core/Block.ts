@@ -53,7 +53,7 @@ export default class Block<P extends {}> {
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
 
-  _checkInDom() {
+  private _checkInDom() {
     const elementInDOM = document.body.contains(this._element);
 
     if (elementInDOM) {
@@ -64,7 +64,7 @@ export default class Block<P extends {}> {
     this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
   }
 
-  _registerEvents(eventBus: EventBus<Events>) {
+  private _registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -79,7 +79,7 @@ export default class Block<P extends {}> {
 
   componentWillUnmount() {}
 
-  _createResources() {
+  private _createResources() {
     this._element = this._createDocumentElement('div');
   }
 
@@ -93,7 +93,7 @@ export default class Block<P extends {}> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  _componentDidMount(props: P) {
+  private _componentDidMount(props: P) {
     this._checkInDom();
 
     this.componentDidMount(props);
@@ -102,7 +102,7 @@ export default class Block<P extends {}> {
   // @ts-ignore
   componentDidMount(props: P) {}
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -135,7 +135,7 @@ export default class Block<P extends {}> {
     return this._element;
   }
 
-  _render() {
+  private _render() {
     const fragment = this._compile();
 
     this._removeEvents();
@@ -163,7 +163,7 @@ export default class Block<P extends {}> {
     return this.element!;
   }
 
-  _makePropsProxy(props: any): any {
+  private _makePropsProxy(props: any): any {
     const self = this;
 
     return new Proxy(props as unknown as object, {
@@ -183,11 +183,11 @@ export default class Block<P extends {}> {
     }) as unknown as P;
   }
 
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
-  _removeEvents() {
+  private _removeEvents() {
     const events: Record<string, () => void> = (this.props as any).events;
 
     if (!events || !this._element) {
@@ -199,7 +199,7 @@ export default class Block<P extends {}> {
     });
   }
 
-  _addEvents() {
+  private _addEvents() {
     const events: Record<string, () => void> = (this.props as any).events;
 
     if (!events) {
@@ -211,7 +211,7 @@ export default class Block<P extends {}> {
     });
   }
 
-  _compile(): DocumentFragment {
+  private _compile(): DocumentFragment {
     const fragment = document.createElement('template');
 
     const template = Handlebars.compile(this.render());

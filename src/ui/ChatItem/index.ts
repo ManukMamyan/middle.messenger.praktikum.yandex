@@ -33,7 +33,7 @@ class ChatItem extends Block<TPropsChatItemBlock> {
     return `
     <li class="chat-list__item">
       <div class="user-info">
-        <img class="avatar_image" src="https://ya-praktikum.tech/api/v2/uploads{{ avatar }}" alt="avatar">
+        <img class="avatar_image" src="https://ya-praktikum.tech/api/v2/resources{{avatar}}" alt="avatar">
         <div class="info">
           <div class="title">{{ title }}</div>
           <div class="subtitle">{{ content }}</div>

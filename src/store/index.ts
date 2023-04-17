@@ -7,6 +7,7 @@ const defaultState: AppState = {
   editProfileFormError: null,
   editPasswordFormError: null,
   selectedChat: null,
+  selectedChatId: null,
   user: null,
   chats: null,
 };

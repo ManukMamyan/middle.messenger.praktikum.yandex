@@ -1,5 +1,5 @@
 import { Block, Store } from '../../core';
-import { chatList, createChat, addUser, deleteUser, token } from '../../services/chat';
+import { chatList, editAvatar, createChat, addUser, deleteUser, token } from '../../services/chat';
 import Socket from '../../services/socket';
 import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
@@ -15,10 +15,14 @@ type TMessage = {
 
 type TProps = {
   onClick: (event: SubmitEvent) => void;
+  toggleAvatarForm: () => void;
   createChat: (event: SubmitEvent) => void;
   addParticipantToChat: (event: SubmitEvent) => void;
   deleteParticipantFromChat: (event: SubmitEvent) => void;
-  selectedChat: () => string | null;
+  selectedChat: () => TSelectedChat | null;
+  selectedChatTitle: () => string | undefined;
+  selectedChatAvatar: () => string | undefined;
+  selectedChatId: () => string | null;
   toggleAddChatForm: () => void;
   toggleChatActions: () => void;
   renderMessages: () => string;
@@ -30,6 +34,7 @@ type TProps = {
   token?: string;
   socket?: Socket;
   messages: TMessage[];
+  isShowAvatarForm: boolean;
 };
 
 class Chat extends Block<TProps> {
@@ -41,6 +46,7 @@ class Chat extends Block<TProps> {
 
     this.setProps({
       onClick: this.onClick,
+      toggleAvatarForm: this.toggleAvatarForm,
       toggleAddChatForm: this.toggleAddChatForm,
       toggleChatActions: this.toggleChatActions,
       createChat: this.createChat,
@@ -52,8 +58,12 @@ class Chat extends Block<TProps> {
       isShowChatActions: false,
       store: window.store,
       messages: [],
+      selectedChatId: () => this.props.store.getState().selectedChatId,
+      selectedChatTitle: () => this.props.store.getState().selectedChat?.title,
+      selectedChatAvatar: () => this.props.store.getState().selectedChat?.avatar,
       selectedChat: () => this.props.store.getState().selectedChat,
       chats: () => this.props.store?.getState().chats,
+      isShowAvatarForm: false,
     });
   }
 
@@ -62,7 +72,7 @@ class Chat extends Block<TProps> {
   }
 
   componentDidUpdate(_oldProps: TProps, _newProps: TProps): boolean {
-    const chatId = this.props.store?.getState().selectedChat;
+    const chatId = this.props.store?.getState().selectedChatId;
     const userId = this.props.store?.getState().user?.id;
 
     if (!Chat.chatInitiated && chatId && userId) {
@@ -86,7 +96,7 @@ class Chat extends Block<TProps> {
         .catch(console.log);
     }
 
-    if (_oldProps.selectedChat !== _newProps.selectedChat) {
+    if (_oldProps.selectedChatId !== _newProps.selectedChatId) {
       Chat.chatInitiated = false;
     }
 
@@ -166,6 +176,22 @@ class Chat extends Block<TProps> {
     this.setProps({ ...this.props, isShowChatActions: !this.props.isShowChatActions });
   };
 
+  toggleAvatarForm = () => {
+    this.setProps({ ...this.props, isShowAvatarForm: !this.props.isShowAvatarForm });
+
+    if (this.props.isShowAvatarForm) {
+      const form = document.getElementById('avatarForm') as HTMLFormElement;
+
+      form.addEventListener('submit', (event: SubmitEvent) => {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        this.props.store.dispatch(editAvatar, data);
+        this.toggleAvatarForm();
+      });
+    }
+  };
+
   renderAddChatForm = () => {
     return `
       <form id="addChatForm" class="add_chat_form__wrapper">
@@ -181,6 +207,16 @@ class Chat extends Block<TProps> {
         return `<div>${message.content}</div>`;
       })
       .join('');
+  };
+
+  renderAvatarForm = () => {
+    return `
+    <form id="avatarForm" class="avatar_form__wrapper">
+      {{{Input id="avatar" type="file" name="avatar" label="Аватар"}}}
+      {{{Input id="chatId" value=selectedChatId type="hidden" name="chatId" label="ID чата"}}}
+      {{{Button size="medium" type="submit" text="Отправить"}}}
+    <form> 
+    `;
   };
 
   renderChatActions = () => {
@@ -213,8 +249,12 @@ class Chat extends Block<TProps> {
      {{#if selectedChat}}
         <header class="chat__messages-list__header">
         <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="header__user-info__title">{{ title }}</div> 
+        <div class="user-avatar">
+            <img class="avatar_image--edit-chat-avatar" src="https://ya-praktikum.tech/api/v2/resources{{selectedChatAvatar}}" alt="avatar">
+            {{{Div onClick=toggleAvatarForm}}}
+            ${this.props.isShowAvatarForm ? this.renderAvatarForm() : ''}
+          </div>
+          <div class="header__user-info__title">{{ selectedChatTitle }}</div> 
         </div>
         {{{MenuToggler onClick=toggleChatActions}}}
         ${this.props.isShowChatActions ? this.renderChatActions() : ''}

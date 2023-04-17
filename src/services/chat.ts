@@ -39,6 +39,23 @@ export const createChat = async (
   await dispatch(chatList);
 };
 
+export const editAvatar = async (
+  dispatch: Dispatch<AppState>,
+  _state: AppState,
+  action: { chatId: number | string; avatar: FormData }
+) => {
+  dispatch({ isLoading: true });
+
+  const response = await chatAPI.avatar(action);
+
+  if (apiHasError(response)) {
+    dispatch({ isLoading: false });
+    return;
+  }
+
+  await dispatch(chatList);
+};
+
 export const addUser = async (
   dispatch: Dispatch<AppState>,
   _state: AppState,

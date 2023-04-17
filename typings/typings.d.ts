@@ -3,6 +3,12 @@ declare global {
   export type Keys<T extends Record<string | unknown>> = keyof T;
   export type Values<T extends Record<string | unknown>> = T[Keys<T>];
 
+  export type TSelectedChat = {
+    id: string,
+    avatar: string,
+    title: string,
+  }
+
   export type AppState = {
     appIsInitiated: boolean;
     screen: Screens | null;
@@ -11,7 +17,8 @@ declare global {
     signupFormError: string | null;
     editProfileFormError: string | null;
     editPasswordFormError: string | null;
-    selectedChat: string | null;
+    selectedChat: TSelectedChat | null;
+    selectedChatId: string | null;
     user: User | null;
     chats: UserChat[] | null;
   };

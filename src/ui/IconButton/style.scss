@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .back {
     display: flex;
     justify-content: center;

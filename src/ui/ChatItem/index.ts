@@ -25,7 +25,12 @@ class ChatItem extends Block<TPropsChatItemBlock> {
       content,
       time,
       unreadCount,
-      events: { click: () => window.store.dispatch({ selectedChat: id }) },
+      events: {
+        click: () => {
+          window.store.dispatch({ selectedChat: { id, avatar, title } });
+          window.store.dispatch({ selectedChatId: id });
+        },
+      },
     });
   }
 

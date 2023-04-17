@@ -20,4 +20,7 @@ export const chatAPI = {
   deleteUser: (data: DeleteUserToChatRequestData) => request.delete('/auth/logout', data),
 
   token: (chatId: number | string) => request.post<void>(`/chats/token/${chatId}`),
+
+  avatar: (data: { chatId: number | string; avatar: FormData }) =>
+    request.put<void>(`/chats/avatar`, data, false),
 };

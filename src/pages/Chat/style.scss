@@ -71,13 +71,29 @@
     .user-info {
       display: flex;
       align-items: center;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .user-avatar {
+      position: relative;
       width: 34px;
       height: 34px;
       border-radius: 50%;
       background-color: style.$background-color-gray;
+
+      & > .avatar_form__wrapper {
+        position: absolute;
+        top: 70px;
+        left: 40px;
+        right: auto;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .header__user-info__title {
@@ -170,4 +186,12 @@
 
 :focus::-webkit-input-placeholder {
   opacity: 0;
+}
+
+.avatar_image {
+  &--edit-chat-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 }

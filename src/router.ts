@@ -33,7 +33,7 @@ const routes = [
     shouldBeAuthorized: true,
   },
   {
-    path: '/chat',
+    path: '/chats',
     block: Screens.Chat,
     shouldBeAuthorized: true,
   },

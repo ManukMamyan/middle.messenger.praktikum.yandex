@@ -39,5 +39,5 @@
 - /profile
 - /editProfile
 - /editPassword
-- /chats
+- /chat
 - /* 404

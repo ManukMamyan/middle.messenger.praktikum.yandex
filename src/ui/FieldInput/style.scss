@@ -1,0 +1,20 @@
+@use '../../sass/style';
+
+.input-field {
+  width: 100%;
+  border: none;
+  text-align: right;
+  margin-left: auto;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.disabled {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: style.$text-color-gray;
+    pointer-events: none;
+  }
+}

@@ -7,16 +7,37 @@ type TProps = {
   label: string;
   id: string;
   value: string;
-  error?: string;
   editable: boolean;
   onChange: () => void;
+  onFocus: () => void;
+  onBlur: () => void;
 };
 
-class Field extends Block<Omit<TProps, 'onChange'> & { events: { input: () => void } }> {
+class Field extends Block<TProps> {
   static componentName = 'Field';
 
-  constructor({ id, type, name, label, value, error, onChange, editable = true }: TProps) {
-    super({ id, type, name, label, value, editable, error, events: { input: onChange } });
+  constructor({
+    id,
+    type,
+    name,
+    label,
+    value,
+    onChange,
+    onBlur,
+    onFocus = () => {},
+    editable = true,
+  }: TProps) {
+    super({
+      id,
+      type,
+      name,
+      label,
+      value,
+      editable,
+      onChange,
+      onBlur,
+      onFocus,
+    });
   }
 
   render() {
@@ -24,11 +45,16 @@ class Field extends Block<Omit<TProps, 'onChange'> & { events: { input: () => vo
     <div>
       <li class="field__list-item">
           <label class="label" for="{{id}}">{{label}}</label>
-          <input class="input ${
-            !this.props.editable ? 'disabled' : ''
-          }" type="{{type}}" id="{{id}}" value="{{value}}" name="{{name}}"/>
+          {{{FieldInput
+            id=id
+            type=type
+            value=value
+            name=name
+            onChange=onChange
+            onBlur=onBlur
+            onFocus=onFocus
+          }}}
       </li>
-      <div class="input__error">{{#if error}}{{error}}{{/if}}</div>
     <div>
     `;
   }

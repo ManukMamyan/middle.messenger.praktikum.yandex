@@ -31,7 +31,7 @@ export default function registerComponent<Props extends {}>(Component: BlockCons
       children[component.id] = component;
 
       if (ref) {
-        refs[ref] = component.getContent();
+        refs[ref] = component;
       }
 
       const contents = fn ? fn(this) : '';

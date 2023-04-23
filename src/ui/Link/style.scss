@@ -8,4 +8,14 @@
   font-size: 11px;
   line-height: 11px;
   text-decoration: none;
+
+  &.action {
+    margin-top: 0;
+    font-size: 13px;
+    line-height: 13px;
+
+    &.exit {
+      color: style.$text-color-danger;
+    }
+  }
 }

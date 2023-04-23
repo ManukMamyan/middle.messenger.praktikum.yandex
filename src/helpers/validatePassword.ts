@@ -1,4 +1,4 @@
-const patternValidatePassword = new RegExp('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])$');
+const patternValidatePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$&*])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const MIN_LENGTH = 8;
 const MAX_LENGTH = 40;
 
@@ -8,11 +8,11 @@ const validatePassword = (password: string) => {
   }
 
   if (password.length < MIN_LENGTH || password.length > MAX_LENGTH) {
-    return `Пароль должен быть от ${MAX_LENGTH} до ${MAX_LENGTH} символов`;
+    return `Пароль должен быть от ${MIN_LENGTH} до ${MAX_LENGTH} символов`;
   }
 
   if (!patternValidatePassword.test(password)) {
-    return 'Введен недопустимый символ. Пароль должен содержать заглавные и строчные буквы, цифры и специальные символы - !@#$&';
+    return 'Неверный пароль. Пароль должен содержать заглавные и строчные буквы, цифры и специальные символы - !@#$&';
   }
 
   return '';

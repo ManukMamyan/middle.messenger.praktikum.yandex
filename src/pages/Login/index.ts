@@ -1,13 +1,21 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { login } from '../../services/auth';
 import validate, { ValidateRuleType } from '../../helpers/validate';
+import { withStore } from '../../HOCs/withStore';
 import './style.scss';
 
 type TProps = {
   onClick: (event: SubmitEvent) => void;
   onChangeUsername: (event: InputEvent) => void;
+  onFocusUsername: (event: InputEvent) => void;
+  onBlurUsername: (event: InputEvent) => void;
   onChangePassword: (event: InputEvent) => void;
+  onFocusPassword: (event: InputEvent) => void;
+  onBlurPassword: (event: InputEvent) => void;
+  toRegister: (event: MouseEvent) => void;
   errorUsername: string;
   errorPassword: string;
+  store: Store<AppState>;
 };
 
 class Login extends Block<TProps> {
@@ -19,13 +27,31 @@ class Login extends Block<TProps> {
     this.setProps({
       onClick: this.onClick,
       onChangeUsername: this.onChangeUsername,
+      onFocusUsername: this.onFocusUsername,
+      onBlurUsername: this.onBlurUsername,
       onChangePassword: this.onChangePassword,
+      onFocusPassword: this.onFocusPassword,
+      onBlurPassword: this.onBlurPassword,
+      toRegister: this.toRegister,
       errorUsername: '',
       errorPassword: '',
+      store: window.store,
     });
   }
 
-  onClick = () => {
+  setErrorUsername = (error: string) => {
+    this.refs.errorRefUsername.setProps({
+      error,
+    });
+  };
+
+  setErrorPassword = (error: string) => {
+    this.refs.errorRefPassword.setProps({
+      error,
+    });
+  };
+
+  getFormValues = (): { username: string; password: string } => {
     const inputElUsername = this._element?.querySelector(
       'input[name=username]'
     ) as HTMLInputElement;
@@ -35,28 +61,79 @@ class Login extends Block<TProps> {
     const username = inputElUsername.value;
     const password = inputElPassword.value;
 
-    const errorUsername = validate({ type: ValidateRuleType.PASSWORD, value: username });
+    return { username, password };
+  };
+
+  validateUsername = (): boolean => {
+    const { username } = this.getFormValues();
+    const errorUsername = validate({ type: ValidateRuleType.LOGIN, value: username });
+    let isValid = true;
+
+    if (errorUsername) {
+      this.setErrorUsername(errorUsername);
+
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validatePassword = (): boolean => {
+    const { password } = this.getFormValues();
     const errorPassword = validate({ type: ValidateRuleType.PASSWORD, value: password });
+    let isValid = true;
 
-    this.setProps({
-      errorUsername,
-      errorPassword,
-      onClick: this.onClick,
-      onChangeUsername: this.onChangeUsername,
-      onChangePassword: this.onChangePassword,
-    });
+    if (errorPassword) {
+      this.setErrorPassword(errorPassword);
 
-    if (!errorUsername && !errorPassword) {
-      console.log('[LOGIN_DATA]', { username, password });
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  validateForm = (): boolean => {
+    return this.validateUsername() && this.validatePassword();
+  };
+
+  onClick = () => {
+    const isValidForm = this.validateForm();
+
+    if (isValidForm) {
+      const { username, password } = this.getFormValues();
+      const loginData = { login: username, password };
+      this.props.store.dispatch(login, loginData);
     }
   };
 
   onChangeUsername = () => {
-    console.log('input username was changed, this', this);
+    this.setErrorUsername('');
+  };
+
+  onFocusUsername = () => {
+    console.log('input username was focused, this', this);
+  };
+
+  onBlurUsername = () => {
+    this.validateUsername();
   };
 
   onChangePassword = () => {
-    console.log('input password was changed, this', this);
+    this.setErrorPassword('');
+  };
+
+  onFocusPassword = () => {
+    console.log('input password was focused, this', this);
+  };
+
+  onBlurPassword = () => {
+    this.validatePassword();
+  };
+
+  toRegister = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.go('/register');
   };
 
   render() {
@@ -66,12 +143,32 @@ class Login extends Block<TProps> {
     <div class="form-wrapper">
       {{{Header header="Вход"}}}
       <form class="login-form">
-        {{{Input error=errorUsername id="username" type="text" label="Логин" name="username" onChange=onChangeUsername}}}
-        {{{Input error=errorPassword id="password" type="password" label="Пароль" name="password" onChange=onChangePassword}}}
+        {{{Label label="Логин" id="username"}}}
+        {{{Input  
+          id="username" 
+          type="text"  
+          name="username" 
+          onChange=onChangeUsername
+          onFocus=onFocusUsername
+          onBlur=onBlurUsername
+          ref="loginInput"
+        }}}
+        {{{InputError error=errorUsername ref="errorRefUsername"}}}
+        {{{Label label="Пароль" id="password"}}}
+        {{{Input 
+          id="password" 
+          type="password"
+          name="password" 
+          onChange=onChangePassword
+          onFocus=onFocusPassword
+          onBlur=onBlurPassword
+          ref="loginPassword"
+        }}}
+        {{{InputError error=errorPassword ref="errorRefPassword"}}}
       </form>
       <div class="login-form__actions">
         {{{Button text="Авторизоваться" size="large" onClick=onClick}}}
-        {{{Link text="Нет аккаунта?" to="/register"}}}
+        {{{Link text="Нет аккаунта?" to="/register" onClick=toRegister}}}
       </div>
     </div>
   </div>
@@ -80,4 +177,4 @@ class Login extends Block<TProps> {
   }
 }
 
-export default Login;
+export default withStore(Login);

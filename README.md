@@ -31,3 +31,13 @@
 - добавлена аутентификация
 - раутинг
 - отправка сообщений
+
+#### Рауты
+
+- /login
+- /register
+- /profile
+- /editProfile
+- /editPassword
+- /chats
+- /* 404

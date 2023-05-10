@@ -40,7 +40,7 @@ class FieldInput extends Block<
 
   render() {
     return `
-    <input class="input ${
+    <input class="input-field ${
       !this.props.editable ? 'disabled' : ''
     }" type="{{type}}" id="{{id}}" value="{{value}}" name="{{name}}"/>
     `;

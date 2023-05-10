@@ -1,5 +1,7 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { login } from '../../services/auth';
 import validate, { ValidateRuleType } from '../../helpers/validate';
+import { withStore } from '../../HOCs/withStore';
 import './style.scss';
 
 type TProps = {
@@ -10,8 +12,10 @@ type TProps = {
   onChangePassword: (event: InputEvent) => void;
   onFocusPassword: (event: InputEvent) => void;
   onBlurPassword: (event: InputEvent) => void;
+  toRegister: (event: MouseEvent) => void;
   errorUsername: string;
   errorPassword: string;
+  store: Store<AppState>;
 };
 
 class Login extends Block<TProps> {
@@ -28,8 +32,10 @@ class Login extends Block<TProps> {
       onChangePassword: this.onChangePassword,
       onFocusPassword: this.onFocusPassword,
       onBlurPassword: this.onBlurPassword,
+      toRegister: this.toRegister,
       errorUsername: '',
       errorPassword: '',
+      store: window.store,
     });
   }
 
@@ -94,7 +100,9 @@ class Login extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[LOGIN_DATA]', this.getFormValues());
+      const { username, password } = this.getFormValues();
+      const loginData = { login: username, password };
+      this.props.store.dispatch(login, loginData);
     }
   };
 
@@ -120,6 +128,12 @@ class Login extends Block<TProps> {
 
   onBlurPassword = () => {
     this.validatePassword();
+  };
+
+  toRegister = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.go('/register');
   };
 
   render() {
@@ -154,7 +168,7 @@ class Login extends Block<TProps> {
       </form>
       <div class="login-form__actions">
         {{{Button text="Авторизоваться" size="large" onClick=onClick}}}
-        {{{Link text="Нет аккаунта?" to="/register"}}}
+        {{{Link text="Нет аккаунта?" to="/register" onClick=toRegister}}}
       </div>
     </div>
   </div>
@@ -163,4 +177,4 @@ class Login extends Block<TProps> {
   }
 }
 
-export default Login;
+export default withStore(Login);

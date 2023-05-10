@@ -1,4 +1,6 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { editPassword } from '../../services/profile';
+import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
 
@@ -13,6 +15,7 @@ type TProps = {
   errorOldPassword: string;
   errorNewPassword: string;
   errorRepeatPassword: string;
+  store: Store<AppState>;
 };
 
 type TFormValues = {
@@ -38,6 +41,7 @@ class EditPassword extends Block<TProps> {
       errorOldPassword: '',
       errorNewPassword: '',
       errorRepeatPassword: '',
+      store: window.store,
     });
   }
 
@@ -133,7 +137,9 @@ class EditPassword extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[PASSWORD_DATA]', this.getFormValues());
+      const { oldPassword, newPassword } = this.getFormValues();
+
+      this.props.store.dispatch(editPassword, { oldPassword, newPassword });
     }
   };
 
@@ -178,7 +184,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Старый пароль" 
           name="oldPassword" 
-          value="123456789" 
+          value="" 
           onChange=onChangeOldPassword
           onBlur=onBlurOldPassword
         }}}
@@ -189,7 +195,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Новый пароль" 
           name="newPassword" 
-          value="00123456789" 
+          value="" 
           onChange=onChangeNewPassword
           onBlur=onBlurNewPassword
         }}}
@@ -200,7 +206,7 @@ class EditPassword extends Block<TProps> {
           type="password" 
           label="Повторите новый пароль" 
           name="repeatNewPassword" 
-          value="00123456789" 
+          value="" 
           onChange=onChangeRepeatNewPassword
           onBlur=onBlurRepeatNewPassword
         }}}
@@ -216,4 +222,4 @@ class EditPassword extends Block<TProps> {
   }
 }
 
-export default EditPassword;
+export default withStore(EditPassword);

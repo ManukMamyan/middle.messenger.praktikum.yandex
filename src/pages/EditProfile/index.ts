@@ -1,6 +1,9 @@
-import Block from '../../core/Block';
+import { Block, Store } from '../../core';
+import { editProfile, editAvatar } from '../../services/profile';
+import { withStore } from '../../HOCs/withStore';
 import validate, { ValidateRuleType } from '../../helpers/validate';
 import '../Profile/style.scss';
+import './style.scss';
 
 type TProps = {
   onClickSaveProfile: (event: MouseEvent) => void;
@@ -20,6 +23,16 @@ type TProps = {
   errorName: string;
   errorSecondName: string;
   errorPhone: string;
+  store: Store<AppState>;
+  email?: () => string | undefined;
+  login?: () => string | undefined;
+  firstName?: () => string | undefined;
+  secondName?: () => string | undefined;
+  displayName?: () => string | undefined;
+  avatar?: () => string | undefined;
+  phone?: () => string | undefined;
+  isShowAvatarForm: boolean;
+  back: (event: MouseEvent) => void;
 };
 
 type TFormValues = {
@@ -54,6 +67,24 @@ class EditProfile extends Block<TProps> {
       errorName: '',
       errorSecondName: '',
       errorPhone: '',
+      store: window.store,
+      email: () => this.props.store.getState().user?.email,
+      login: () => this.props.store.getState().user?.login,
+      firstName: () => this.props.store.getState().user?.firstName,
+      secondName: () => this.props.store.getState().user?.secondName,
+      displayName: () => this.props.store.getState().user?.displayName,
+      avatar: () => this.props.store.getState().user?.avatar,
+      phone: () => this.props.store.getState().user?.phone,
+      isShowAvatarForm: false,
+      back: this.back,
+    });
+  }
+
+  componentDidMount(): void {
+    const avatarWrapper = document.getElementById('avatarWrapper');
+
+    avatarWrapper?.addEventListener('click', () => {
+      this.toggleAvatarForm();
     });
   }
 
@@ -189,7 +220,16 @@ class EditProfile extends Block<TProps> {
     const isValidForm = this.validateForm();
 
     if (isValidForm) {
-      console.log('[PROFILE_DATA]', this.getFormValues());
+      const formValues = this.getFormValues();
+      const editedData = {
+        login: formValues.login,
+        first_name: formValues.name,
+        second_name: formValues.secondName,
+        display_name: formValues.login,
+        phone: formValues.phone,
+        email: formValues.email,
+      };
+      this.props.store.dispatch(editProfile, editedData);
     }
   };
 
@@ -241,14 +281,46 @@ class EditProfile extends Block<TProps> {
     this.validatePhone();
   };
 
+  toggleAvatarForm = () => {
+    this.setProps({ ...this.props, isShowAvatarForm: !this.props.isShowAvatarForm });
+
+    if (this.props.isShowAvatarForm) {
+      const form = document.getElementById('avatarForm') as HTMLFormElement;
+
+      form.addEventListener('submit', (event: SubmitEvent) => {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        this.props.store.dispatch(editAvatar, data);
+        this.toggleAvatarForm();
+      });
+    }
+  };
+
+  renderAvatarForm = () => {
+    return `
+    <form id="avatarForm" class="avatar_form__wrapper">
+      {{{Input id="avatar" type="file" name="avatar" label="Аватар"}}}
+      {{{Button size="medium" type="submit" text="Отправить"}}}
+    <form> 
+    `;
+  };
+
+  back = (e: MouseEvent) => {
+    e.preventDefault();
+
+    window.router.back();
+  };
+
   render(): string {
     return `
   <div class="container-profile">
-    <div class="wrapper__action">
-      <a class="back" href="/profile">&#x2190</a>
-    </div>
+    {{{IconButton onClick=back}}}
     <main class="content-profile">
-      <div class="avatar"></div>
+      <div id="avatarWrapper" class="avatar">
+       <img class="avatar_image--edit-profile" src="https://ya-praktikum.tech/api/v2/resources{{avatar}}" alt="avatar">
+       ${this.props.isShowAvatarForm ? this.renderAvatarForm() : ''}
+      </div>
       <h3 class="profile__header-name">Иван</h3>
       <div class="data-profile">
         <ul class="data-profile__list">
@@ -257,7 +329,7 @@ class EditProfile extends Block<TProps> {
           type="email" 
           label="Почта" 
           name="email" 
-          value="pochta@yandex.ru" 
+          value=email
           onChange=onChangeProfileEmail
           onBlur=onBlurProfileEmail
         }}}
@@ -267,7 +339,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Логин" 
           name="username" 
-          value="ivanivanov" 
+          value=login
           onChange=onChangeProfileLogin
           onBlur=onBlurProfileLogin
         }}}
@@ -277,7 +349,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Имя" 
           name="name" 
-          value="Иван" 
+          value=firstName 
           onChange=onChangeProfileName
           onBlur=onBlurProfileName
         }}}
@@ -287,7 +359,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Фамилия" 
           name="second-name" 
-          value="Иванов" 
+          value=secondName
           onChange=onChangeProfileSecondName
           onBlur=onBlurSecondName
         }}}
@@ -297,7 +369,7 @@ class EditProfile extends Block<TProps> {
           type="text" 
           label="Имя в чате" 
           name="chat-name" 
-          value="Иван" 
+          value=login
           onChange=onChangeProfileChatName
           onBlur=onBlurProfileChatName
         }}}
@@ -305,7 +377,7 @@ class EditProfile extends Block<TProps> {
           id="phone" type="tel" 
           label="Телефон" 
           name="phone" 
-          value="+7 (909) 967 30 30" 
+          value=phone 
           onChange=onChangeProfilePhone
           onBlur=onBlurProfilePhone
         }}}
@@ -321,4 +393,4 @@ class EditProfile extends Block<TProps> {
   }
 }
 
-export default EditProfile;
+export default withStore(EditProfile);

@@ -6,6 +6,7 @@ type TProps = {
   name: string;
   id: string;
   value?: string;
+  placeholder?: string;
   onChange: () => void;
   onFocus: () => void;
   onBlur: () => void;
@@ -17,13 +18,29 @@ class Input extends Block<
 > {
   static componentName = 'Input';
 
-  constructor({ id, type, name, value, onChange, onBlur, onFocus = () => {} }: TProps) {
-    super({ id, type, name, value, events: { input: onChange, focus: onFocus, blur: onBlur } });
+  constructor({
+    id,
+    type,
+    name,
+    value,
+    placeholder,
+    onChange,
+    onBlur,
+    onFocus = () => {},
+  }: TProps) {
+    super({
+      id,
+      type,
+      name,
+      value,
+      placeholder,
+      events: { input: onChange, focus: onFocus, blur: onBlur },
+    });
   }
 
   render() {
     return `
-      <input class="input" type="{{type}}" id="{{id}}" name="{{name}}" value="{{value}}" />
+      <input class="input" type="{{type}}" id="{{id}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}"/>
     `;
   }
 }

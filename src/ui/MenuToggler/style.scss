@@ -1,0 +1,17 @@
+@use '../../sass/style';
+
+.menu-toggler {
+  display: flex;
+  padding-left: 10px;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+
+  &__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: style.$background-color-dark;
+    margin-bottom: 3px;
+  }
+}

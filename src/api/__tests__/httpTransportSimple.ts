@@ -107,7 +107,7 @@ describe('tests for path router', () => {
     mockXMLHttpRequest(500, dataFail);
 
     await expect(transport.delete('/login')).rejects.toEqual(JSON.stringify(dataFail));
-  })
+  });
 
   it('transport isJson=false', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);

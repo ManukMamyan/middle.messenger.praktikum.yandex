@@ -10,21 +10,20 @@ describe('tests for path router', () => {
   let loginCb: () => void;
 
   beforeEach(() => {
-     homeCb = jest.fn();
-     loginCb = jest.fn();
+    homeCb = jest.fn();
+    loginCb = jest.fn();
 
-     router = new PathRouter()
+    router = new PathRouter();
 
-     router.use('/', homeCb);
-     router.use('/login', loginCb);
-  })
+    router.use('/', homeCb);
+    router.use('/login', loginCb);
+  });
 
   afterEach(() => {
     jest.resetAllMocks();
-  })
+  });
 
-
- it('router go', () => {
+  it('router go', () => {
     router.go('/login');
 
     expect(loginCb).toHaveBeenCalledTimes(1);

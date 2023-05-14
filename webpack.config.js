@@ -24,6 +24,9 @@ module.exports = (env) => {
       static: {
         directory: path.join(__dirname, 'dist'),
       },
+      historyApiFallback: {
+        index: 'index.html',
+      },
       compress: true,
       port: 3000,
     },

@@ -22,7 +22,7 @@ describe('tests for path router', () => {
   it('transport get success', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.get('/login')).toEqual(JSON.stringify(dataSuccess));
+    expect(await transport.get('/login')).toEqual(JSON.stringify(dataSuccess));
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Get', `${API_URL}chat/login`);
     expect(mockObjectXMLHttpRequest.setRequestHeader).toHaveBeenCalledWith(
       'Content-Type',
@@ -40,7 +40,7 @@ describe('tests for path router', () => {
   it('transport post success', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.post('/login', dataPost)).toEqual(JSON.stringify(dataSuccess));
+    expect(await transport.post('/login', dataPost)).toEqual(JSON.stringify(dataSuccess));
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Post', `${API_URL}chat/login`);
     expect(mockObjectXMLHttpRequest.setRequestHeader).toHaveBeenCalledWith(
       'Content-Type',
@@ -58,7 +58,7 @@ describe('tests for path router', () => {
   it('transport put success', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.put('/login', dataPut)).toEqual(JSON.stringify(dataSuccess));
+    expect(await transport.put('/login', dataPut)).toEqual(JSON.stringify(dataSuccess));
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Put', `${API_URL}chat/login`);
     expect(mockObjectXMLHttpRequest.setRequestHeader).toHaveBeenCalledWith(
       'Content-Type',
@@ -76,7 +76,7 @@ describe('tests for path router', () => {
   it('transport patch success', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.patch('/login', dataPatch)).toEqual(JSON.stringify(dataSuccess));
+    expect(await transport.patch('/login', dataPatch)).toEqual(JSON.stringify(dataSuccess));
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Patch', `${API_URL}chat/login`);
     expect(mockObjectXMLHttpRequest.setRequestHeader).toHaveBeenCalledWith(
       'Content-Type',
@@ -94,7 +94,7 @@ describe('tests for path router', () => {
   it('transport delete success', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.delete('/login')).toEqual(JSON.stringify(dataSuccess));
+    expect(await transport.delete('/login')).toEqual(JSON.stringify(dataSuccess));
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Delete', `${API_URL}chat/login`);
     expect(mockObjectXMLHttpRequest.setRequestHeader).toHaveBeenCalledWith(
       'Content-Type',
@@ -112,7 +112,7 @@ describe('tests for path router', () => {
   it('transport isJson=false', async () => {
     const mockObjectXMLHttpRequest = mockXMLHttpRequest(200, dataSuccess);
 
-    await expect(await transport.post('/login', dataPost, false)).toEqual(
+    expect(await transport.post('/login', dataPost, false)).toEqual(
       JSON.stringify(dataSuccess)
     );
     expect(mockObjectXMLHttpRequest.open).toHaveBeenCalledWith('Post', `${API_URL}chat/login`);

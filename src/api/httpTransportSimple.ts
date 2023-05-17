@@ -6,6 +6,8 @@ export enum Method {
   Delete = 'Delete',
 }
 
+const DONE = 4;
+
 type Options = {
   method: Method;
   data?: any;
@@ -23,11 +25,15 @@ export default class HTTPTransport {
     return this.request<Response>(this.endpoint + path);
   }
 
-  public post<Response = void>(path: string, data?: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
-      method: Method.Post,
-      data,
-    });
+  public post<Response = void>(path: string, data?: unknown, isJson = true): Promise<Response> {
+    return this.request<Response>(
+      this.endpoint + path,
+      {
+        method: Method.Post,
+        data,
+      },
+      isJson
+    );
   }
 
   public put<Response = void>(path: string, data: unknown, isJson = true): Promise<Response> {
@@ -62,11 +68,11 @@ export default class HTTPTransport {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
+      const xhr = new window.XMLHttpRequest();
       xhr.open(method, url);
 
       xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.readyState === DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
           } else {

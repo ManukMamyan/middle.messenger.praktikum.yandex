@@ -41,3 +41,12 @@
 - /editPassword
 - /chat
 - /* 404
+
+## Sprint_4
+
+---
+
+добавлено husky precommit hook
+тесты на jest для раутинга, модуля запросов и некоторых компонентов
+сборка с помощью Docker
+доплой на Render [render](https://my-chat-middle-yandex.onrender.com/)

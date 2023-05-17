@@ -26,7 +26,7 @@ module.exports = (env) => {
       historyApiFallback: {
         index: 'index.html',
       },
-      disableHostCheck: true,
+      allowedHosts: 'all',
       compress: true,
       port: 3000,
     },

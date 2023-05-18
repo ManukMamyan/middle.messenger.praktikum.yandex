@@ -7,7 +7,7 @@ type TProps = {
   toEditProfile: (event: MouseEvent) => void;
   toEditPassword: (event: MouseEvent) => void;
   logout: (event: MouseEvent) => void;
-  back: (event: MouseEvent) => void;
+  toChat: (event: MouseEvent) => void;
   store: Store<AppState>;
   email?: () => string | undefined;
   login?: () => string | undefined;
@@ -28,7 +28,7 @@ class Profile extends Block<TProps> {
       toEditProfile: this.toEditProfile,
       toEditPassword: this.toEditPassword,
       logout: this.logout,
-      back: this.back,
+      toChat: this.toChat,
       store: window.store,
       email: () => this.props.store.getState().user?.email,
       login: () => this.props.store.getState().user?.login,
@@ -58,16 +58,16 @@ class Profile extends Block<TProps> {
     this.props.store.dispatch(logout);
   };
 
-  back = (e: MouseEvent) => {
+  toChat = (e: MouseEvent) => {
     e.preventDefault();
 
-    window.router.back();
+    window.router.go('/chat');
   };
 
   render(): string {
     return `
   <div class="container-profile">
-    {{{IconButton onClick=back}}}
+    {{{IconButton onClick=toChat}}}
     <main class="content-profile">
       ${
         this.props.avatar

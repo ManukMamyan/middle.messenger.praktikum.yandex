@@ -9,7 +9,7 @@
     "lint:ts": "tsc --noEmit",
     "lint:styles": "npx stylelint \"**/*.scss\"",
     "dev": "parcel src/index.html -p 3000 --no-cache --no-source-maps --open",
-    "start": "npm run dev:webpack",
+    "start": "npm run build:webpack && npm run dev:webpack",
     "build": "parcel build src/index.html",
     "build:webpack": "webpack",
     "dev:webpack": "webpack-dev-server",

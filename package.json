@@ -8,9 +8,10 @@
     "lint:js": "eslint src/. --ext  .js,.ts,",
     "lint:ts": "tsc --noEmit",
     "lint:styles": "npx stylelint \"**/*.scss\"",
-    "start": "npm run build && webpack serve",
+    "start": "npm run build && npm run dev:webpack",
     "build": "webpack",
     "dev": "webpack serve",
+    "dev:webpack": "webpack-dev-server",
     "test": "jest",
     "prepare": "husky install"
   },
